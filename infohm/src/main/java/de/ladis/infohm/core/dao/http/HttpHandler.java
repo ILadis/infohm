@@ -24,6 +24,24 @@ public class HttpHandler {
 		}
 	}
 
+	private static enum HttpMethod {
+
+		OPTIONS("OPTIONS"), GET("GET"), HEAD("HEAD"), PUT("PUT"), POST("POST"), DELETE("DELETE"),
+		TRACE("TRACE"), CONNECT("CONNECT");
+
+		private final String value;
+
+		private HttpMethod(String value) {
+			this.value = value;
+		}
+
+		@Override
+		public String toString() {
+			return value;
+		}
+
+	}
+
 	private URL parseUri(String uri) {
 		try {
 			return new URL(uri);
@@ -49,6 +67,8 @@ public class HttpHandler {
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
 			break;
+		default:
+			throw new UnsupportedOperationException("http method " + method + " unsupported");
 		}
 
 		connection.setRequestMethod(method.toString());

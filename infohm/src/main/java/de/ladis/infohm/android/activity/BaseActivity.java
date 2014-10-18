@@ -8,7 +8,7 @@ import butterknife.ButterKnife;
 import de.ladis.infohm.android.Application;
 import de.ladis.infohm.util.Injector;
 
-public class BaseActivity extends FragmentActivity implements Injector {
+public abstract class BaseActivity extends FragmentActivity implements Injector {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

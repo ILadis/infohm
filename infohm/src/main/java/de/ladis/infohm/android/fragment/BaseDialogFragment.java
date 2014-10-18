@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BaseDialogFragment extends DialogFragment implements Injector {
+public abstract class BaseDialogFragment extends DialogFragment implements Injector {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

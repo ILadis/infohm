@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BaseFragment extends Fragment implements Injector {
+public abstract class BaseFragment extends Fragment implements Injector {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

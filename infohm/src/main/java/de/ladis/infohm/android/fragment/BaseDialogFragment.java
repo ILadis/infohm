@@ -1,15 +1,22 @@
 package de.ladis.infohm.android.fragment;
 
-import butterknife.ButterKnife;
-import de.ladis.infohm.android.Application;
-import de.ladis.infohm.util.Injector;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import de.ladis.infohm.R;
+import de.ladis.infohm.android.Application;
+import de.ladis.infohm.util.Injector;
 
 public abstract class BaseDialogFragment extends DialogFragment implements Injector {
+
+	private TextView titleView;
+	private ViewGroup contentView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -18,11 +25,44 @@ public abstract class BaseDialogFragment extends DialogFragment implements Injec
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-		ButterKnife.inject(view);
+	public final Dialog onCreateDialog(Bundle savedInstanceState) {
+		Context context = getActivity();
+		Dialog dialog = new Dialog(context, R.style.Theme_Dialog);
+
+		return dialog;
+	}
+
+	@Override
+	public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = View.inflate(getContext(), R.layout.fragment_dialog_base, null);
+
+		titleView = (TextView) view.findViewById(R.id.fragment_dialog_base_title);
+		contentView = (ViewGroup) view.findViewById(R.id.fragment_dialog_base_content);
 
 		return view;
+	}
+
+	@Override
+	public final void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		ViewGroup container = contentView;
+
+		View dialog = onCreateDialogView(inflater, container, savedInstanceState);
+		container.addView(dialog);
+
+		ButterKnife.inject(this, view);
+	}
+
+	public abstract View onCreateDialogView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+	public final void setTitle(int titleResId) {
+		titleView.setText(titleResId);
+	}
+
+	public final Context getContext() {
+		return getDialog().getContext();
 	}
 
 	@Override

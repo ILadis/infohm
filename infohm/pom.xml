@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
-	<groupId>infohm</groupId>
+
+	<groupId>de.ladis.infohm</groupId>
 	<artifactId>infohm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>apk</packaging>
 	<name>InfOhm</name>
-	
+
 	<properties>
 		<java.version>1.6</java.version>
 		<gson.version>2.3</gson.version>
@@ -15,25 +15,27 @@
 		<butterknife.version>5.1.2</butterknife.version>
 		<actionbarsherlock.version>4.4.0</actionbarsherlock.version>
 	</properties>
-	
+
+	<repositories>
+		<repository>
+			<id>android-support-repository</id>
+			<url>file:///${env.ANDROID_HOME}/extras/android/m2repository/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
-			<version>4.4W</version>
+			<version>5.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.google.android</groupId>
-			<artifactId>support-v4</artifactId>
-			<version>r7</version>
-		</dependency>
-		<!-- <dependency>
 			<groupId>com.actionbarsherlock</groupId>
 			<artifactId>actionbarsherlock</artifactId>
-			<version>{$actionbarsherlock.version}</version>
+			<version>${actionbarsherlock.version}</version>
 			<type>apklib</type>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -56,7 +58,7 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -66,8 +68,8 @@
 				<extensions>true</extensions>
 				<configuration>
 					<sdk>
-						<path>${android.sdk.path}</path>
-						<platform>${android.platform}</platform>
+						<path>${env.ANDROID_HOME}</path>
+						<platform>20</platform>
 					</sdk>
 					<run><debug>true</debug></run>
 				</configuration>

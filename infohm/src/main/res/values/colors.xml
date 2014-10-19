@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Text colors. -->
+	<color name="text_primary_color">#dd000000</color>
+	<color name="text_secondary_color">#89000000</color>
+	<color name="text_hint_color">#42000000</color>
+	<color name="text_disabled_color">#42000000</color>
+
+	<!-- Button colors. -->
+	<color name="button_primary_color">#ddffffff</color>
+	<color name="button_secondary_color">#dd000000</color>
+	<color name="button_disabled_color">#42000000</color>
+
+	<color name="button_flat_primary_color">#ff2196f3</color>
+	<color name="button_flat_secondary_color">#89000000</color>
+	<color name="button_flat_disabled_color">#42000000</color>
+	<color name="button_flat_pressed_color">#1e000000</color>
+
+</resources>

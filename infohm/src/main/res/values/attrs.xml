@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Widget styleables. -->
+	<attr name="textViewStyle" type="reference" />
+	<attr name="textViewSecondaryStyle" type="reference" />
+	<attr name="buttonStyle" type="reference" />
+	<attr name="buttonSecondaryStyle" type="reference" />
+	<attr name="buttonFlatStyle" type="reference" />
+	<attr name="buttonFlatSecondaryStyle" type="reference" />
+
+	<!-- Dialog styleables. -->
+	<attr name="dialogStyle" type="reference" />
+	<attr name="dialogTitleStyle" type="reference" />
+	<attr name="dialogContentStyle" type="reference" />
+
+</resources>

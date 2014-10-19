@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Text styles. -->
+	<style name="Text" parent="android:TextAppearance">
+		<item name="android:textStyle">normal</item>
+		<item name="android:textSize">@dimen/text_body_size</item>
+		<item name="android:textColor">@color/text_primary_color</item>
+	</style>
+
+	<style name="Text.Headline">
+		<item name="android:textSize">@dimen/text_headline_size</item>
+	</style>
+
+	<style name="Text.Title">
+		<item name="android:textSize">@dimen/text_title_size</item>
+	</style>
+
+	<style name="Text.Subheader">
+		<item name="android:textSize">@dimen/text_title_size</item>
+		<item name="android:textColor">@color/text_secondary_color</item>
+	</style>
+
+	<style name="Text.Body" />
+
+	<style name="Text.Caption">
+		<item name="android:textSize">@dimen/text_caption_size</item>
+		<item name="android:textColor">@color/text_secondary_color</item>
+	</style>
+
+	<style name="Text.Button">
+		<item name="android:textSize">@dimen/text_button_size</item>
+	</style>
+
+	<!-- Widget styles. -->
+	<style name="Widget" parent="android:Widget" />
+
+	<style name="Widget.TextView" parent="android:Widget.TextView">
+		<item name="android:textAppearance">@style/Text.Body</item>
+	</style>
+
+	<style name="Widget.TextView.Secondary">
+		<item name="android:textColor">@color/text_secondary_color</item>
+	</style>
+
+	<style name="Widget.Button" parent="android:Widget.Button">
+		<item name="android:paddingTop">6dp</item>
+		<item name="android:paddingRight">24dp</item>
+		<item name="android:paddingBottom">6dp</item>
+		<item name="android:paddingLeft">24dp</item>
+		<item name="android:textAppearance">@style/Text.Button</item>
+		<item name="android:textColor">@color/text_primary_color</item>
+	</style>
+
+	<style name="Widget.Button.Secondary">
+	</style>
+
+	<style name="Widget.Button.Flat">
+		<item name="android:paddingTop">12dp</item>
+		<item name="android:paddingRight">6dp</item>
+		<item name="android:paddingBottom">12dp</item>
+		<item name="android:paddingLeft">6dp</item>
+		<item name="android:textColor">@color/button_flat_color_selector</item>
+		<item name="android:background">@drawable/button_flat_background_selector</item>
+	</style>
+
+	<style name="Widget.Button.Flat.Secondary">
+		<item name="android:textColor">@color/button_flat_secondary_color_selector</item>
+		<item name="android:background">@drawable/button_flat_secondary_background_selector</item>
+	</style>
+
+	<!-- Dialog styles. -->
+	<style name="Dialog">
+		<item name="android:paddingTop">48dp</item>
+		<item name="android:paddingRight">40dp</item>
+		<item name="android:paddingBottom">40dp</item>
+		<item name="android:paddingLeft">40dp</item>
+		<item name="android:background">@drawable/dialog_background</item>
+	</style>
+
+	<style name="Dialog.Title" parent="Widget">
+		<item name="android:paddingBottom">12dp</item>
+		<item name="android:textStyle">normal</item>
+		<item name="android:textSize">@dimen/text_title_size</item>
+		<item name="android:textColor">@color/text_primary_color</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">end</item>
+	</style>
+
+	<style name="Dialog.Content" parent="Widget">
+		<item name="android:paddingBottom">24dp</item>
+	</style>
+
+</resources>

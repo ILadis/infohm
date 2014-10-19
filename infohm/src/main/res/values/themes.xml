@@ -1,45 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-	<!--
-		Base application theme, dependent on API level. This theme is replaced
-		by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-	-->
-	<style name="AppBaseTheme" parent="android:Theme.Light">
-		<!--
-			Theme customizations available in newer API levels can go in
-			res/values-vXX/styles.xml, while customizations related to
-			backward-compatibility can go here.
-		-->
-	</style>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!-- Application theme. -->
-	<style name="AppTheme" parent="AppBaseTheme">
+	<style name="Theme" parent="Theme.Sherlock.Light">
 		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
+		<!-- Widget styles. -->
+		<item name="textViewStyle">@style/Widget.TextView</item>
+		<item name="textViewSecondaryStyle">@style/Widget.TextView.Secondary</item>
+		<item name="buttonStyle">@style/Widget.Button</item>
+		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
+		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
+		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+
+		<!-- Dialog styles. -->
+		<item name="dialogStyle">@style/Dialog</item>
+		<item name="dialogTitleStyle">@style/Dialog.Title</item>
+		<item name="dialogContentStyle">@style/Dialog.Content</item>
 	</style>
-	
-	<!--
-		Base dialog theme, dependent on API level. This theme is replaced
-		by DialogBaseTheme from res/values-vXX/styles.xml on newer devices.
-	-->
-	<style name="DialogBaseTheme" parent="android:Theme.Light">
-		<!--
-			Theme customizations available in newer API levels can go in
-			res/values-vXX/styles.xml, while customizations related to
-			backward-compatibility can go here.
-		-->
-	</style>
-	
+
 	<!-- Dialog theme. -->
-	<style name="DialogTheme" parent="DialogBaseTheme">
+	<style name="Theme.Dialog">
 		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
+		<!-- Window styles. -->
 		<item name="android:windowFrame">@null</item>
 		<item name="android:windowIsFloating">true</item>
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowContentOverlay">@null</item>
 		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
 		<item name="android:backgroundDimAmount">0.6</item>
 		<item name="android:colorBackgroundCacheHint">@null</item>
+
+		<!-- Widget styles. -->
+		<item name="android:textViewStyle">@style/Widget.TextView.Secondary</item>
 	</style>
 
 </resources>

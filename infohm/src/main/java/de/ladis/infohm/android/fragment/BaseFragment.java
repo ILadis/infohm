@@ -1,13 +1,11 @@
 package de.ladis.infohm.android.fragment;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.View;
 import butterknife.ButterKnife;
 import de.ladis.infohm.android.Application;
 import de.ladis.infohm.util.Injector;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment implements Injector {
 
@@ -18,11 +16,9 @@ public abstract class BaseFragment extends Fragment implements Injector {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-		ButterKnife.inject(view);
-
-		return view;
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		ButterKnife.inject(this, view);
+		super.onViewCreated(view, savedInstanceState);
 	}
 
 	@Override

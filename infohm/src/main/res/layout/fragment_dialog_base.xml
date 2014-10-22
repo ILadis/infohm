@@ -4,7 +4,7 @@
 	style="?attr/dialogStyle"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="wrap_content">
 
 	<TextView
 		style="?attr/dialogTitleStyle"
@@ -13,10 +13,38 @@
 		android:layout_height="wrap_content"
 		tools:text="Title" />
 
-	<FrameLayout
+	<de.ladis.infohm.android.widget.ScrollView
 		style="?attr/dialogContentStyle"
 		android:id="@+id/fragment_dialog_base_content"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
+
+	<View
+		style="?attr/dialogDividerStyle"
+		android:id="@+id/fragment_dialog_base_divider" />
+
+	<RelativeLayout
+		style="?attr/dialogActionsStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<Button
+			style="?attr/buttonFlatStyle"
+			android:id="@+id/fragment_dialog_base_actions_positive"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:text="ACCEPT" />
+
+		<Button
+			style="?attr/buttonFlatSecondaryStyle"
+			android:id="@+id/fragment_dialog_base_actions_negative"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="16dp"
+			android:layout_toLeftOf="@id/fragment_dialog_base_actions_positive"
+			android:text="DECLINE" />
+
+	</RelativeLayout>
 
 </LinearLayout>

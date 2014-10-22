@@ -2,8 +2,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!-- Application theme. -->
-	<style name="Theme" parent="Theme.Sherlock.Light">
+	<style name="Theme" parent="Theme.AppCompat.Light">
 		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
+		<!-- Window styles. -->
+		<item name="android:windowBackground">@drawable/activity_background</item>
+
 		<!-- Widget styles. -->
 		<item name="textViewStyle">@style/Widget.TextView</item>
 		<item name="textViewSecondaryStyle">@style/Widget.TextView.Secondary</item>
@@ -12,10 +15,10 @@
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
 
-		<!-- Dialog styles. -->
-		<item name="dialogStyle">@style/Dialog</item>
-		<item name="dialogTitleStyle">@style/Dialog.Title</item>
-		<item name="dialogContentStyle">@style/Dialog.Content</item>
+		<!-- Activity styles. -->
+		<item name="colorPrimary">@color/activity_primary_color</item>
+		<item name="colorPrimaryDark">@color/activity_secondary_color</item>
+		<item name="colorAccent">@color/activity_accent_color</item>
 	</style>
 
 	<!-- Dialog theme. -->
@@ -32,7 +35,19 @@
 		<item name="android:colorBackgroundCacheHint">@null</item>
 
 		<!-- Widget styles. -->
-		<item name="android:textViewStyle">@style/Widget.TextView.Secondary</item>
+		<item name="textViewStyle">@style/Widget.TextView.Secondary</item>
+		<item name="textViewSecondaryStyle">@style/Widget.TextView.Secondary</item>
+		<item name="buttonStyle">@style/Widget.Button</item>
+		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
+		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
+		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+
+		<!-- Dialog styles. -->
+		<item name="dialogStyle">@style/Dialog</item>
+		<item name="dialogTitleStyle">@style/Dialog.Title</item>
+		<item name="dialogContentStyle">@style/Dialog.Content</item>
+		<item name="dialogDividerStyle">@style/Dialog.Divider</item>
+		<item name="dialogActionsStyle">@style/Dialog.Actions</item>
 	</style>
 
 </resources>

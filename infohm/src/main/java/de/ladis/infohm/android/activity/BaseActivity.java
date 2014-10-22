@@ -1,15 +1,14 @@
 package de.ladis.infohm.android.activity;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import butterknife.ButterKnife;
 import de.ladis.infohm.android.Application;
 import de.ladis.infohm.util.Injector;
 
-public abstract class BaseActivity extends SherlockActivity implements Injector {
+public abstract class BaseActivity extends ActionBarActivity implements Injector {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

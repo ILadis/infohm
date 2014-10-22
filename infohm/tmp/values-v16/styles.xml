@@ -2,14 +2,14 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!-- Text styles. -->
-	<style name="Text" parent="android:TextAppearance">
+	<style name="Text" parent="@android:TextAppearance">
 		<item name="android:fontFamily">sans-serif</item>
 		<item name="android:textStyle">normal</item>
 		<item name="android:textSize">@dimen/text_body_size</item>
 		<item name="android:textColor">@color/text_primary_color</item>
 	</style>
 
-	<style name="Text.Title" parent="android:TextAppearance.Small">
+	<style name="Text.Title" parent="@android:TextAppearance.Small">
 		<item name="android:fontFamily">sans-serif-medium</item>
 		<item name="android:textSize">@dimen/text_title_size</item>
 	</style>

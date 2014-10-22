@@ -2,17 +2,17 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!-- Text styles. -->
-	<style name="Text" parent="android:TextAppearance">
+	<style name="Text" parent="@style/TextAppearance.AppCompat">
 		<item name="android:textStyle">normal</item>
 		<item name="android:textSize">@dimen/text_body_size</item>
 		<item name="android:textColor">@color/text_primary_color</item>
 	</style>
 
-	<style name="Text.Headline">
+	<style name="Text.Headline" parent="@style/TextAppearance.AppCompat.Headline">
 		<item name="android:textSize">@dimen/text_headline_size</item>
 	</style>
 
-	<style name="Text.Title">
+	<style name="Text.Title" parent="@style/TextAppearance.AppCompat.Title">
 		<item name="android:textSize">@dimen/text_title_size</item>
 	</style>
 
@@ -21,21 +21,21 @@
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
 
-	<style name="Text.Body" />
+	<style name="Text.Body" parent="@style/TextAppearance.AppCompat.Body1" />
 
-	<style name="Text.Caption">
+	<style name="Text.Caption" parent="@style/TextAppearance.AppCompat.Caption">
 		<item name="android:textSize">@dimen/text_caption_size</item>
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
 
-	<style name="Text.Button">
+	<style name="Text.Button" parent="@style/TextAppearance.AppCompat.Button">
 		<item name="android:textSize">@dimen/text_button_size</item>
 	</style>
 
 	<!-- Widget styles. -->
-	<style name="Widget" parent="android:Widget" />
+	<style name="Widget" parent="@android:Widget" />
 
-	<style name="Widget.TextView" parent="android:Widget.TextView">
+	<style name="Widget.TextView" parent="@android:Widget.TextView">
 		<item name="android:textAppearance">@style/Text.Body</item>
 	</style>
 
@@ -43,7 +43,7 @@
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
 
-	<style name="Widget.Button" parent="android:Widget.Button">
+	<style name="Widget.Button" parent="@android:Widget.Button">
 		<item name="android:paddingTop">6dp</item>
 		<item name="android:paddingRight">24dp</item>
 		<item name="android:paddingBottom">6dp</item>
@@ -69,17 +69,19 @@
 		<item name="android:background">@drawable/button_flat_secondary_background_selector</item>
 	</style>
 
+	<!-- Activity styles. -->
+	<style name="Activity" />
+
 	<!-- Dialog styles. -->
 	<style name="Dialog">
-		<item name="android:paddingTop">48dp</item>
-		<item name="android:paddingRight">40dp</item>
-		<item name="android:paddingBottom">40dp</item>
-		<item name="android:paddingLeft">40dp</item>
 		<item name="android:background">@drawable/dialog_background</item>
 	</style>
 
 	<style name="Dialog.Title" parent="Widget">
-		<item name="android:paddingBottom">12dp</item>
+		<item name="android:paddingTop">24dp</item>
+		<item name="android:paddingRight">24dp</item>
+		<item name="android:paddingBottom">18dp</item>
+		<item name="android:paddingLeft">24dp</item>
 		<item name="android:textStyle">normal</item>
 		<item name="android:textSize">@dimen/text_title_size</item>
 		<item name="android:textColor">@color/text_primary_color</item>
@@ -88,7 +90,20 @@
 	</style>
 
 	<style name="Dialog.Content" parent="Widget">
+		<item name="android:paddingRight">24dp</item>
 		<item name="android:paddingBottom">24dp</item>
+		<item name="android:paddingLeft">24dp</item>
+	</style>
+
+	<style name="Dialog.Divider" parent="Widget">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">1dp</item>
+		<item name="android:background">@drawable/dialog_divider_background</item>
+	</style>
+
+	<style name="Dialog.Actions" parent="Widget">
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:paddingLeft">16dp</item>
 	</style>
 
 </resources>

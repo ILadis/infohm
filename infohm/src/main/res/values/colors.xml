@@ -17,4 +17,13 @@
 	<color name="button_flat_disabled_color">#42000000</color>
 	<color name="button_flat_pressed_color">#1e000000</color>
 
+	<!-- Activity colors. -->
+	<color name="activity_color">#ffeeeeee</color>
+	<color name="activity_primary_color">#ff01579b</color>
+	<color name="activity_secondary_color">#ff0277bd</color>
+	<color name="activity_accent_color">#ff0288d1</color>
+
+	<!-- Dialog colors. -->
+	<color name="dialog_divider_color">#14000000</color>
+
 </resources>

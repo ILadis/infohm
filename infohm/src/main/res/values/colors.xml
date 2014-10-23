@@ -22,6 +22,7 @@
 	<color name="activity_primary_color">#ff01579b</color>
 	<color name="activity_secondary_color">#ff0277bd</color>
 	<color name="activity_accent_color">#ff0288d1</color>
+	<color name="activity_title_color">#ffffffff</color>
 
 	<!-- Dialog colors. -->
 	<color name="dialog_divider_color">#14000000</color>

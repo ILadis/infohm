@@ -16,6 +16,7 @@
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
 
 		<!-- Activity styles. -->
+		<item name="actionBarStyle">@style/Activity.ActionBar</item>
 		<item name="colorPrimary">@color/activity_primary_color</item>
 		<item name="colorPrimaryDark">@color/activity_secondary_color</item>
 		<item name="colorAccent">@color/activity_accent_color</item>

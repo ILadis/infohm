@@ -72,6 +72,14 @@
 	<!-- Activity styles. -->
 	<style name="Activity" />
 
+	<style name="Activity.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+		<item name="titleTextStyle">@style/Activity.ActionBar.Title</item>
+	</style>
+
+	<style name="Activity.ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+		<item name="android:textColor">@color/activity_title_color</item>
+	</style>
+
 	<!-- Dialog styles. -->
 	<style name="Dialog">
 		<item name="android:background">@drawable/dialog_background</item>

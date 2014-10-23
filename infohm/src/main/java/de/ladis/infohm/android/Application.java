@@ -5,7 +5,6 @@ import java.util.List;
 
 import dagger.ObjectGraph;
 import de.ladis.infohm.android.module.AndroidModule;
-import de.ladis.infohm.android.module.TestModule;
 import de.ladis.infohm.util.Injector;
 
 public class Application extends android.app.Application implements Injector {
@@ -20,9 +19,8 @@ public class Application extends android.app.Application implements Injector {
 	}
 
 	protected List<Object> getModules() {
-		return Arrays.asList(
-				new AndroidModule(this),
-				new TestModule()
+		return Arrays.<Object>asList(
+				new AndroidModule(this)
 		);
 	}
 

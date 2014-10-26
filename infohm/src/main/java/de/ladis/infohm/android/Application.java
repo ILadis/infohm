@@ -11,11 +11,12 @@ public class Application extends android.app.Application implements Injector {
 
 	private ObjectGraph graph;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
+	protected synchronized ObjectGraph getGraph() {
+		if (graph == null) {
+			graph = ObjectGraph.create(getModules().toArray());
+		}
 
-		graph = ObjectGraph.create(getModules().toArray());
+		return graph;
 	}
 
 	protected List<Object> getModules() {
@@ -26,7 +27,7 @@ public class Application extends android.app.Application implements Injector {
 
 	@Override
 	public void inject(Object object) {
-		graph.inject(object);
+		getGraph().inject(object);
 	}
 
 }

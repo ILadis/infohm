@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<!-- Text styles. -->
-	<style name="Text" parent="@style/TextAppearance.AppCompat">
+	<!-- Text appearances. -->
+	<style name="TextAppearance" parent="@style/TextAppearance.AppCompat">
 		<item name="android:textStyle">normal</item>
 		<item name="android:textSize">@dimen/text_body_size</item>
 		<item name="android:textColor">@color/text_primary_color</item>
 	</style>
 
-	<style name="Text.Headline" parent="@style/TextAppearance.AppCompat.Headline">
+	<style name="TextAppearance.Headline" parent="@style/TextAppearance.AppCompat.Headline">
 		<item name="android:textSize">@dimen/text_headline_size</item>
+		<item name="android:textColor">@color/text_highlight_color</item>
 	</style>
 
-	<style name="Text.Title" parent="@style/TextAppearance.AppCompat.Title">
+	<style name="TextAppearance.Title" parent="@style/TextAppearance.AppCompat.Title">
 		<item name="android:textSize">@dimen/text_title_size</item>
 	</style>
 
-	<style name="Text.Subheader">
+	<style name="TextAppearance.Subheader">
 		<item name="android:textSize">@dimen/text_title_size</item>
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
 
-	<style name="Text.Body" parent="@style/TextAppearance.AppCompat.Body1" />
+	<style name="TextAppearance.Body" parent="@style/TextAppearance.AppCompat.Body1" />
 
-	<style name="Text.Caption" parent="@style/TextAppearance.AppCompat.Caption">
+	<style name="TextAppearance.Caption" parent="@style/TextAppearance.AppCompat.Caption">
 		<item name="android:textSize">@dimen/text_caption_size</item>
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
 
-	<style name="Text.Button" parent="@style/TextAppearance.AppCompat.Button">
+	<style name="TextAppearance.Button" parent="@style/TextAppearance.AppCompat.Button">
 		<item name="android:textSize">@dimen/text_button_size</item>
 	</style>
 
@@ -36,7 +37,7 @@
 	<style name="Widget" parent="@android:Widget" />
 
 	<style name="Widget.TextView" parent="@android:Widget.TextView">
-		<item name="android:textAppearance">@style/Text.Body</item>
+		<item name="android:textAppearance">@style/TextAppearance.Body</item>
 	</style>
 
 	<style name="Widget.TextView.Secondary">
@@ -48,7 +49,7 @@
 		<item name="android:paddingRight">24dp</item>
 		<item name="android:paddingBottom">6dp</item>
 		<item name="android:paddingLeft">24dp</item>
-		<item name="android:textAppearance">@style/Text.Button</item>
+		<item name="android:textAppearance">@style/TextAppearance.Button</item>
 		<item name="android:textColor">@color/text_primary_color</item>
 	</style>
 
@@ -69,15 +70,29 @@
 		<item name="android:background">@drawable/button_flat_secondary_background_selector</item>
 	</style>
 
-	<!-- Activity styles. -->
-	<style name="Activity" />
-
-	<style name="Activity.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
-		<item name="titleTextStyle">@style/Activity.ActionBar.Title</item>
+	<!-- ActionBar styles. -->
+	<style name="ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+		<item name="titleTextStyle">@style/ActionBar.Title</item>
+		<item name="drawerArrowStyle">@style/Drawer.Toggle</item>
 	</style>
 
-	<style name="Activity.ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+	<style name="ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+		<item name="android:gravity">center</item>
 		<item name="android:textColor">@color/activity_title_color</item>
+	</style>
+
+	<style name="ActionBar.Search" parent="@style/Widget.AppCompat.SearchView">
+		<item name="queryBackground">@drawable/actionbar_search_textview_selector</item>
+		<item name="closeIcon">@drawable/actionbar_search_clear</item>
+		<item name="searchIcon">@drawable/actionbar_search_lens</item>
+	</style>
+
+	<!-- Drawer styles. -->
+	<style name="Drawer" parent="@style/Widget" />
+
+	<style name="Drawer.Toggle" parent="@style/Base.Widget.AppCompat.DrawerArrowToggle">
+		<item name="color">@android:color/white</item>
+		<item name="spinBars">false</item>
 	</style>
 
 	<!-- Dialog styles. -->

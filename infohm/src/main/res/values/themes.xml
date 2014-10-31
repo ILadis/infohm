@@ -2,10 +2,25 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!-- Application theme. -->
-	<style name="Theme" parent="Theme.AppCompat.Light">
+	<style name="Theme" parent="Theme.AppCompat.Light.NoActionBar">
 		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
 		<!-- Window styles. -->
 		<item name="android:windowBackground">@drawable/activity_background</item>
+
+		<!-- Color palette. -->
+		<item name="colorPrimary">@color/activity_primary_color</item>
+		<item name="colorPrimaryDark">@color/activity_secondary_color</item>
+		<item name="colorAccent">@color/activity_accent_color</item>
+		
+		<!-- Dimension values. -->
+		<item name="cardViewGuttersPadding">8dp</item>
+		<item name="cardViewContentPadding">16dp</item>
+
+		<!-- Text appearances. -->
+		<item name="textAppearance">@style/TextAppearance</item>
+		<item name="textAppearanceHeadline">@style/TextAppearance.Headline</item>
+		<item name="textAppearanceTitle">@style/TextAppearance.Title</item>
+		<item name="textAppearanceSubheader">@style/TextAppearance.Subheader</item>
 
 		<!-- Widget styles. -->
 		<item name="textViewStyle">@style/Widget.TextView</item>
@@ -14,12 +29,24 @@
 		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+		
+		<!-- ActionBar theme. -->
+		<item name="theme">@style/Theme.ActionBar</item>
+	</style>
 
-		<!-- Activity styles. -->
-		<item name="actionBarStyle">@style/Activity.ActionBar</item>
-		<item name="colorPrimary">@color/activity_primary_color</item>
-		<item name="colorPrimaryDark">@color/activity_secondary_color</item>
-		<item name="colorAccent">@color/activity_accent_color</item>
+	<!-- ActionBar theme. -->
+	<style name="Theme.ActionBar" parent="@style/ThemeOverlay.AppCompat.Light">
+		<!-- Common styles. -->
+		<item name="android:background">@color/activity_primary_color</item>
+
+		<!-- Text styles. -->
+		<item name="android:textColorPrimary">@color/activity_title_color</item>
+		<item name="android:textColorSecondary">@color/text_secondary_color</item>
+
+		<!-- ActionBar styles. -->
+		<item name="titleTextAppearance">@style/ActionBar.Title</item>
+		<item name="searchViewStyle">@style/ActionBar.Search</item>
+		<item name="drawerArrowStyle">@style/Drawer.Toggle</item>
 	</style>
 
 	<!-- Dialog theme. -->

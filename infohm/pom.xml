@@ -34,24 +34,25 @@
 			<groupId>com.android.support</groupId>
 			<artifactId>support-v4</artifactId>
 			<version>21.0.0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>support-annotations</artifactId>
-					<groupId>com.android.support</groupId>
-				</exclusion>
-			</exclusions>
+			<type>aar</type>
 		</dependency>
 		<dependency>
 			<groupId>com.android.support</groupId>
 			<artifactId>appcompat-v7</artifactId>
 			<version>21.0.0</version>
 			<type>aar</type>
-			<exclusions>
-				<exclusion>
-					<artifactId>support-annotations</artifactId>
-					<groupId>com.android.support</groupId>
-				</exclusion>
-			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.android.support</groupId>
+			<artifactId>cardview-v7</artifactId>
+			<version>21.0.0</version>
+			<type>aar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.android.support</groupId>
+			<artifactId>recyclerview-v7</artifactId>
+			<version>21.0.0</version>
+			<type>aar</type>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -81,7 +82,7 @@
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
-				<version>4.0.0-rc.1</version>
+				<version>4.0.0-rc.2</version>
 				<extensions>true</extensions>
 				<configuration>
 					<sdk>
@@ -89,6 +90,7 @@
 						<platform>21</platform>
 					</sdk>
 					<run><debug>true</debug></run>
+					<includeLibsJarsFromAar>true</includeLibsJarsFromAar>
 				</configuration>
 			</plugin>
 			<plugin>

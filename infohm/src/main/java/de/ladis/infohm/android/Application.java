@@ -4,7 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import dagger.ObjectGraph;
+import de.ladis.infohm.android.module.ActivityModule;
 import de.ladis.infohm.android.module.AndroidModule;
+import de.ladis.infohm.android.module.ContentDaoModule;
+import de.ladis.infohm.android.module.ContentProviderModule;
+import de.ladis.infohm.android.module.FragmentModule;
+import de.ladis.infohm.android.module.HttpDaoModule;
+import de.ladis.infohm.android.module.SqliteDaoModule;
 import de.ladis.infohm.util.Injector;
 
 public class Application extends android.app.Application implements Injector {
@@ -21,7 +27,15 @@ public class Application extends android.app.Application implements Injector {
 
 	protected List<Object> getModules() {
 		return Arrays.<Object>asList(
-				new AndroidModule(this)
+				// library modules
+				new AndroidModule(this),
+				new ContentDaoModule(),
+				new HttpDaoModule(),
+				new SqliteDaoModule(),
+				// injection modules
+				new ActivityModule(),
+				new FragmentModule(),
+				new ContentProviderModule()
 		);
 	}
 

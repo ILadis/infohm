@@ -2,22 +2,32 @@ package de.ladis.infohm.core.dao.http.publisher;
 
 import java.util.List;
 
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestFactory;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.protocol.HttpContext;
 
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.domain.PublisherDao;
 import de.ladis.infohm.core.dao.http.HttpDao;
+import de.ladis.infohm.core.dao.http.handler.HttpDaoResponseHandler;
 import de.ladis.infohm.core.domain.Publisher;
+import de.ladis.infohm.core.parser.xml.publisher.XmlPublishersParser;
 
 public class PublisherHttpDao extends HttpDao<Integer, Publisher> implements PublisherDao {
 
-	private final String baseUri;
+	private final HttpHost host;
+	private final HttpContext context;
+	private final HttpRequestFactory factory;
 
-	public PublisherHttpDao(HttpClient client, String baseUri) {
+	public PublisherHttpDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
 		super(client);
 
-		this.baseUri = baseUri;
+		this.host = host;
+		this.context = context;
+		this.factory = factory;
 	}
 
 	@Override
@@ -28,7 +38,10 @@ public class PublisherHttpDao extends HttpDao<Integer, Publisher> implements Pub
 	@Override
 	public List<Publisher> list() throws DaoException {
 		try {
-			return http().execute(new HttpGet(baseUri + "/publishers"), PublishersResponseHandler.getInstance());
+			HttpRequest request = factory.newHttpRequest("GET", "/publishers");
+			ResponseHandler<List<Publisher>> handler = new HttpDaoResponseHandler<List<Publisher>>(new XmlPublishersParser());
+
+			return http().execute(host, request, handler, context);
 		} catch (Exception e) {
 			throw new DaoException(this, e);
 		}

@@ -8,9 +8,9 @@
 		<item name="android:windowBackground">@drawable/activity_background</item>
 
 		<!-- Color palette. -->
-		<item name="colorPrimary">@color/activity_primary_color</item>
-		<item name="colorPrimaryDark">@color/activity_secondary_color</item>
-		<item name="colorAccent">@color/activity_accent_color</item>
+		<item name="colorPrimary">@color/actionbar_primary_color</item>
+		<item name="colorPrimaryDark">@color/actionbar_secondary_color</item>
+		<item name="colorAccent">@color/actionbar_accent_color</item>
 		
 		<!-- Dimension values. -->
 		<item name="cardViewGuttersPadding">8dp</item>
@@ -29,6 +29,8 @@
 		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+		<item name="drawerStyle">@style/Drawer</item>
+		<item name="drawerDividerStyle">@style/Drawer.Divider</item>
 		
 		<!-- ActionBar theme. -->
 		<item name="theme">@style/Theme.ActionBar</item>
@@ -37,10 +39,10 @@
 	<!-- ActionBar theme. -->
 	<style name="Theme.ActionBar" parent="@style/ThemeOverlay.AppCompat.Light">
 		<!-- Common styles. -->
-		<item name="android:background">@color/activity_primary_color</item>
+		<item name="android:background">@color/actionbar_primary_color</item>
 
 		<!-- Text styles. -->
-		<item name="android:textColorPrimary">@color/activity_title_color</item>
+		<item name="android:textColorPrimary">@color/actionbar_title_color</item>
 		<item name="android:textColorSecondary">@color/text_secondary_color</item>
 
 		<!-- ActionBar styles. -->

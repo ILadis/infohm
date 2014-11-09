@@ -78,7 +78,7 @@
 
 	<style name="ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
 		<item name="android:gravity">center</item>
-		<item name="android:textColor">@color/activity_title_color</item>
+		<item name="android:textColor">@color/actionbar_title_color</item>
 	</style>
 
 	<style name="ActionBar.Search" parent="@style/Widget.AppCompat.SearchView">
@@ -88,11 +88,24 @@
 	</style>
 
 	<!-- Drawer styles. -->
-	<style name="Drawer" parent="@style/Widget" />
+	<style name="Drawer" parent="@style/Widget">
+		<item name="android:layout_width">320dp</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:layout_gravity">start|left</item>
+		<item name="android:background">@drawable/drawer_background</item>
+	</style>
 
 	<style name="Drawer.Toggle" parent="@style/Base.Widget.AppCompat.DrawerArrowToggle">
 		<item name="color">@android:color/white</item>
 		<item name="spinBars">false</item>
+	</style>
+
+	<style name="Drawer.Divider" parent="@style/Widget">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_marginTop">8dp</item>
+		<item name="android:layout_marginBottom">8dp</item>
+		<item name="android:background">@drawable/drawer_divider_background</item>
 	</style>
 
 	<!-- Dialog styles. -->

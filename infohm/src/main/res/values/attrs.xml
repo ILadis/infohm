@@ -17,6 +17,10 @@
 	<attr name="cardViewGuttersPadding" type="dimension" />
 	<attr name="cardViewContentPadding" type="dimension" />
 
+	<!-- Drawer styleables. -->
+	<attr name="drawerStyle" type="reference" />
+	<attr name="drawerDividerStyle" type="reference" />
+
 	<!-- Dialog styleables. -->
 	<attr name="dialogStyle" type="reference" />
 	<attr name="dialogTitleStyle" type="reference" />

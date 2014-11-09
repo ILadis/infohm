@@ -1,11 +1,12 @@
 package de.ladis.infohm.core.parser.xml;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
-import android.util.Xml;
 import de.ladis.infohm.core.parser.Parser;
 import de.ladis.infohm.core.parser.ParserException;
 import de.ladis.infohm.util.Closeables;
@@ -17,9 +18,10 @@ public abstract class XmlParser<O> implements Parser<InputStream, O> {
 		XmlPullParser parser = null;
 
 		try {
-			parser = Xml.newPullParser();
+			parser = XmlPullParserFactory.newInstance().newPullParser();
 			parser.setInput(input, null);
-		} catch (XmlPullParserException e) {
+			parser.nextTag();
+		} catch (Exception e) {
 			throw new ParserException(this, e);
 		}
 
@@ -27,6 +29,8 @@ public abstract class XmlParser<O> implements Parser<InputStream, O> {
 
 		try {
 			output = parse(parser);
+		} catch (Exception e) {
+			throw new ParserException(this, e);
 		} finally {
 			Closeables.close(input);
 		}
@@ -34,6 +38,6 @@ public abstract class XmlParser<O> implements Parser<InputStream, O> {
 		return output;
 	}
 
-	protected abstract O parse(XmlPullParser parser) throws ParserException;
+	protected abstract O parse(XmlPullParser parser) throws XmlPullParserException, IOException;
 
 }

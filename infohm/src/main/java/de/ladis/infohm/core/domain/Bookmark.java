@@ -39,4 +39,22 @@ public class Bookmark {
 		return description;
 	}
 
+	@Override
+	public int hashCode() {
+		return id.intValue();
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof Bookmark) {
+			Bookmark other = (Bookmark) object;
+
+			return this.id == other.id
+					&& this.title.equals(other.title)
+					&& this.description.equals(other.description);
+		}
+
+		return false;
+	}
+
 }

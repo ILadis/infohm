@@ -30,4 +30,22 @@ public class Publisher {
 		return description;
 	}
 
+	@Override
+	public int hashCode() {
+		return id.intValue();
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof Publisher) {
+			Publisher other = (Publisher) object;
+
+			return this.id == other.id
+					&& this.name.equals(other.name)
+					&& this.description.equals(other.description);
+		}
+
+		return false;
+	}
+
 }

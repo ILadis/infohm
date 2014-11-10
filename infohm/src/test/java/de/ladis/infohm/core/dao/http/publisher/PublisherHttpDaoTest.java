@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import org.junit.Test;
 
 import de.ladis.infohm.core.dao.DaoException;
+import de.ladis.infohm.core.dao.http.MockedHttpClient;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.test.BaseTest;
 
@@ -25,10 +26,17 @@ public class PublisherHttpDaoTest extends BaseTest {
 	}
 
 	@Inject
+	protected MockedHttpClient client;
+
+	@Inject
 	protected PublisherHttpDao dao;
 
 	@Test
-	public void httpDaoShouldFetchAndParseValidHttpResponseSuccessful() throws Exception {
+	public void httpDaoShouldFetchAndParseValidHttpResponseSuccessful() {
+		client.setResponseStatusCode(200);
+		client.setResponseContentType("application/xml");
+		client.setResponseStream(validResourceAsStream());
+
 		List<Publisher> results = dao.list();
 
 		assertValid(results);

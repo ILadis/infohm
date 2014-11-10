@@ -1,6 +1,5 @@
 package de.ladis.infohm.core.dao.http.factory;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpRequest;
 import org.apache.http.MethodNotSupportedException;
 import org.apache.http.RequestLine;
@@ -19,14 +18,9 @@ public class HttpDaoRequestFactory extends DefaultHttpRequestFactory {
 	}
 
 	private HttpRequest newHttpRequest(HttpRequest request) {
-		addAuthenticationHeader(request);
 		addAcceptHeader(request);
 
 		return request;
-	}
-
-	private void addAuthenticationHeader(HttpRequest request) {
-		request.addHeader("Authorization", "Basic " + new String(Base64.encodeBase64(("rest:resttest").getBytes())));
 	}
 
 	private void addAcceptHeader(HttpRequest request) {

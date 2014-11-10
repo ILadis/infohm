@@ -11,8 +11,16 @@ import de.ladis.infohm.core.domain.Publisher;
 
 public class XmlPublishersTestUtil {
 
-	public static InputStream inputStream() {
-		return XmlPublishersTestUtil.class.getResourceAsStream("publishers.xml");
+	public static InputStream validResourceAsStream() {
+		return XmlPublishersTestUtil.class.getResourceAsStream("publishers_valid.xml");
+	}
+
+	public static InputStream invalidResourceAsStream() {
+		return XmlPublishersTestUtil.class.getResourceAsStream("publishers_invalid.xml");
+	}
+
+	public static InputStream extendedResourceAsStream() {
+		return XmlPublishersTestUtil.class.getResourceAsStream("publishers_extended.xml");
 	}
 
 	public static Publisher newInstance() {

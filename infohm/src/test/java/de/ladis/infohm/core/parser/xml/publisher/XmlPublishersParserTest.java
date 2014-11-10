@@ -1,6 +1,8 @@
 package de.ladis.infohm.core.parser.xml.publisher;
 
 import static de.ladis.infohm.core.parser.xml.publisher.XmlPublishersTestUtil.*;
+import static org.hamcrest.core.IsInstanceOf.*;
+import static org.junit.Assert.*;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -12,8 +14,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.xmlpull.v1.XmlPullParserException;
 
 import de.ladis.infohm.core.domain.Publisher;
+import de.ladis.infohm.core.parser.ParserException;
 import de.ladis.infohm.core.parser.domain.PublishersParser;
 import de.ladis.infohm.test.BaseTest;
 
@@ -29,16 +33,37 @@ public class  XmlPublishersParserTest extends BaseTest {
 	}
 
 	@Inject
-	protected InputStream stream;
-
-	@Inject
 	protected PublishersParser parser;
 
 	@Test
-	public void parserShouldParseWellFormedXmlSuccessful() throws Exception {
+	public void parserShouldParseValidXmlSuccessful() {
+		InputStream stream = validResourceAsStream();
+
 		List<Publisher> results = parser.parse(stream);
 
 		assertValid(results);
+	}
+
+	@Test
+	public void parserShouldParseExtendedButValidXmlSuccessful() {
+		InputStream stream = extendedResourceAsStream();
+
+		List<Publisher> results = parser.parse(stream);
+
+		assertValid(results);
+	}
+
+	@Test
+	public void parserShouldFailWhenParsingNotWellFormedXml() {
+		InputStream stream = invalidResourceAsStream();
+
+		try {
+			parser.parse(stream);
+
+			fail("XmlPublishersParser.parse() did not throw expected exception");
+		} catch (ParserException e) {
+			assertThat(e.getCause(), instanceOf(XmlPullParserException.class));
+		}
 	}
 
 }

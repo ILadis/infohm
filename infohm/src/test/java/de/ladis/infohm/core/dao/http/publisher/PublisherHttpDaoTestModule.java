@@ -40,7 +40,7 @@ public class PublisherHttpDaoTestModule {
 					ResponseHandler<? extends T> responseHandler,
 					HttpContext context) throws IOException, ClientProtocolException {
 
-				InputStream stream = XmlPublishersTestUtil.inputStream();
+				InputStream stream = XmlPublishersTestUtil.validResourceAsStream();
 
 				HttpResponse response = mock(HttpResponse.class);
 				HttpEntity entity = mock(HttpEntity.class);

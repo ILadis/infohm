@@ -43,7 +43,7 @@ public class PublisherHttpDaoTest extends BaseTest {
 	}
 
 	@Test
-	public void httpDaoShoulsNotSupportTheseMethodsAndThrowExpectedException() {
+	public void httpDaoShouldNotSupportTheseMethodsAndThrowExpectedException() {
 		try {
 			dao.find(1);
 

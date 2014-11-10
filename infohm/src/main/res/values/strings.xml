@@ -3,4 +3,8 @@
 
 	<string name="app_name">InfOhm</string>
 
+	<string name="fragment_authentication_username_hint">Benutzername</string>
+	<string name="fragment_authentication_username_password">Passwort</string>
+	<string name="fragment_authentication_submit">WEITER</string>
+
 </resources>

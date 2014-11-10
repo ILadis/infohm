@@ -87,6 +87,14 @@
 		<item name="searchIcon">@drawable/actionbar_search_lens</item>
 	</style>
 
+	<!-- Activity styles. -->
+	<style name="Activity" parent="@style/Widget" />
+
+	<style name="Activity.Content">
+		<item name="android:paddingLeft">16dp</item>
+		<item name="android:paddingRight">16dp</item>
+	</style>
+
 	<!-- Drawer styles. -->
 	<style name="Drawer" parent="@style/Widget">
 		<item name="android:layout_width">320dp</item>

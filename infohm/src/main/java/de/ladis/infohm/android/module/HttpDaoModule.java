@@ -15,6 +15,7 @@ import android.content.Context;
 import android.net.http.AndroidHttpClient;
 import dagger.Module;
 import dagger.Provides;
+import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
 
@@ -65,6 +66,12 @@ public class HttpDaoModule {
 	@Singleton
 	public PublisherHttpDao providePublisherDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
 		return new PublisherHttpDao(client, host, context, factory);
+	}
+
+	@Provides
+	@Singleton
+	public AuthenticationHttpDao provideAuthenticationDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
+		return new AuthenticationHttpDao(client, host, context, factory);
 	}
 
 }

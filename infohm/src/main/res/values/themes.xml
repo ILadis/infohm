@@ -29,6 +29,7 @@
 		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+		<item name="activityContent">@style/Activity.Content</item>
 		<item name="drawerStyle">@style/Drawer</item>
 		<item name="drawerDividerStyle">@style/Drawer.Divider</item>
 		

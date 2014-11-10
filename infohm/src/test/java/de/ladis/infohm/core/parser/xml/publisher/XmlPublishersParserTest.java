@@ -1,6 +1,6 @@
 package de.ladis.infohm.core.parser.xml.publisher;
 
-import static de.ladis.infohm.core.parser.xml.publisher.PublishersTestUtil.*;
+import static de.ladis.infohm.core.parser.xml.publisher.XmlPublishersTestUtil.*;
 
 import java.io.InputStream;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package de.ladis.infohm.core.dao.http.publisher;
 
-import static de.ladis.infohm.core.parser.xml.publisher.PublishersTestUtil.*;
+import static de.ladis.infohm.core.parser.xml.publisher.XmlPublishersTestUtil.*;
 import static org.hamcrest.core.IsInstanceOf.*;
 import static org.junit.Assert.*;
 

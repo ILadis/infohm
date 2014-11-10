@@ -22,7 +22,7 @@ import org.apache.http.protocol.HttpContext;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
-import de.ladis.infohm.core.parser.xml.publisher.PublishersTestUtil;
+import de.ladis.infohm.core.parser.xml.publisher.XmlPublishersTestUtil;
 
 @Module(
 library = true,
@@ -40,7 +40,7 @@ public class PublisherHttpDaoTestModule {
 					ResponseHandler<? extends T> responseHandler,
 					HttpContext context) throws IOException, ClientProtocolException {
 
-				InputStream stream = PublishersTestUtil.xmlInputStream();
+				InputStream stream = XmlPublishersTestUtil.inputStream();
 
 				HttpResponse response = mock(HttpResponse.class);
 				HttpEntity entity = mock(HttpEntity.class);

@@ -9,14 +9,10 @@ import java.util.List;
 
 import de.ladis.infohm.core.domain.Publisher;
 
-public class PublishersTestUtil {
+public class XmlPublishersTestUtil {
 
-	public static InputStream xmlInputStream() {
-		return PublishersTestUtil.class.getResourceAsStream("publishers.xml");
-	}
-
-	public static InputStream jsonInputStream() {
-		throw new UnsupportedOperationException("json test file not supported at this moment");
+	public static InputStream inputStream() {
+		return XmlPublishersTestUtil.class.getResourceAsStream("publishers.xml");
 	}
 
 	public static Publisher newInstance() {

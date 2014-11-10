@@ -1,11 +1,12 @@
 package de.ladis.infohm.core.parser.xml.publisher;
 
-import static org.hamcrest.core.Is.*;
-import static org.hamcrest.core.IsEqual.*;
-import static org.junit.Assert.*;
+import static de.ladis.infohm.core.parser.xml.publisher.PublishersTestUtil.*;
 
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,26 +15,30 @@ import org.robolectric.annotation.Config;
 
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.parser.domain.PublishersParser;
-import de.ladis.infohm.core.parser.xml.publisher.XmlPublishersParser;
+import de.ladis.infohm.test.BaseTest;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class  XmlPublishersParserTest {
+public class  XmlPublishersParserTest extends BaseTest {
+
+	@Override
+	protected List<Object> getModules() {
+		return Arrays.<Object>asList(
+				new XmlPublishersParserTestModule()
+		);
+	}
+
+	@Inject
+	protected InputStream stream;
+
+	@Inject
+	protected PublishersParser parser;
 
 	@Test
 	public void parserShouldParseWellFormedXmlSuccessful() throws Exception {
-		InputStream stream =  XmlPublishersParserTest.class.getResourceAsStream("publishers.xml");
-		PublishersParser parser = new XmlPublishersParser();
-
-		Publisher expected = new Publisher();
-		expected.setId(1l);
-		expected.setName("test");
-		expected.setDescription("a publisher for testing purposes");
-
 		List<Publisher> results = parser.parse(stream);
 
-		assertThat(results.size(), is(1));
-		assertThat(results.get(0), equalTo(expected));
+		assertValid(results);
 	}
 
 }

@@ -7,4 +7,11 @@
 		<id>1</id>
 		<name>test</name>
 	</publisher>
+	<publisher>
+		<createdAt>2014-12-01T11:47:00+01:00</createdAt>
+		<updatedAt>2014-12-01T11:47:00+01:00</updatedAt>
+		<description>yet another publisher for testing purposes</description>
+		<id>2</id>
+		<name>yap</name>
+	</publisher>
 </publishers>

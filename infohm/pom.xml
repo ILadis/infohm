@@ -14,7 +14,6 @@
 		<butterknife.version>5.1.2</butterknife.version>
 		<dagger.version>1.2.2</dagger.version>
 		<gson.version>2.3</gson.version>
-		<commons-codec.version>1.9</commons-codec.version>
 		<junit.version>4.8.1</junit.version>
 		<robolectric.version>2.4</robolectric.version>
 		<mockito.version>1.10.8</mockito.version>
@@ -78,11 +77,6 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>${commons-codec.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

@@ -74,7 +74,13 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 			addCredentialsToContext(context, credentials);
 			addCredentialsToRequest(request, credentials);
 
-			return http().execute(host, request, handler, context);
+			boolean result = http().execute(host, request, handler, context);
+
+			if (!result) {
+				removeCredentialsFromContext(context);
+			}
+
+			return result;
 		} catch (Exception e) {
 			throw new DaoException(this, e);
 		}

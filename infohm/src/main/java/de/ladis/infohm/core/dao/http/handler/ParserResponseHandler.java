@@ -10,11 +10,11 @@ import org.apache.http.client.ResponseHandler;
 
 import de.ladis.infohm.core.parser.Parser;
 
-public class HttpDaoResponseHandler<T> implements ResponseHandler<T> {
+public class ParserResponseHandler<T> implements ResponseHandler<T> {
 
 	private final Parser<InputStream, T> parser;
 
-	public HttpDaoResponseHandler(Parser<InputStream, T> parser) {
+	public ParserResponseHandler(Parser<InputStream, T> parser) {
 		this.parser = parser;
 	}
 

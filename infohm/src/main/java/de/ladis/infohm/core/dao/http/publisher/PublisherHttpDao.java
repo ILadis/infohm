@@ -12,7 +12,7 @@ import org.apache.http.protocol.HttpContext;
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.domain.PublisherDao;
 import de.ladis.infohm.core.dao.http.HttpDao;
-import de.ladis.infohm.core.dao.http.handler.HttpDaoResponseHandler;
+import de.ladis.infohm.core.dao.http.handler.ParserResponseHandler;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.parser.xml.publisher.XmlPublishersParser;
 
@@ -38,8 +38,8 @@ public class PublisherHttpDao extends HttpDao<Integer, Publisher> implements Pub
 	@Override
 	public List<Publisher> list() throws DaoException {
 		try {
-			HttpRequest request = factory.newHttpRequest("GET", "/publishers");
-			ResponseHandler<List<Publisher>> handler = new HttpDaoResponseHandler<List<Publisher>>(new XmlPublishersParser());
+			HttpRequest request = factory.newHttpRequest("GET", "/rest/publishers");
+			ResponseHandler<List<Publisher>> handler = new ParserResponseHandler<List<Publisher>>(new XmlPublishersParser());
 
 			return http().execute(host, request, handler, context);
 		} catch (Exception e) {

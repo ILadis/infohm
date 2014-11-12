@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:paddingTop="?attr/listViewContentPadding"
+	android:paddingRight="?attr/verticalSpaceBorder"
+	android:paddingBottom="?attr/listViewContentPadding"
+	android:paddingLeft="?attr/verticalSpaceBorder">
+
+	<TextView
+		android:id="@+id/adapter_multichoice_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="?attr/verticalSpaceKeyline"
+		style="?attr/textAppearanceSubheader" />
+
+	<TextView
+		android:id="@+id/adapter_multichoice_caption"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/adapter_multichoice_title"
+		android:layout_marginLeft="?attr/verticalSpaceKeyline"
+		android:singleLine="true"
+		android:ellipsize="end"
+		style="?attr/textAppearanceCaption" />
+
+	<CheckBox
+		android:id="@+id/adapter_multichoice_checkbox"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+
+</RelativeLayout>

@@ -7,13 +7,17 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
+import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
 import de.ladis.infohm.core.service.AuthenticationService;
+import de.ladis.infohm.core.service.PublisherService;
 
 @Module(
 library = true,
 includes = {
-	HttpDaoModule.class
+		ContentDaoModule.class,
+		HttpDaoModule.class
 })
 public class ServiceModule {
 
@@ -27,6 +31,12 @@ public class ServiceModule {
 	@Singleton
 	public AuthenticationService provideAuthenticationService(AuthenticationHttpDao dao, ExecutorService executor) {
 		return new AuthenticationService(dao, executor);
+	}
+
+	@Provides
+	@Singleton
+	public PublisherService providePublisherService(PublisherContentDao cache, PublisherHttpDao remote, ExecutorService executor) {
+		return new PublisherService(cache, remote, executor);
 	}
 
 }

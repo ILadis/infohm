@@ -4,7 +4,7 @@ public interface AuthenticationListener {
 
 	public void onSignedIn();
 
-	public boolean onSigninFailed();
+	public void onSigninFailed();
 
 	public void onSignedOut();
 

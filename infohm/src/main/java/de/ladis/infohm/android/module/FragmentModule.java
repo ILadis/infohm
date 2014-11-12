@@ -6,7 +6,7 @@ import de.ladis.infohm.android.fragment.authentication.AuthenticationFragment;
 @Module(
 includes = {
 		AndroidModule.class,
-		ContentDaoModule.class
+		ServiceModule.class
 },
 injects = {
 		AuthenticationFragment.class

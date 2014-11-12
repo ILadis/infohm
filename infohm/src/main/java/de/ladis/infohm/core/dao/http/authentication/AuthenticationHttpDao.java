@@ -68,7 +68,7 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 	@Override
 	public boolean signin(Credentials credentials) throws DaoException {
 		try {
-			HttpEntityEnclosingRequest request = (HttpEntityEnclosingRequest) factory.newHttpRequest("POST", "/rest/auth/login");
+			HttpEntityEnclosingRequest request = (HttpEntityEnclosingRequest) factory.newHttpRequest("POST", "/iscore/rest/auth/login");
 			ResponseHandler<Boolean> handler = new AuthenticationResponseHandler();
 
 			addCredentialsToContext(context, credentials);
@@ -90,7 +90,7 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 		CredentialsProvider provider = new BasicCredentialsProvider();
 		provider.setCredentials(AuthScope.ANY, credentials);
 
-		context.setAttribute(ClientContext.CREDS_PROVIDER, provider);;
+		context.setAttribute(ClientContext.CREDS_PROVIDER, provider);
 		context.setAttribute(ClientPNames.HANDLE_AUTHENTICATION, true);
 	}
 

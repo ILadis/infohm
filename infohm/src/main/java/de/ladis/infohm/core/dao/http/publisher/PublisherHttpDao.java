@@ -38,7 +38,7 @@ public class PublisherHttpDao extends HttpDao<Integer, Publisher> implements Pub
 	@Override
 	public List<Publisher> list() throws DaoException {
 		try {
-			HttpRequest request = factory.newHttpRequest("GET", "/rest/publishers");
+			HttpRequest request = factory.newHttpRequest("GET", "/iscore/rest/publishers");
 			ResponseHandler<List<Publisher>> handler = new ParserResponseHandler<List<Publisher>>(new XmlPublishersParser());
 
 			return http().execute(host, request, handler, context);

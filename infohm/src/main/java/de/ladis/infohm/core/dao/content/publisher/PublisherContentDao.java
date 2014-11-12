@@ -1,5 +1,6 @@
 package de.ladis.infohm.core.dao.content.publisher;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,40 +15,18 @@ import de.ladis.infohm.core.domain.Publisher;
 
 public class PublisherContentDao extends ContentDao<Integer, Publisher> implements PublisherDao {
 
-	private final String baseUri;
+	private final URI base;
 
-	public PublisherContentDao(ContentResolver resolver, String baseUri) {
+	public PublisherContentDao(ContentResolver resolver, URI base) {
 		super(resolver);
 
-		this.baseUri = baseUri;
-	}
-
-	private static Publisher fromCursor(Cursor cursor) {
-		Long id = cursor.getLong(cursor.getColumnIndex("id"));
-		String name = cursor.getString(cursor.getColumnIndex("name"));
-		String description = cursor.getString(cursor.getColumnIndex("description"));
-
-		Publisher publisher = new Publisher();
-		publisher.setId(id);
-		publisher.setName(name);
-		publisher.setDescription(description);
-
-		return publisher;
-	}
-
-	private static ContentValues toValues(Publisher entity) {
-		ContentValues values = new ContentValues();
-
-		values.put("name", entity.getName());
-		values.put("description", entity.getDescription());
-
-		return values;
+		this.base = base;
 	}
 
 	@Override
 	public Publisher find(Integer key) throws DaoException {
 		Cursor cursor = content().query(
-				Uri.parse(baseUri + "/publisher"),
+				Uri.parse(base + "/publisher"),
 				null,
 				"id = ?",
 				new String[] { String.valueOf(key) },
@@ -64,7 +43,7 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 	@Override
 	public List<Publisher> list() throws DaoException {
 		Cursor cursor = content().query(
-				Uri.parse(baseUri + "/publisher"),
+				Uri.parse(base + "/publisher"),
 				null,
 				null,
 				null,
@@ -85,7 +64,7 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 	@Override
 	public void insert(Publisher entity) throws DaoException {
 		Uri uri = content().insert(
-				Uri.parse(baseUri + "/publisher"),
+				Uri.parse(base + "/publisher"),
 				toValues(entity)
 		);
 
@@ -99,7 +78,7 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 	@Override
 	public void update(Publisher entity) throws DaoException {
 		content().update(
-				Uri.parse(baseUri + "/publisher"),
+				Uri.parse(base + "/publisher"),
 				toValues(entity),
 				"id = ?",
 				new String[] { String.valueOf(entity.getId()) }
@@ -109,10 +88,36 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 	@Override
 	public void delete(Publisher entity) throws DaoException {
 		content().delete(
-				Uri.parse(baseUri + "/publisher"),
+				Uri.parse(base + "/publisher"),
 				"id = ?",
 				new String[] { String.valueOf(entity.getId()) }
 		);
+	}
+
+	private static Publisher fromCursor(Cursor cursor) {
+		Long id = cursor.getLong(cursor.getColumnIndex("id"));
+		String name = cursor.getString(cursor.getColumnIndex("name"));
+		String description = cursor.getString(cursor.getColumnIndex("description"));
+		Boolean starred = cursor.getInt(cursor.getColumnIndex("starred")) != 0;
+
+		Publisher publisher = new Publisher();
+		publisher.setId(id);
+		publisher.setName(name);
+		publisher.setDescription(description);
+		publisher.setStarred(starred);
+
+		return publisher;
+	}
+
+	private static ContentValues toValues(Publisher entity) {
+		ContentValues values = new ContentValues();
+
+		values.put("id", entity.getId());
+		values.put("name", entity.getName());
+		values.put("description", entity.getDescription());
+		values.put("starred", entity.isStarred());
+
+		return values;
 	}
 
 }

@@ -1,5 +1,7 @@
 package de.ladis.infohm.android.module;
 
+import java.net.URI;
+
 import javax.inject.Singleton;
 
 import android.content.ContentResolver;
@@ -7,7 +9,6 @@ import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
-import de.ladis.infohm.core.dao.domain.PublisherDao;
 
 @Module(
 library = true,
@@ -24,8 +25,14 @@ public class ContentDaoModule {
 
 	@Provides
 	@Singleton
-	public PublisherDao providePublisherDao(ContentResolver resolver) {
-		return new PublisherContentDao(resolver, "content://de.ladis.infohm.provider");
+	public URI provideBaseUri() {
+		return URI.create("content://de.ladis.infohm.provider");
+	}
+
+	@Provides
+	@Singleton
+	public PublisherContentDao providePublisherDao(ContentResolver resolver, URI base) {
+		return new PublisherContentDao(resolver, base);
 	}
 
 }

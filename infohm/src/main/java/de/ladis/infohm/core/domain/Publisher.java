@@ -5,6 +5,7 @@ public class Publisher {
 	private Long id;
 	private String name;
 	private String description;
+	private Boolean starred;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -28,6 +29,14 @@ public class Publisher {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public void setStarred(Boolean starred) {
+		this.starred = starred;
+	}
+
+	public Boolean isStarred() {
+		return starred;
 	}
 
 	@Override

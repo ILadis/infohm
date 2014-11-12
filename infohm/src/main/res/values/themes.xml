@@ -11,16 +11,20 @@
 		<item name="colorPrimary">@color/actionbar_primary_color</item>
 		<item name="colorPrimaryDark">@color/actionbar_secondary_color</item>
 		<item name="colorAccent">@color/actionbar_accent_color</item>
-		
+
 		<!-- Dimension values. -->
+		<item name="verticalSpaceBorder">16dp</item>
+		<item name="verticalSpaceKeyline">72dp</item>
 		<item name="cardViewGuttersPadding">8dp</item>
 		<item name="cardViewContentPadding">16dp</item>
+		<item name="listViewContentPadding">8dp</item>
 
 		<!-- Text appearances. -->
 		<item name="textAppearance">@style/TextAppearance</item>
 		<item name="textAppearanceHeadline">@style/TextAppearance.Headline</item>
 		<item name="textAppearanceTitle">@style/TextAppearance.Title</item>
 		<item name="textAppearanceSubheader">@style/TextAppearance.Subheader</item>
+		<item name="textAppearanceCaption">@style/TextAppearance.Caption</item>
 
 		<!-- Widget styles. -->
 		<item name="textViewStyle">@style/Widget.TextView</item>
@@ -29,7 +33,6 @@
 		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
-		<item name="activityContent">@style/Activity.Content</item>
 		<item name="drawerStyle">@style/Drawer</item>
 		<item name="drawerDividerStyle">@style/Drawer.Divider</item>
 		

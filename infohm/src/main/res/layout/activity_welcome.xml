@@ -10,10 +10,11 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
 
-	<fragment class="de.ladis.infohm.android.fragment.authentication.AuthenticationFragment"
-		android:id="@+id/activity_authentication_fragment"
+	<fragment class="de.ladis.infohm.android.fragment.publisher.StarPublisherFragment"
+		android:id="@+id/activity_welcome_star_fragment"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		tools:layout="@layout/fragment_authentication" />
+		android:layout_marginTop="200dp"
+		tools:layout="@layout/fragment_star_publisher" />
 
 </LinearLayout>

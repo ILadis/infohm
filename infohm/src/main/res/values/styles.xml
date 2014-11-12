@@ -18,11 +18,12 @@
 	</style>
 
 	<style name="TextAppearance.Subheader">
-		<item name="android:textSize">@dimen/text_title_size</item>
-		<item name="android:textColor">@color/text_secondary_color</item>
+		<item name="android:textSize">@dimen/text_subheader_size</item>
 	</style>
 
-	<style name="TextAppearance.Body" parent="@style/TextAppearance.AppCompat.Body1" />
+	<style name="TextAppearance.Body" parent="@style/TextAppearance.AppCompat.Body1">
+		<item name="android:textColor">@color/text_primary_color</item>
+	</style>
 
 	<style name="TextAppearance.Caption" parent="@style/TextAppearance.AppCompat.Caption">
 		<item name="android:textSize">@dimen/text_caption_size</item>
@@ -85,14 +86,6 @@
 		<item name="queryBackground">@drawable/actionbar_search_textview_selector</item>
 		<item name="closeIcon">@drawable/actionbar_search_clear</item>
 		<item name="searchIcon">@drawable/actionbar_search_lens</item>
-	</style>
-
-	<!-- Activity styles. -->
-	<style name="Activity" parent="@style/Widget" />
-
-	<style name="Activity.Content">
-		<item name="android:paddingLeft">16dp</item>
-		<item name="android:paddingRight">16dp</item>
 	</style>
 
 	<!-- Drawer styles. -->

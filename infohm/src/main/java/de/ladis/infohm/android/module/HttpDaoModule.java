@@ -38,7 +38,7 @@ public class HttpDaoModule {
 	@Provides
 	@Singleton
 	public HttpHost provideHttpHost() {
-		return new HttpHost("localhost", 8080);
+		return new HttpHost("192.168.0.9", 8080);
 	}
 
 	@Provides

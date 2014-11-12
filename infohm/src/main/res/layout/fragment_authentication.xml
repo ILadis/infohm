@@ -1,41 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@id/activity_drawer"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:paddingLeft="?attr/verticalSpaceBorder"
+	android:paddingRight="?attr/verticalSpaceBorder">
 
-	<android.support.v7.widget.Toolbar
-		android:id="@id/activity_toolbar"
+	<EditText
+		android:id="@+id/fragment_authentication_username"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content"
+		android:inputType="text|textCapWords"
+		android:hint="@string/fragment_authentication_username_hint" />
 
-	<LinearLayout
+	<EditText
+		android:id="@+id/fragment_authentication_password"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical"
-		style="?attr/activityContent">
+		android:layout_height="wrap_content"
+		android:inputType="text|textPassword"
+		android:hint="@string/fragment_authentication_username_password" />
 
-		<EditText
-			android:id="@+id/fragment_authentication_username"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:inputType="text|textCapWords"
-			android:hint="@string/fragment_authentication_username_hint" />
-
-		<EditText
-			android:id="@+id/fragment_authentication_password"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:inputType="text|textPassword"
-			android:hint="@string/fragment_authentication_username_password" />
-
-		<Button
-			android:id="@+id/fragment_authentication_submit"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/fragment_authentication_submit" />
-
-	</LinearLayout>
+	<Button
+		android:id="@+id/fragment_authentication_submit"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/fragment_authentication_submit" />
 
 </LinearLayout>

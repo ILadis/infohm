@@ -8,24 +8,24 @@
 	android:paddingLeft="?attr/verticalSpaceBorder">
 
 	<TextView
-		android:id="@+id/adapter_multichoice_title"
+		android:id="@+id/adapter_star_publisher_name"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="?attr/verticalSpaceKeyline"
 		style="?attr/textAppearanceSubheader" />
 
 	<TextView
-		android:id="@+id/adapter_multichoice_caption"
+		android:id="@+id/adapter_star_publisher_description"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/adapter_multichoice_title"
+		android:layout_below="@id/adapter_star_publisher_name"
 		android:layout_marginLeft="?attr/verticalSpaceKeyline"
 		android:singleLine="true"
 		android:ellipsize="end"
 		style="?attr/textAppearanceCaption" />
 
 	<CheckBox
-		android:id="@+id/adapter_multichoice_checkbox"
+		android:id="@+id/adapter_star_publisher_checkbox"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" />
 

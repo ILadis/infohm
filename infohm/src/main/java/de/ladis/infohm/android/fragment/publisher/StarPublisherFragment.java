@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.InjectView;
 import de.ladis.infohm.R;
+import de.ladis.infohm.android.adapter.publisher.StarPublisherAdapter;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.PublisherListener;

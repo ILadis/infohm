@@ -1,7 +1,6 @@
-package de.ladis.infohm.android.adapter.multichoice;
+package de.ladis.infohm.android.adapter.publisher;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import de.ladis.infohm.R;
-import de.ladis.infohm.android.adapter.multichoice.MultichoiceAdapter.ViewHolder;
+import de.ladis.infohm.core.domain.Publisher;
 
-public class MultichoiceAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
+public class StarPublisherAdapter extends RecyclerView.Adapter<StarPublisherAdapter.ViewHolder> {
 
 	protected static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -30,24 +29,22 @@ public class MultichoiceAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 			super(view);
 
 			this.parentView = view;
-			this.checkView = (CheckBox) view.findViewById(R.id.adapter_multichoice_checkbox);
-			this.titleView = (TextView) view.findViewById(R.id.adapter_multichoice_title);
-			this.captionView = (TextView) view.findViewById(R.id.adapter_multichoice_caption);
+			this.checkView = (CheckBox) view.findViewById(R.id.adapter_star_publisher_checkbox);
+			this.titleView = (TextView) view.findViewById(R.id.adapter_star_publisher_name);
+			this.captionView = (TextView) view.findViewById(R.id.adapter_star_publisher_description);
 		}
 
 	}
 
-	private final List<T> items;
-	private final MultichoiceItemBinder<T> binder;
+	private final List<Publisher> items;
 	private final Set<Integer> selection;
 
-	public MultichoiceAdapter(Collection<T> items, MultichoiceItemBinder<T> binder) {
-		this.items = new ArrayList<T>(items);
-		this.binder = binder;
+	public StarPublisherAdapter(List<Publisher> items) {
+		this.items = items;
 		this.selection = new HashSet<Integer>();
 	}
 
-	public void selectItem(T item) {
+	public void selectItem(Publisher item) {
 		int position = items.indexOf(item);
 
 		if (position >= 0) {
@@ -65,8 +62,8 @@ public class MultichoiceAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 		notifyDataSetChanged();
 	}
 
-	public Collection<T> getSelection() {
-		List<T> items = new ArrayList<T>(selection.size());
+	public List<Publisher> getSelection() {
+		List<Publisher> items = new ArrayList<Publisher>(selection.size());
 
 		for (Integer position : selection) {
 			items.add(getItem(position));
@@ -75,7 +72,7 @@ public class MultichoiceAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 		return items;
 	}
 
-	public T getItem(int position) {
+	public Publisher getItem(int position) {
 		return items.get(position);
 	}
 
@@ -88,18 +85,18 @@ public class MultichoiceAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		Context context = parent.getContext();
 
-		View view = LayoutInflater.from(context).inflate(R.layout.adapter_multichoice, parent, false);
+		View view = LayoutInflater.from(context).inflate(R.layout.adapter_star_publisher, parent, false);
 
 		return new ViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(ViewHolder holder, final int position) {
-		T item = getItem(position);
+		Publisher item = getItem(position);
 
 		holder.checkView.setChecked(selection.contains(position));
-		holder.titleView.setText(binder.getTitle(item));
-		holder.captionView.setText(binder.getCaption(item));
+		holder.titleView.setText(item.getName());
+		holder.captionView.setText(item.getDescription());
 
 		OnClickListener listener = new OnClickListener() {
 

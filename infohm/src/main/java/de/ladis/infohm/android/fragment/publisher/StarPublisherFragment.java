@@ -99,7 +99,6 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 	public void onPause() {
 		super.onPause();
 
-		controller.star(adapter.getSelection());
 		service.unregisterListener(this);
 	}
 

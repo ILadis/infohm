@@ -42,7 +42,14 @@ public abstract class BaseDrawerActivity extends BaseActivity {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 			actionBar.setHomeButtonEnabled(true);
 
-			toggle = new ActionBarDrawerToggle(this, drawer, getSupportToolbar(), R.string.app_name, R.string.app_name);
+			toggle = new ActionBarDrawerToggle(this, drawer, getSupportToolbar(), R.string.app_name, R.string.app_name) {
+
+				@Override
+				public void onDrawerSlide(View drawerView, float slideOffset) {
+					super.onDrawerSlide(drawerView, 0);
+				}
+
+			};
 			drawer.setDrawerListener(toggle);
 		}
 	}

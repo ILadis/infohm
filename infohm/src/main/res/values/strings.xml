@@ -7,4 +7,6 @@
 	<string name="fragment_authentication_username_password">Passwort</string>
 	<string name="fragment_authentication_submit">WEITER</string>
 
+	<string name="menu_fragment_search_title">Suchen</string>
+
 </resources>

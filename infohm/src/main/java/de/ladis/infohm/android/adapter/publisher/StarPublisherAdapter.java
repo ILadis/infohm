@@ -1,6 +1,7 @@
 package de.ladis.infohm.android.adapter.publisher;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,20 +40,55 @@ public class StarPublisherAdapter extends RecyclerView.Adapter<StarPublisherAdap
 	private final List<Publisher> items;
 	private final Set<Integer> selection;
 
-	public StarPublisherAdapter(List<Publisher> items) {
-		this.items = items;
+	public StarPublisherAdapter() {
+		this.items = new ArrayList<Publisher>();
 		this.selection = new HashSet<Integer>();
+	}
+
+	public boolean containsItem(Publisher publisher) {
+		return items.indexOf(publisher) >= 0;
+	}
+
+	public void addItems(Collection<Publisher> publishers) {
+		for (Publisher publisher : publishers) {
+			addItem(publisher);
+		}
+	}
+
+	public void addItem(Publisher publisher) {
+		int index = items.indexOf(publisher);
+
+		if (index >= 0) {
+			items.remove(index);
+			items.add(index, publisher);
+
+			notifyItemChanged(index);
+		} else {
+			index = items.size();
+
+			items.add(publisher);
+
+			notifyItemInserted(index);
+		}
 	}
 
 	public void selectItem(Publisher item) {
 		int position = items.indexOf(item);
 
-		if (position >= 0) {
-			select(position);
+		if (position >= 0 && selection.add(position)) {
+			notifyDataSetChanged();
 		}
 	}
 
-	private void select(int position) {
+	public void deselectItem(Publisher item) {
+		int position = items.indexOf(item);
+
+		if (position >= 0 && selection.remove(position)) {
+			notifyDataSetChanged();
+		}
+	}
+
+	private void toggleSelect(int position) {
 		if (selection.contains(position)) {
 			selection.remove(position);
 		} else {
@@ -102,7 +138,7 @@ public class StarPublisherAdapter extends RecyclerView.Adapter<StarPublisherAdap
 
 			@Override
 			public void onClick(View view) {
-				select(position);
+				toggleSelect(position);
 			}
 
 		};

@@ -47,22 +47,68 @@ public class PublisherService {
 
 			@Override
 			public List<Publisher> doSync() {
-				return cache.list();
+				List<Publisher> all = cache.list();
+
+				handler.callback().onGathered(all);
+
+				return all;
 			}
 
 		};
 	}
 
-	public void getStarred() {
+	public Call<List<Publisher>> getStarred() {
+		return new AbstractCall<List<Publisher>>(executor) {
 
+			@Override
+			public List<Publisher> doSync() {
+				List<Publisher> starred = cache.starred();
+
+				handler.callback().onStarred(starred);
+
+				return starred;
+			}
+
+		};
 	}
 
-	public void starTo(Publisher publisher) {
+	public Call<Void> starTo(final Publisher publisher) {
+		return new AbstractCall<Void>(executor) {
 
+			@Override
+			public Void doSync() {
+				cache.star(publisher);
+
+				return null;
+			}
+
+		};
 	}
 
-	public void unstarFrom(Publisher publisher) {
+	public Call<Void> unstarFromAll() {
+		return new AbstractCall<Void>(executor) {
 
+			@Override
+			public Void doSync() {
+				cache.unstarAll();
+
+				return null;
+			}
+
+		};
+	}
+
+	public Call<Void> unstarFrom(final Publisher publisher) {
+		return new AbstractCall<Void>(executor) {
+
+			@Override
+			public Void doSync() {
+				cache.unstar(publisher);
+
+				return null;
+			}
+
+		};
 	}
 
 	public void subscribeTo(Publisher publisher) {

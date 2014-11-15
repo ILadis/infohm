@@ -29,6 +29,13 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 	private StarPublisherAdapter adapter;
 
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		adapter = new StarPublisherAdapter();
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_star_publisher, container, false);
 	}
@@ -37,6 +44,7 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 	}
@@ -46,18 +54,38 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 		super.onResume();
 
 		service.registerListener(this);
+
+		service.getAll().doAsync();
 		service.updateAll().doAsync();
 	}
 
 	@Override
-	public void onUpdated(List<Publisher> publisher) {
-		adapter = new StarPublisherAdapter(publisher);
-		recyclerView.setAdapter(adapter);
+	public void onUpdated(List<Publisher> publishers) {
+		adapter.addItems(publishers);
+		service.getStarred().doAsync();
+	}
+
+	@Override
+	public void onGathered(List<Publisher> publishers) {
+		adapter.addItems(publishers);
+		service.getStarred().doAsync();
+	}
+
+	@Override
+	public void onStarred(List<Publisher> publishers) {
+		for (Publisher starred : publishers) {
+			adapter.selectItem(starred);
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+
+		service.unstarFromAll().doSync();
+		for (Publisher starred : adapter.getSelection()) {
+			service.starTo(starred).doSync();
+		}
 
 		service.unregisterListener(this);
 	}

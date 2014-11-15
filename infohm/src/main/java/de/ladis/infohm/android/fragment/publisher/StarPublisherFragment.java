@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,14 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.adapter.publisher.StarPublisherAdapter;
+import de.ladis.infohm.android.controller.StarPublisherController;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.PublisherListener;
 import de.ladis.infohm.core.service.PublisherService;
 
 public class StarPublisherFragment extends BaseFragment implements PublisherListener {
+
+	private StarPublisherController controller;
 
 	@Inject
 	protected PublisherService service;
@@ -33,6 +38,13 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 		super.onCreate(savedInstanceState);
 
 		adapter = new StarPublisherAdapter();
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		controller = (StarPublisherController) activity;
 	}
 
 	@Override
@@ -78,15 +90,16 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 		}
 	}
 
+	@OnClick(R.id.fragment_start_publisher_submit)
+	protected void submitCredentials() {
+		controller.star(adapter.getSelection());
+	}
+
 	@Override
 	public void onPause() {
 		super.onPause();
 
-		service.unstarFromAll().doSync();
-		for (Publisher starred : adapter.getSelection()) {
-			service.starTo(starred).doSync();
-		}
-
+		controller.star(adapter.getSelection());
 		service.unregisterListener(this);
 	}
 

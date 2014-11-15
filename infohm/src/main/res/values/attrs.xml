@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+	<!-- Color references. -->
+	<attr name="slidingTabIndicatorColor" type="color" />
+
 	<!-- Dimension references. -->
 	<attr name="verticalSpaceBorder" type="dimension" />
 	<attr name="verticalSpaceKeyline" type="dimension" />
 	<attr name="cardViewGuttersPadding" type="dimension" />
 	<attr name="cardViewContentPadding" type="dimension" />
 	<attr name="listViewContentPadding" type="dimension" />
+	<attr name="slidingTabIndicatorHeight" type="dimentsion" />
 
 	<!-- Text styleables. -->
 	<attr name="textAppearance" type="reference" />
@@ -22,6 +26,7 @@
 	<attr name="buttonSecondaryStyle" type="reference" />
 	<attr name="buttonFlatStyle" type="reference" />
 	<attr name="buttonFlatSecondaryStyle" type="reference" />
+	<attr name="slidingTabTextViewStyle" type="reference" />
 
 	<!-- Drawer styleables. -->
 	<attr name="drawerStyle" type="reference" />

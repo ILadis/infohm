@@ -11,6 +11,7 @@
 		<item name="colorPrimary">@color/actionbar_primary_color</item>
 		<item name="colorPrimaryDark">@color/actionbar_secondary_color</item>
 		<item name="colorAccent">@color/actionbar_accent_color</item>
+		<item name="slidingTabIndicatorColor">@android:color/white</item>
 
 		<!-- Dimension values. -->
 		<item name="verticalSpaceBorder">16dp</item>
@@ -18,6 +19,7 @@
 		<item name="cardViewGuttersPadding">8dp</item>
 		<item name="cardViewContentPadding">16dp</item>
 		<item name="listViewContentPadding">8dp</item>
+		<item name="slidingTabIndicatorHeight">3dp</item>
 
 		<!-- Text appearances. -->
 		<item name="textAppearance">@style/TextAppearance</item>
@@ -33,6 +35,7 @@
 		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+		<item name="slidingTabTextViewStyle">@style/Widget.SlidingTab</item>
 		<item name="drawerStyle">@style/Drawer</item>
 		<item name="drawerDividerStyle">@style/Drawer.Divider</item>
 		

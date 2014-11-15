@@ -45,7 +45,7 @@ public class PublisherHttpDaoTest extends BaseTest {
 	@Test
 	public void httpDaoShouldNotSupportTheseMethodsAndThrowExpectedException() {
 		try {
-			dao.find(1);
+			dao.find(1l);
 
 			fail("PublisherHttpDao.find() did not throw expected exception");
 		} catch (DaoException e) {
@@ -74,6 +74,38 @@ public class PublisherHttpDaoTest extends BaseTest {
 			dao.delete(publisher);
 
 			fail("PublisherHttpDao.delete() did not throw expected exception");
+		} catch (DaoException e) {
+			assertThat(e.getCause(), instanceOf(UnsupportedOperationException.class));
+		}
+
+		try {
+			dao.starred();
+
+			fail("PublisherHttpDao.starred() did not throw expected exception");
+		} catch (DaoException e) {
+			assertThat(e.getCause(), instanceOf(UnsupportedOperationException.class));
+		}
+
+		try {
+			dao.star(publisher);
+
+			fail("PublisherHttpDao.star() did not throw expected exception");
+		} catch (DaoException e) {
+			assertThat(e.getCause(), instanceOf(UnsupportedOperationException.class));
+		}
+
+		try {
+			dao.unstarAll();
+
+			fail("PublisherHttpDao.unstarAll() did not throw expected exception");
+		} catch (DaoException e) {
+			assertThat(e.getCause(), instanceOf(UnsupportedOperationException.class));
+		}
+
+		try {
+			dao.unstar(publisher);
+
+			fail("PublisherHttpDao.unstar() did not throw expected exception");
 		} catch (DaoException e) {
 			assertThat(e.getCause(), instanceOf(UnsupportedOperationException.class));
 		}

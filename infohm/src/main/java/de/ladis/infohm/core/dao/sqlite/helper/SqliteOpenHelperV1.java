@@ -13,20 +13,27 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE bookmark ("
-				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ "id INTEGER, "
 				+ "url TEXT NOT NULL, "
 				+ "title TEXT NOT NULL, "
 				+ "description TEXT NOT NULL, "
 				+ "created TEXT NOT NULL, "
-				+ "updated TEXT NOT NULL)");
+				+ "updated TEXT NOT NULL, "
+				+ "PRIMARY KEY (id))");
 
 		db.execSQL("CREATE TABLE publisher ("
-				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ "id INTEGER, "
 				+ "name TEXT NOT NULL, "
 				+ "description TEXT NOT NULL, "
-				+ "starred INTEGER NOT NULL, "
 				+ "created TEXT NOT NULL, "
-				+ "updated TEXT NOT NULL)");
+				+ "updated TEXT NOT NULL, "
+				+ "PRIMARY KEY (id))");
+
+		db.execSQL("CREATE TABLE starred ("
+				+ "id INTEGER, "
+				+ "pid INTEGER, "
+				+ "PRIMARY KEY (id, pid), "
+				+ "FOREIGN KEY (pid) REFERENCES publisher(id))");
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import de.ladis.infohm.core.dao.http.handler.ParserResponseHandler;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.parser.xml.publisher.XmlPublishersParser;
 
-public class PublisherHttpDao extends HttpDao<Integer, Publisher> implements PublisherDao {
+public class PublisherHttpDao extends HttpDao<Long, Publisher> implements PublisherDao {
 
 	private final HttpHost host;
 	private final HttpContext context;
@@ -31,7 +31,7 @@ public class PublisherHttpDao extends HttpDao<Integer, Publisher> implements Pub
 	}
 
 	@Override
-	public Publisher find(Integer key) throws DaoException {
+	public Publisher find(Long key) throws DaoException {
 		throw new DaoException(this, new UnsupportedOperationException());
 	}
 
@@ -59,6 +59,26 @@ public class PublisherHttpDao extends HttpDao<Integer, Publisher> implements Pub
 
 	@Override
 	public void delete(Publisher entity) throws DaoException {
+		throw new DaoException(this, new UnsupportedOperationException());
+	}
+
+	@Override
+	public List<Publisher> starred() {
+		throw new DaoException(this, new UnsupportedOperationException());
+	}
+
+	@Override
+	public void star(Publisher entity) {
+		throw new DaoException(this, new UnsupportedOperationException());
+	}
+
+	@Override
+	public void unstarAll() {
+		throw new DaoException(this, new UnsupportedOperationException());
+	}
+
+	@Override
+	public void unstar(Publisher entity) {
 		throw new DaoException(this, new UnsupportedOperationException());
 	}
 

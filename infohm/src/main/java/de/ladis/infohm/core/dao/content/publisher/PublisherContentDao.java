@@ -1,8 +1,12 @@
 package de.ladis.infohm.core.dao.content.publisher;
 
+import static android.net.Uri.*;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -13,7 +17,7 @@ import de.ladis.infohm.core.dao.content.ContentDao;
 import de.ladis.infohm.core.dao.domain.PublisherDao;
 import de.ladis.infohm.core.domain.Publisher;
 
-public class PublisherContentDao extends ContentDao<Integer, Publisher> implements PublisherDao {
+public class PublisherContentDao extends ContentDao<Long, Publisher> implements PublisherDao {
 
 	private final URI base;
 
@@ -23,10 +27,18 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 		this.base = base;
 	}
 
+	private boolean contains(Publisher entitiy) throws DaoException {
+		return find(entitiy.getId()) != null;
+	}
+
 	@Override
-	public Publisher find(Integer key) throws DaoException {
+	public Publisher find(Long key) throws DaoException {
+		if (key <= 0) {
+			return null;
+		}
+
 		Cursor cursor = content().query(
-				Uri.parse(base + "/publisher"),
+				parse(base + "/publisher"),
 				null,
 				"id = ?",
 				new String[] { String.valueOf(key) },
@@ -43,7 +55,7 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 	@Override
 	public List<Publisher> list() throws DaoException {
 		Cursor cursor = content().query(
-				Uri.parse(base + "/publisher"),
+				parse(base + "/publisher"),
 				null,
 				null,
 				null,
@@ -64,21 +76,25 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 	@Override
 	public void insert(Publisher entity) throws DaoException {
 		Uri uri = content().insert(
-				Uri.parse(base + "/publisher"),
+				parse(base + "/publisher"),
 				toValues(entity)
 		);
 
 		if (uri != null) {
-			Long id = Long.decode(uri.getLastPathSegment());
-
-			entity.setId(id);
+			if (contains(entity)) {
+				update(entity);
+			}
+			else {
+				Long id = Long.decode(uri.getLastPathSegment());
+				entity.setId(id);
+			}
 		}
 	}
 
 	@Override
 	public void update(Publisher entity) throws DaoException {
 		content().update(
-				Uri.parse(base + "/publisher"),
+				parse(base + "/publisher"),
 				toValues(entity),
 				"id = ?",
 				new String[] { String.valueOf(entity.getId()) }
@@ -88,9 +104,61 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 	@Override
 	public void delete(Publisher entity) throws DaoException {
 		content().delete(
-				Uri.parse(base + "/publisher"),
+				parse(base + "/publisher"),
 				"id = ?",
 				new String[] { String.valueOf(entity.getId()) }
+		);
+	}
+
+	@Override
+	public List<Publisher> starred() {
+		Cursor cursor = content().query(
+				parse(base + "/starred"),
+				new String[] { "pid" },
+				null,
+				null,
+				null
+		);
+
+		List<Publisher> starred = new ArrayList<Publisher>(cursor.getCount());
+
+		if (cursor.moveToFirst()) {
+			do {
+				Long id = cursor.getLong(0);
+
+				starred.add(find(id));
+			} while (cursor.moveToNext());
+		}
+
+		return starred;
+	}
+
+	@Override
+	public void star(Publisher entity) {
+		ContentValues values = new ContentValues();
+		values.put("pid", entity.getId());
+
+		content().insert(
+				parse(base + "/starred"),
+				values
+		);
+	}
+
+	@Override
+	public void unstarAll() {
+		content().delete(
+				parse(base + "/starred"),
+				null,
+				null
+		);
+	}
+
+	@Override
+	public void unstar(Publisher entity) {
+		content().delete(
+				parse(base + "/starred"),
+				"pid = ?",
+				new String[] { entity.getId().toString() }
 		);
 	}
 
@@ -98,13 +166,15 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 		Long id = cursor.getLong(cursor.getColumnIndex("id"));
 		String name = cursor.getString(cursor.getColumnIndex("name"));
 		String description = cursor.getString(cursor.getColumnIndex("description"));
-		Boolean starred = cursor.getInt(cursor.getColumnIndex("starred")) != 0;
+		DateTime created = DateTime.parse(cursor.getString(cursor.getColumnIndex("created")));
+		DateTime updated = DateTime.parse(cursor.getString(cursor.getColumnIndex("updated")));
 
 		Publisher publisher = new Publisher();
 		publisher.setId(id);
 		publisher.setName(name);
 		publisher.setDescription(description);
-		publisher.setStarred(starred);
+		publisher.setCreatedAt(created);
+		publisher.setUpdatedAt(updated);
 
 		return publisher;
 	}
@@ -115,7 +185,8 @@ public class PublisherContentDao extends ContentDao<Integer, Publisher> implemen
 		values.put("id", entity.getId());
 		values.put("name", entity.getName());
 		values.put("description", entity.getDescription());
-		values.put("starred", entity.isStarred());
+		values.put("created", entity.getCreatedAt().toString());
+		values.put("updated", entity.getUpdatedAt().toString());
 
 		return values;
 	}

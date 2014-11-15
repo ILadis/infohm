@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 import java.io.InputStream;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import de.ladis.infohm.core.domain.Publisher;
 
 public class XmlPublishersTestUtil {
@@ -37,16 +39,20 @@ public class XmlPublishersTestUtil {
 		assertThat(results.size(), is(2));
 
 		expected = new Publisher();
-		expected.setId(1l);
+		expected.setId(Long.valueOf(1l));
 		expected.setName("test");
 		expected.setDescription("a publisher for testing purposes");
+		expected.setCreatedAt(new DateTime(2014, 11, 6, 18, 22, 0));
+		expected.setUpdatedAt(new DateTime(2014, 11, 6, 18, 22, 0));
 
 		assertThat(results.get(0), equalTo(expected));
 
 		expected = new Publisher();
-		expected.setId(2l);
+		expected.setId(Long.valueOf(2l));
 		expected.setName("yap");
 		expected.setDescription("yet another publisher for testing purposes");
+		expected.setCreatedAt(new DateTime(2014, 12, 1, 11, 47, 0));
+		expected.setUpdatedAt(new DateTime(2014, 12, 1, 11, 47, 0));
 
 		assertThat(results.get(1), equalTo(expected));
 	}

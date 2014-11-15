@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -42,6 +43,8 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		Long id = null;
 		String name = null;
 		String description = null;
+		DateTime created = null;
+		DateTime updated = null;
 
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -55,6 +58,10 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 				name = parseName(parser);
 			} else if ("description".equals(tag)) {
 				description = parseDescription(parser);
+			} else if ("createdAt".equals(tag)) {
+				created = parseCreatedAt(parser);
+			} else if ("updatedAt".equals(tag)) {
+				updated = parseUpdatedAt(parser);
 			} else {
 				XmlParserUtil.skipTag(parser);
 			}
@@ -64,6 +71,8 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		publisher.setId(id);
 		publisher.setName(name);
 		publisher.setDescription(description);
+		publisher.setCreatedAt(created);
+		publisher.setUpdatedAt(updated);
 
 		parser.require(XmlPullParser.END_TAG, null, "publisher");
 
@@ -127,6 +136,48 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		parser.require(XmlPullParser.END_TAG, null, "description");
 
 		return value;
+	}
+
+	private DateTime parseCreatedAt(XmlPullParser parser) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, "createdAt");
+
+		String value = null;
+
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.TEXT) {
+				continue;
+			}
+			String text = parser.getText();
+
+			value = text;
+		}
+
+		parser.require(XmlPullParser.END_TAG, null, "createdAt");
+
+		DateTime created = DateTime.parse(value);
+
+		return created;
+	}
+
+	private DateTime parseUpdatedAt(XmlPullParser parser) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, "updatedAt");
+
+		String value = null;
+
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.TEXT) {
+				continue;
+			}
+			String text = parser.getText();
+
+			value = text;
+		}
+
+		parser.require(XmlPullParser.END_TAG, null, "updatedAt");
+
+		DateTime updated = DateTime.parse(value);
+
+		return updated;
 	}
 
 }

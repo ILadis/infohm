@@ -1,11 +1,16 @@
 package de.ladis.infohm.core.domain;
 
-public class Publisher {
+public class Publisher extends Entity {
 
 	private Long id;
 	private String name;
 	private String description;
-	private Boolean starred;
+
+	public Publisher() {
+		this.id = Long.valueOf(0);
+		this.name = "";
+		this.description = "";
+	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -31,14 +36,6 @@ public class Publisher {
 		return description;
 	}
 
-	public void setStarred(Boolean starred) {
-		this.starred = starred;
-	}
-
-	public Boolean isStarred() {
-		return starred;
-	}
-
 	@Override
 	public int hashCode() {
 		return id.intValue();
@@ -51,7 +48,9 @@ public class Publisher {
 
 			return this.id == other.id
 					&& this.name.equals(other.name)
-					&& this.description.equals(other.description);
+					&& this.description.equals(other.description)
+					&& this.created.isEqual(other.created)
+					&& this.updated.isEqual(other.updated);
 		}
 
 		return false;

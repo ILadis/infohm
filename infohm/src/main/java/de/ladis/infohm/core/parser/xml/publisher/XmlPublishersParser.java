@@ -1,5 +1,7 @@
 package de.ladis.infohm.core.parser.xml.publisher;
 
+import static de.ladis.infohm.util.XmlParserUtil.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.parser.domain.PublishersParser;
 import de.ladis.infohm.core.parser.xml.XmlParser;
-import de.ladis.infohm.util.XmlParserUtil;
 
 public class XmlPublishersParser extends XmlParser<List<Publisher>> implements PublishersParser {
 
@@ -29,6 +30,8 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 
 			if ("publisher".equals(tag)) {
 				publishers.add(parsePublisher(parser));
+			} else {
+				skipTag(parser);
 			}
 		}
 
@@ -37,7 +40,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return publishers;
 	}
 
-	private Publisher parsePublisher(XmlPullParser parser) throws XmlPullParserException, IOException {
+	private static Publisher parsePublisher(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "publisher");
 
 		Long id = null;
@@ -63,7 +66,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 			} else if ("updatedAt".equals(tag)) {
 				updated = parseUpdatedAt(parser);
 			} else {
-				XmlParserUtil.skipTag(parser);
+				skipTag(parser);
 			}
 		}
 
@@ -79,7 +82,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return publisher;
 	}
 
-	private Long parseId(XmlPullParser parser) throws XmlPullParserException, IOException {
+	private static Long parseId(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "id");
 
 		String value = null;
@@ -100,7 +103,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return id;
 	}
 
-	private String parseName(XmlPullParser parser) throws XmlPullParserException, IOException {
+	private static String parseName(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "name");
 
 		String value = null;
@@ -119,7 +122,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return value;
 	}
 
-	private String parseDescription(XmlPullParser parser) throws XmlPullParserException, IOException {
+	private static String parseDescription(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "description");
 
 		String value = null;
@@ -136,48 +139,6 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		parser.require(XmlPullParser.END_TAG, null, "description");
 
 		return value;
-	}
-
-	private DateTime parseCreatedAt(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, null, "createdAt");
-
-		String value = null;
-
-		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.TEXT) {
-				continue;
-			}
-			String text = parser.getText();
-
-			value = text;
-		}
-
-		parser.require(XmlPullParser.END_TAG, null, "createdAt");
-
-		DateTime created = DateTime.parse(value);
-
-		return created;
-	}
-
-	private DateTime parseUpdatedAt(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, null, "updatedAt");
-
-		String value = null;
-
-		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.TEXT) {
-				continue;
-			}
-			String text = parser.getText();
-
-			value = text;
-		}
-
-		parser.require(XmlPullParser.END_TAG, null, "updatedAt");
-
-		DateTime updated = DateTime.parse(value);
-
-		return updated;
 	}
 
 }

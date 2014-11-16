@@ -1,5 +1,7 @@
 package de.ladis.infohm.core.domain;
 
+import de.ladis.infohm.util.Strings;
+
 public class Publisher extends Entity {
 
 	private Long id;
@@ -8,8 +10,8 @@ public class Publisher extends Entity {
 
 	public Publisher() {
 		this.id = Long.valueOf(0);
-		this.name = "";
-		this.description = "";
+		this.name = Strings.empty();
+		this.description = Strings.empty();
 	}
 
 	public void setId(Long id) {

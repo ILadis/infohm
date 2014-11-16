@@ -13,6 +13,12 @@
 			</fields>
 		</meta>
 	</publisher>
+	<map>
+		<item>
+			<key>name</key>
+			<value>extended publisher (should not be parsed)</value>
+		</item>
+	</map>
 	<publisher>
 		<createdAt>2014-12-01T11:47:00+01:00</createdAt>
 		<updatedAt>2014-12-01T11:47:00+01:00</updatedAt>

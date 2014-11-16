@@ -1,6 +1,7 @@
 package de.ladis.infohm.core.dao.content.publisher;
 
 import static android.net.Uri.*;
+import static de.ladis.infohm.util.Arrays.*;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 				parse(base + "/publisher"),
 				null,
 				"id = ?",
-				new String[] { String.valueOf(key) },
+				from(key.toString()),
 				null
 		);
 
@@ -75,16 +76,15 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 
 	@Override
 	public void insert(Publisher entity) throws DaoException {
-		Uri uri = content().insert(
-				parse(base + "/publisher"),
-				toValues(entity)
-		);
+		if (contains(entity)) {
+			update(entity);
+		} else {
+			Uri uri = content().insert(
+					parse(base + "/publisher"),
+					toValues(entity)
+			);
 
-		if (uri != null) {
-			if (contains(entity)) {
-				update(entity);
-			}
-			else {
+			if (uri != null) {
 				Long id = Long.decode(uri.getLastPathSegment());
 				entity.setId(id);
 			}
@@ -97,7 +97,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 				parse(base + "/publisher"),
 				toValues(entity),
 				"id = ?",
-				new String[] { String.valueOf(entity.getId()) }
+				from(entity.getId().toString())
 		);
 	}
 
@@ -106,7 +106,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 		content().delete(
 				parse(base + "/publisher"),
 				"id = ?",
-				new String[] { String.valueOf(entity.getId()) }
+				from(entity.getId().toString())
 		);
 	}
 
@@ -114,7 +114,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 	public List<Publisher> starred() {
 		Cursor cursor = content().query(
 				parse(base + "/starred"),
-				new String[] { "pid" },
+				from("pid"),
 				null,
 				null,
 				null
@@ -158,7 +158,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 		content().delete(
 				parse(base + "/starred"),
 				"pid = ?",
-				new String[] { entity.getId().toString() }
+				from(entity.getId().toString())
 		);
 	}
 

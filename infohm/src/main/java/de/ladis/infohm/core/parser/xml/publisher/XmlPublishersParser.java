@@ -40,7 +40,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return publishers;
 	}
 
-	private static Publisher parsePublisher(XmlPullParser parser) throws XmlPullParserException, IOException {
+	public static Publisher parsePublisher(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "publisher");
 
 		Long id = null;
@@ -82,7 +82,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return publisher;
 	}
 
-	private static String parseName(XmlPullParser parser) throws XmlPullParserException, IOException {
+	public static String parseName(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "name");
 
 		String value = null;
@@ -103,7 +103,7 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return name;
 	}
 
-	private static String parseDescription(XmlPullParser parser) throws XmlPullParserException, IOException {
+	public static String parseDescription(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "description");
 
 		String value = null;

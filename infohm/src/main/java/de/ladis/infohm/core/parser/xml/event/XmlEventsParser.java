@@ -40,7 +40,7 @@ public class XmlEventsParser extends XmlParser<List<Event>> implements EventsPar
 		return events;
 	}
 
-	private static Event parseEvent(XmlPullParser parser) throws XmlPullParserException, IOException {
+	public static Event parseEvent(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "news");
 
 		Long id = null;
@@ -82,7 +82,7 @@ public class XmlEventsParser extends XmlParser<List<Event>> implements EventsPar
 		return event;
 	}
 
-	private static String parseHeadline(XmlPullParser parser) throws XmlPullParserException, IOException {
+	public static String parseHeadline(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "headline");
 
 		String value = null;
@@ -103,7 +103,7 @@ public class XmlEventsParser extends XmlParser<List<Event>> implements EventsPar
 		return headline;
 	}
 
-	private static String parseContent(XmlPullParser parser) throws XmlPullParserException, IOException {
+	public static String parseContent(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "content");
 
 		String value = null;

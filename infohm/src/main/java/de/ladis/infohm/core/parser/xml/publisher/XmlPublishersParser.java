@@ -82,27 +82,6 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		return publisher;
 	}
 
-	private static Long parseId(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, null, "id");
-
-		String value = null;
-
-		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.TEXT) {
-				continue;
-			}
-			String text = parser.getText();
-
-			value = text;
-		}
-
-		Long id = Long.parseLong(value);
-
-		parser.require(XmlPullParser.END_TAG, null, "id");
-
-		return id;
-	}
-
 	private static String parseName(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "name");
 

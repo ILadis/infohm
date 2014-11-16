@@ -26,6 +26,27 @@ public class XmlParserUtil {
 		}
 	}
 
+	public static Long parseId(XmlPullParser parser) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, "id");
+
+		String value = null;
+
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.TEXT) {
+				continue;
+			}
+			String text = parser.getText();
+
+			value = text;
+		}
+
+		Long id = Long.parseLong(value);
+
+		parser.require(XmlPullParser.END_TAG, null, "id");
+
+		return id;
+	}
+
 	public static DateTime parseCreatedAt(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "createdAt");
 

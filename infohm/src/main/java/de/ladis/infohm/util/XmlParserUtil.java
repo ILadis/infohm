@@ -26,6 +26,10 @@ public class XmlParserUtil {
 		}
 	}
 
+	public static String textOf(String text) {
+		return text.trim().replace("\t", "").replace('\n', ' ');
+	}
+
 	public static Long parseId(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, "id");
 

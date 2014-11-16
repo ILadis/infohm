@@ -96,9 +96,11 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 			value = text;
 		}
 
+		String name = textOf(value);
+
 		parser.require(XmlPullParser.END_TAG, null, "name");
 
-		return value;
+		return name;
 	}
 
 	private static String parseDescription(XmlPullParser parser) throws XmlPullParserException, IOException {
@@ -115,9 +117,11 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 			value = text;
 		}
 
+		String description = textOf(value);
+
 		parser.require(XmlPullParser.END_TAG, null, "description");
 
-		return value;
+		return description;
 	}
 
 }

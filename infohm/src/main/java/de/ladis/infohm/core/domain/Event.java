@@ -2,16 +2,16 @@ package de.ladis.infohm.core.domain;
 
 import de.ladis.infohm.util.Strings;
 
-public class Publisher extends Entity {
+public class Event extends Entity {
 
 	private Long id;
-	private String name;
-	private String description;
+	private String headline;
+	private String content;
 
-	public Publisher() {
+	public Event() {
 		this.id = Long.valueOf(0);
-		this.name = Strings.empty();
-		this.description = Strings.empty();
+		this.headline = Strings.empty();
+		this.content = Strings.empty();
 	}
 
 	public void setId(Long id) {
@@ -22,20 +22,20 @@ public class Publisher extends Entity {
 		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setHeadline(String headline) {
+		this.headline = headline;
 	}
 
-	public String getName() {
-		return name;
+	public String getHeadline() {
+		return headline;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getContent() {
+		return content;
 	}
 
 	@Override
@@ -46,11 +46,11 @@ public class Publisher extends Entity {
 	@Override
 	public boolean equals(Object object) {
 		if (this.getClass().isInstance(object)) {
-			Publisher other = (Publisher) object;
+			Event other = (Event) object;
 
 			return this.id == other.id
-					&& this.name.equals(other.name)
-					&& this.description.equals(other.description)
+					&& this.headline.equals(other.headline)
+					&& this.content.equals(other.content)
 					&& this.created.isEqual(other.created)
 					&& this.updated.isEqual(other.updated);
 		}

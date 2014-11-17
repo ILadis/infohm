@@ -40,7 +40,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 
 		Cursor cursor = content().query(
 				parse(base + "/publisher"),
-				null,
+				from("id", "name", "description", "created", "updated"),
 				"id = ?",
 				from(key.toString()),
 				null
@@ -57,10 +57,10 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 	public List<Publisher> list() throws DaoException {
 		Cursor cursor = content().query(
 				parse(base + "/publisher"),
+				from("id", "name", "description", "created", "updated"),
 				null,
 				null,
-				null,
-				null
+				"id ASC"
 		);
 
 		List<Publisher> publishers = new ArrayList<Publisher>(cursor.getCount());

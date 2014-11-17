@@ -66,20 +66,14 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 		super.onResume();
 
 		service.registerListener(this);
-
 		service.getAll().doAsync();
-		service.updateAll().doAsync();
-	}
-
-	@Override
-	public void onUpdated(List<Publisher> publishers) {
-		adapter.addItems(publishers);
-		service.getStarred().doAsync();
 	}
 
 	@Override
 	public void onGathered(List<Publisher> publishers) {
 		adapter.addItems(publishers);
+
+		service.updateAll().doAsync();
 		service.getStarred().doAsync();
 	}
 
@@ -88,6 +82,11 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 		for (Publisher starred : publishers) {
 			adapter.selectItem(starred);
 		}
+	}
+
+	@Override
+	public void onUpdated(List<Publisher> publishers) {
+		adapter.addItems(publishers);
 	}
 
 	@OnClick(R.id.fragment_start_publisher_submit)

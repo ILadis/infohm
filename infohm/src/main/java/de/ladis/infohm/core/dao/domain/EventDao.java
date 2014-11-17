@@ -2,8 +2,6 @@ package de.ladis.infohm.core.dao.domain;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import de.ladis.infohm.core.dao.Dao;
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.domain.Event;
@@ -15,7 +13,9 @@ public interface EventDao extends Dao<Long, Event> {
 
 	public List<Event> list(Publisher entity) throws DaoException;
 
-	public List<Event> since(Publisher entity, DateTime when) throws DaoException;
+	public Event lastOf(Publisher entity) throws DaoException;
+
+	public List<Event> since(Publisher key, Event entity) throws DaoException;
 
 	public void insert(Publisher key, Event entity) throws DaoException;
 

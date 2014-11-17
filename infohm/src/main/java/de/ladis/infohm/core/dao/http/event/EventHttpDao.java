@@ -8,8 +8,6 @@ import org.apache.http.HttpRequestFactory;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.protocol.HttpContext;
-import org.joda.time.DateTime;
-
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.domain.EventDao;
 import de.ladis.infohm.core.dao.http.HttpDao;
@@ -68,9 +66,27 @@ public class EventHttpDao extends HttpDao<Long, Event> implements EventDao {
 	}
 
 	@Override
-	public List<Event> since(Publisher entity, DateTime when) throws DaoException {
+	public Event lastOf(Publisher entity) throws DaoException {
 		try {
-			HttpRequest request = factory.newHttpRequest("GET", "/iscore/rest/publishers/" + entity.getId() + "/events?since=" + when.getMillis());
+			HttpRequest request = factory.newHttpRequest("GET", "/iscore/rest/publishers/" + entity.getId() + "/events?events=1");
+			ResponseHandler<List<Event>> handler = new ParserResponseHandler<List<Event>>(new XmlEventsParser());
+
+			List<Event> result = http().execute(host, request, handler, context);
+
+			if (result.size() > 0) {
+				return result.get(0);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			throw new DaoException(this, e);
+		}
+	}
+
+	@Override
+	public List<Event> since(Publisher key, Event entity) throws DaoException {
+		try {
+			HttpRequest request = factory.newHttpRequest("GET", "/iscore/rest/publishers/" + entity.getId() + "/events?since=" + entity.getId());
 			ResponseHandler<List<Event>> handler = new ParserResponseHandler<List<Event>>(new XmlEventsParser());
 
 			return http().execute(host, request, handler, context);

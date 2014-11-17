@@ -82,7 +82,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 				from("id", "headline", "content", "created", "updated"),
 				null,
 				null,
-				"id DESC"
+				"datetime(created) DESC"
 		);
 
 		List<Event> events = new ArrayList<Event>(cursor.getCount());
@@ -103,7 +103,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 				from("id", "headline", "content", "created", "updated"),
 				"pid = ?",
 				from(entity.getId().toString()),
-				"id DESC"
+				"datetime(created) DESC"
 		);
 
 		List<Event> events = new ArrayList<Event>(cursor.getCount());
@@ -118,13 +118,32 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 	}
 
 	@Override
-	public List<Event> since(Publisher entity, DateTime when) throws DaoException {
+	public Event lastOf(Publisher entity) throws DaoException {
+		Cursor cursor = content().query(
+				parse(base + "/event"),
+				from("id"),
+				"pid = ?",
+				from(entity.getId().toString()),
+				"id DESC LIMIT 1"
+		);
+
+		Event last = null;
+
+		if (cursor.moveToFirst()) {
+			last = fromCursor(cursor);
+		}
+
+		return last;
+	}
+
+	@Override
+	public List<Event> since(Publisher key, Event entity) throws DaoException {
 		Cursor cursor = content().query(
 				parse(base + "/event"),
 				from("id", "headline", "content", "created", "updated"),
-				"pid = ? AND datetime(createdAt) >= datetime(?)",
-				from(entity.getId().toString(), when.toString()),
-				"id DESC"
+				"pid = ? AND id > ?",
+				from(entity.getId().toString(), entity.getId().toString()),
+				"datetime(created) DESC"
 		);
 
 		List<Event> events = new ArrayList<Event>(cursor.getCount());

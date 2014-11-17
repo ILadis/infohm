@@ -74,6 +74,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
 			tabStrip.addView(tabView);
 		}
+
+		selectTab(viewPager.getCurrentItem());
 	}
 
 	@Override
@@ -82,6 +84,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
 		if (viewPager != null) {
 			scrollToTab(viewPager.getCurrentItem(), 0);
+			selectTab(viewPager.getCurrentItem());
 		}
 	}
 
@@ -101,6 +104,17 @@ public class SlidingTabLayout extends HorizontalScrollView {
 			}
 
 			scrollTo(targetScrollX, 0);
+		}
+	}
+
+	private void selectTab(int tabIndex) {
+		for (int i = 0; i < tabStrip.getChildCount(); i++) {
+			View childView = tabStrip.getChildAt(i);
+
+			if (TextView.class.isInstance(childView)) {
+				TextView tabView = (TextView) childView;
+				tabView.setActivated(i == tabIndex);
+			}
 		}
 	}
 
@@ -126,14 +140,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 			}
 
 			if (positionOffset <= 0.01f) {
-				for (int i = 0; i < tabStrip.getChildCount(); i++) {
-					View childView = tabStrip.getChildAt(i);
-
-					if (TextView.class.isInstance(childView)) {
-						TextView tabView = (TextView) childView;
-						tabView.setActivated(i == position);
-					}
-				}
+				selectTab(position);
 			}
 		}
 

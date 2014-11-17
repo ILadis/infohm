@@ -91,7 +91,7 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 	}
 
 	@OnClick(R.id.fragment_start_publisher_submit)
-	protected void submitCredentials() {
+	protected void submitStarred() {
 		controller.star(adapter.getSelection());
 	}
 

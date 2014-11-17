@@ -5,7 +5,7 @@
 	android:orientation="vertical">
 
 	<de.ladis.infohm.android.widget.SlidingTabLayout
-		android:id="@+id/fragment_events_tabs"
+		android:id="@+id/fragment_events_pager_tabs"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/colorPrimary" />

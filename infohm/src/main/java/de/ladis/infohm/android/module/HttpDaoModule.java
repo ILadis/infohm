@@ -16,6 +16,7 @@ import android.net.http.AndroidHttpClient;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
+import de.ladis.infohm.core.dao.http.event.EventHttpDao;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
 
@@ -62,6 +63,13 @@ public class HttpDaoModule {
 		return new HttpDaoRequestFactory();
 	}
 
+
+	@Provides
+	@Singleton
+	public AuthenticationHttpDao provideAuthenticationDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
+		return new AuthenticationHttpDao(client, host, context, factory);
+	}
+
 	@Provides
 	@Singleton
 	public PublisherHttpDao providePublisherDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
@@ -70,8 +78,8 @@ public class HttpDaoModule {
 
 	@Provides
 	@Singleton
-	public AuthenticationHttpDao provideAuthenticationDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
-		return new AuthenticationHttpDao(client, host, context, factory);
+	public EventHttpDao provideEventDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
+		return new EventHttpDao(client, host, context, factory);
 	}
 
 }

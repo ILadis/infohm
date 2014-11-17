@@ -5,11 +5,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import de.ladis.infohm.android.fragment.drawer.NavigationDrawerFragment;
-import de.ladis.infohm.core.domain.Publisher;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import de.ladis.infohm.android.fragment.events.EventsFragment;
+import de.ladis.infohm.core.domain.Publisher;
 
 public class EventsPagerAdapter extends FragmentPagerAdapter {
 
@@ -34,8 +34,6 @@ public class EventsPagerAdapter extends FragmentPagerAdapter {
 			items.remove(index);
 			items.add(index, publisher);
 		} else {
-			index = items.size();
-
 			items.add(publisher);
 		}
 
@@ -47,9 +45,13 @@ public class EventsPagerAdapter extends FragmentPagerAdapter {
 		return items.get(position).getName().toUpperCase(Locale.US);
 	}
 
+	public Collection<Publisher> getItems() {
+		return items;
+	}
+
 	@Override
 	public Fragment getItem(int position) {
-		return new NavigationDrawerFragment();
+		return EventsFragment.newInstance(items.get(position));
 	}
 
 	@Override

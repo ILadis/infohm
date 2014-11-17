@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
+import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
 
 @Module(
@@ -33,6 +34,12 @@ public class ContentDaoModule {
 	@Singleton
 	public PublisherContentDao providePublisherDao(ContentResolver resolver, URI base) {
 		return new PublisherContentDao(resolver, base);
+	}
+
+	@Provides
+	@Singleton
+	public EventContentDao provideEventDao(ContentResolver resolver, URI base) {
+		return new EventContentDao(resolver, base);
 	}
 
 }

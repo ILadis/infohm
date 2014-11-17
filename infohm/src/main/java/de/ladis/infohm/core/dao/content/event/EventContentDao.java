@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.google.common.collect.Range;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -118,10 +120,34 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 	}
 
 	@Override
+	public List<Event> list(Publisher entity, Range<Integer> range) throws DaoException {
+		Integer count = range.upperEndpoint() - range.lowerEndpoint() + 1;
+		Integer offset = range.lowerEndpoint();
+
+		Cursor cursor = content().query(
+				parse(base + "/event"),
+				from("id", "headline", "content", "created", "updated"),
+				"pid = ?",
+				from(entity.getId().toString()),
+				"datetime(created) DESC LIMIT "+ offset + ", " + count
+		);
+
+		List<Event> events = new ArrayList<Event>(cursor.getCount());
+
+		if (cursor.moveToFirst()) {
+			do {
+				events.add(fromCursor(cursor));
+			} while (cursor.moveToNext());
+		}
+
+		return events;
+	}
+
+	@Override
 	public Event lastOf(Publisher entity) throws DaoException {
 		Cursor cursor = content().query(
 				parse(base + "/event"),
-				from("id"),
+				from("id", "headline", "content", "created", "updated"),
 				"pid = ?",
 				from(entity.getId().toString()),
 				"id DESC LIMIT 1"
@@ -168,7 +194,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 			update(entity);
 		} else {
 			Uri uri = content().insert(
-					parse(base + "/events"),
+					parse(base + "/event"),
 					toValues(key, entity)
 			);
 

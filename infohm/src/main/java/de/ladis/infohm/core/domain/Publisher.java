@@ -48,11 +48,7 @@ public class Publisher extends Entity {
 		if (this.getClass().isInstance(object)) {
 			Publisher other = (Publisher) object;
 
-			return this.id == other.id
-					&& this.name.equals(other.name)
-					&& this.description.equals(other.description)
-					&& this.created.isEqual(other.created)
-					&& this.updated.isEqual(other.updated);
+			return this.id == other.id;
 		}
 
 		return false;

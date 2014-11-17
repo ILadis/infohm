@@ -45,7 +45,7 @@ public class XmlEventsTestUtil {
 		expected.setCreatedAt(new DateTime(2014, 11, 6, 18, 22, 0));
 		expected.setUpdatedAt(new DateTime(2014, 11, 6, 18, 22, 0));
 
-		assertThat(results.get(0), equalTo(expected));
+		assertEqual(results.get(0), expected);
 
 		expected = new Event();
 		expected.setId(Long.valueOf(2l));
@@ -54,6 +54,15 @@ public class XmlEventsTestUtil {
 		expected.setCreatedAt(new DateTime(2014, 11, 7, 12, 11, 0));
 		expected.setUpdatedAt(new DateTime(2014, 11, 7, 12, 11, 0));
 
-		assertThat(results.get(1), equalTo(expected));
+		assertEqual(results.get(1), expected);
 	}
+
+	public static void assertEqual(Event actual, Event expected) {
+		assertThat(actual.getId(), equalTo(expected.getId()));
+		assertThat(actual.getHeadline(), equalTo(expected.getHeadline()));
+		assertThat(actual.getContent(), equalTo(expected.getContent()));
+		assertTrue(actual.getCreatedAt().isEqual(expected.getCreatedAt()));
+		assertTrue(actual.getUpdatedAt().isEqual(expected.getUpdatedAt()));
+	}
+
 }

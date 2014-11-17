@@ -49,9 +49,7 @@ public class Bookmark {
 		if (object instanceof Bookmark) {
 			Bookmark other = (Bookmark) object;
 
-			return this.id == other.id
-					&& this.title.equals(other.title)
-					&& this.description.equals(other.description);
+			return this.id == other.id;
 		}
 
 		return false;

@@ -48,11 +48,7 @@ public class Event extends Entity {
 		if (this.getClass().isInstance(object)) {
 			Event other = (Event) object;
 
-			return this.id == other.id
-					&& this.headline.equals(other.headline)
-					&& this.content.equals(other.content)
-					&& this.created.isEqual(other.created)
-					&& this.updated.isEqual(other.updated);
+			return this.id == other.id;
 		}
 
 		return false;

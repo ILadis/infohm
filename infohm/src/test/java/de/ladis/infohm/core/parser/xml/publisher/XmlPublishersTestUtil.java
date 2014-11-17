@@ -45,7 +45,7 @@ public class XmlPublishersTestUtil {
 		expected.setCreatedAt(new DateTime(2014, 11, 6, 18, 22, 0));
 		expected.setUpdatedAt(new DateTime(2014, 11, 6, 18, 22, 0));
 
-		assertThat(results.get(0), equalTo(expected));
+		assertEqual(results.get(0), expected);
 
 		expected = new Publisher();
 		expected.setId(Long.valueOf(2l));
@@ -54,6 +54,15 @@ public class XmlPublishersTestUtil {
 		expected.setCreatedAt(new DateTime(2014, 12, 1, 11, 47, 0));
 		expected.setUpdatedAt(new DateTime(2014, 12, 1, 11, 47, 0));
 
-		assertThat(results.get(1), equalTo(expected));
+		assertEqual(results.get(1), expected);
 	}
+
+	public static void assertEqual(Publisher actual, Publisher expected) {
+		assertThat(actual.getId(), equalTo(expected.getId()));
+		assertThat(actual.getName(), equalTo(expected.getName()));
+		assertThat(actual.getDescription(), equalTo(expected.getDescription()));
+		assertTrue(actual.getCreatedAt().isEqual(expected.getCreatedAt()));
+		assertTrue(actual.getUpdatedAt().isEqual(expected.getUpdatedAt()));
+	}
+
 }

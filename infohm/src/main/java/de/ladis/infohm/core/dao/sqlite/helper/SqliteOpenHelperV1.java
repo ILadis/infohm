@@ -30,7 +30,7 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 				+ "PRIMARY KEY (id))");
 
 		db.execSQL("CREATE TABLE starred ("
-				+ "id INTEGER NOT NULL, "
+				+ "id INTEGER, "
 				+ "pid INTEGER NOT NULL, "
 				+ "PRIMARY KEY (id, pid), "
 				+ "FOREIGN KEY (pid) REFERENCES publisher(id))");

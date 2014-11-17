@@ -20,10 +20,16 @@ public class ParserResponseHandler<T> implements ResponseHandler<T> {
 
 	@Override
 	public final T handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-		HttpEntity entity = response.getEntity();
-		InputStream stream = entity.getContent();
+		int statusCode = response.getStatusLine().getStatusCode();
 
-		return parser.parse(stream);
+		if (statusCode == 200) {
+			HttpEntity entity = response.getEntity();
+			InputStream stream = entity.getContent();
+
+			return parser.parse(stream);
+		} else {
+			return null;
+		}
 	}
 
 }

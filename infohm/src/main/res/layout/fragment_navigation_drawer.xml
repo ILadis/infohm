@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<RelativeLayout
+			android:background="?attr/colorPrimary"
+			style="?attr/drawerHeaderStyle">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:text="wagnermi49111@ohm-hochschule.de"
+				style="?attr/drawerHeaderTitleStyle" />
+
+		</RelativeLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="@drawable/drawer_divider_background" />
+
+		<include
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			layout="@layout/fragment_navigation_drawer_item" />
+
+		<include
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			layout="@layout/fragment_navigation_drawer_item" />
+
+		<include
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			layout="@layout/fragment_navigation_drawer_item" />
+
+	</LinearLayout>
+	
+</ScrollView>

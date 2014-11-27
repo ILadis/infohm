@@ -110,6 +110,28 @@
 		<item name="spinBars">false</item>
 	</style>
 
+	<style name="Drawer.Header" parent="@style/Widget">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:minHeight">81dp</item>
+		<item name="android:paddingTop">?attr/statusBarSize</item>
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:paddingBottom">8dp</item>
+		<item name="android:paddingLeft">16dp</item>
+	</style>
+
+	<style name="Drawer.Header.Title" parent="@style/TextAppearance.Body">
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:singleLine">true</item>
+	</style>
+
+	<style name="Drawer.Item" parent="@style/Widget">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">48dp</item>
+		<item name="android:clickable">true</item>
+		<item name="android:background">@drawable/drawer_item_background</item>
+	</style>
+
 	<style name="Drawer.Divider" parent="@style/Widget">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">1dp</item>

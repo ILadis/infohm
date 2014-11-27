@@ -6,6 +6,7 @@
 		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
 		<!-- Window styles. -->
 		<item name="android:windowBackground">@drawable/activity_background</item>
+		<item name="android:windowTranslucentStatus">true</item>
 
 		<!-- Color palette. -->
 		<item name="colorPrimary">@color/actionbar_primary_color</item>
@@ -14,6 +15,7 @@
 		<item name="slidingTabIndicatorColor">@android:color/white</item>
 
 		<!-- Dimension values. -->
+		<item name="statusBarSize">25dp</item>
 		<item name="verticalSpaceBorder">16dp</item>
 		<item name="verticalSpaceKeyline">72dp</item>
 		<item name="cardViewGuttersPadding">8dp</item>
@@ -37,6 +39,9 @@
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
 		<item name="slidingTabTextViewStyle">@style/Widget.SlidingTab</item>
 		<item name="drawerStyle">@style/Drawer</item>
+		<item name="drawerHeaderStyle">@style/Drawer.Header</item>
+		<item name="drawerHeaderTitleStyle">@style/Drawer.Header.Title</item>
+		<item name="drawerItemStyle">@style/Drawer.Item</item>
 		<item name="drawerDividerStyle">@style/Drawer.Divider</item>
 		
 		<!-- ActionBar theme. -->

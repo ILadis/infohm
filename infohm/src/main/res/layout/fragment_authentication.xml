@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:paddingLeft="?attr/verticalSpaceBorder"
-	android:paddingRight="?attr/verticalSpaceBorder">
+	android:layout_height="match_parent">
 
 	<EditText
 		android:id="@+id/fragment_authentication_username"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginRight="?attr/horizontalSpaceBorder"
+		android:layout_marginLeft="?attr/horizontalSpaceBorder"
 		android:inputType="text|textCapWords"
 		android:hint="@string/fragment_authentication_username_hint" />
 
 	<EditText
+		style="?attr/editTextStyle"
 		android:id="@+id/fragment_authentication_password"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginRight="?attr/horizontalSpaceBorder"
+		android:layout_marginLeft="?attr/horizontalSpaceBorder"
+		android:layout_below="@id/fragment_authentication_username"
 		android:inputType="text|textPassword"
 		android:hint="@string/fragment_authentication_username_password" />
 
 	<Button
+		style="?attr/buttonFlatStyle"
 		android:id="@+id/fragment_authentication_submit"
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
 		android:text="@string/fragment_authentication_submit" />
 
-</LinearLayout>
+	<View
+		style="?attr/dividerStyle"
+		android:layout_above="@id/fragment_authentication_submit" />
+
+</RelativeLayout>

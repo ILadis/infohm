@@ -30,8 +30,10 @@ public class PublisherService {
 			public List<Publisher> doSync() {
 				List<Publisher> updated = remote.list();
 
-				for (Publisher entity : updated) {
-					cache.insert(entity);
+				if (updated != null) {
+					for (Publisher entity : updated) {
+						cache.insert(entity);
+					}
 				}
 
 				handler.callback().onUpdated(updated);

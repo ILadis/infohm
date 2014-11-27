@@ -1,17 +1,15 @@
-package de.ladis.infohm.android.activity.authentication;
+package de.ladis.infohm.android.activity.account;
 
 import javax.inject.Inject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
-import de.ladis.infohm.android.activity.welcome.WelcomeActivity;
 import de.ladis.infohm.android.controller.AuthenticationController;
 import de.ladis.infohm.core.listener.AuthenticationListener;
 import de.ladis.infohm.core.service.AuthenticationService;
 
-public class AuthenticationActivity extends BaseActivity implements AuthenticationController, AuthenticationListener {
+public class CreateAccountActivity extends BaseActivity implements AuthenticationController, AuthenticationListener {
 
 	@Inject
 	protected AuthenticationService service;
@@ -19,7 +17,8 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_authentication);
+		setContentView(R.layout.activity_create_account);
+		setResult(RESULT_CANCELED);
 	}
 
 	@Override
@@ -30,18 +29,21 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
 	}
 
 	@Override
-	public void signin(String username, String password) {
-		service.signin(username, password).doAsync();
+	public void signIn(String username, String password) {
+		service.signIn(username, password).doAsync();
 	}
 
 	@Override
-	public void onSignedIn() {
-		Intent intent = new Intent(this, WelcomeActivity.class);
-		startActivity(intent);
+	public void onSignedIn(String username, String password) {
+		service.addAccount(username, password).doSync();
+
+		setResult(RESULT_OK);
+		finish();
 	}
 
 	@Override
 	public void onSigninFailed() {
+		setResult(RESULT_CANCELED);
 	}
 
 	@Override

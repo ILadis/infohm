@@ -2,6 +2,6 @@ package de.ladis.infohm.android.controller;
 
 public interface AuthenticationController {
 
-	public void signin(String username, String password);
+	public void signIn(String username, String password);
 
 }

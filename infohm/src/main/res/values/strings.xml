@@ -3,9 +3,15 @@
 
 	<string name="app_name">InfOhm</string>
 
+	<string name="activity_create_account_label">Registrieren</string>
+	<string name="activity_create_account_headline">InfOhm Account</string>
+	<string name="activity_create_account_instructions">Verwende deine Zugangsdaten des <![CDATA[<b>my.ohm</b>]]>-Systems um dich zu registrieren.</string>
+
+	<string name="activity_authentication_label">Anmelden</string>
+
 	<string name="fragment_authentication_username_hint">Benutzername</string>
 	<string name="fragment_authentication_username_password">Passwort</string>
-	<string name="fragment_authentication_submit">WEITER</string>
+	<string name="fragment_authentication_submit">ANMELDEN</string>
 
 	<string name="fragment_star_publisher_submit">WEITER</string>
 

@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
 
+import android.accounts.AccountManager;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
@@ -19,8 +20,9 @@ import de.ladis.infohm.core.service.PublisherService;
 @Module(
 library = true,
 includes = {
+		AndroidModule.class,
 		ContentDaoModule.class,
-		HttpDaoModule.class
+		HttpDaoModule.class,
 })
 public class ServiceModule {
 
@@ -32,8 +34,8 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public AuthenticationService provideAuthenticationService(AuthenticationHttpDao dao, ExecutorService executor) {
-		return new AuthenticationService(dao, executor);
+	public AuthenticationService provideAuthenticationService(AccountManager manager, AuthenticationHttpDao dao, ExecutorService executor) {
+		return new AuthenticationService(manager, dao, executor);
 	}
 
 	@Provides

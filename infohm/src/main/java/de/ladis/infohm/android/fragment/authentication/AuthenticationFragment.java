@@ -13,10 +13,9 @@ import butterknife.OnClick;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.controller.AuthenticationController;
 import de.ladis.infohm.android.fragment.BaseFragment;
-import de.ladis.infohm.core.listener.AuthenticationListener;
 import de.ladis.infohm.core.service.AuthenticationService;
 
-public class AuthenticationFragment extends BaseFragment implements AuthenticationListener {
+public class AuthenticationFragment extends BaseFragment {
 
 	private AuthenticationController controller;
 
@@ -42,10 +41,15 @@ public class AuthenticationFragment extends BaseFragment implements Authenticati
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 
-		service.registerListener(this);
+		if (savedInstanceState != null) {
+			usernameView.setText(savedInstanceState.getString("username"));
+			passwordView.setText(savedInstanceState.getString("password"));
+		}
+
+		passwordView.setError("Test error");
 	}
 
 	@OnClick(R.id.fragment_authentication_submit)
@@ -53,26 +57,15 @@ public class AuthenticationFragment extends BaseFragment implements Authenticati
 		String username = usernameView.getText().toString();
 		String password = passwordView.getText().toString();
 
-		controller.signin(username, password);
+		controller.signIn(username, password);
 	}
 
 	@Override
-	public void onSignedIn() {
-	}
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
 
-	@Override
-	public void onSigninFailed() {
-	}
-
-	@Override
-	public void onSignedOut() {
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-
-		service.unregisterListener(this);
+		outState.putString("username", usernameView.getText().toString());
+		outState.putString("password", passwordView.getText().toString());
 	}
 
 }

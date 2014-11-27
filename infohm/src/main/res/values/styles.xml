@@ -8,6 +8,10 @@
 		<item name="android:textColor">@color/text_primary_color</item>
 	</style>
 
+	<style name="TextAppearance.Display" parent="@style/TextAppearance.AppCompat.Display2">
+		<item name="android:textSize">@dimen/text_display_size</item>
+	</style>
+
 	<style name="TextAppearance.Headline" parent="@style/TextAppearance.AppCompat.Headline">
 		<item name="android:textSize">@dimen/text_headline_size</item>
 		<item name="android:textColor">@color/text_highlight_color</item>
@@ -44,8 +48,10 @@
 	<style name="Widget.TextView.Secondary">
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
+	
+	<style name="Widget.EditText" parent="@style/Widget.AppCompat.EditText" />
 
-	<style name="Widget.Button" parent="@android:Widget.Button">
+	<style name="Widget.Button" parent="@android:style/Widget.Holo.Button">
 		<item name="android:paddingTop">6dp</item>
 		<item name="android:paddingRight">24dp</item>
 		<item name="android:paddingBottom">6dp</item>
@@ -80,6 +86,12 @@
 		<item name="android:textStyle">bold</item>
 	</style>
 
+	<style name="Widget.Divider" parent="@android:Widget">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">1dp</item>
+		<item name="android:background">@drawable/divider_background</item>
+	</style>
+
 	<!-- ActionBar styles. -->
 	<style name="ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
 		<item name="titleTextStyle">@style/ActionBar.Title</item>
@@ -110,12 +122,11 @@
 		<item name="spinBars">false</item>
 	</style>
 
-	<style name="Drawer.Divider" parent="@style/Widget">
+	<style name="Drawer.Divider" parent="@style/Widget.Divider">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">1dp</item>
 		<item name="android:layout_marginTop">8dp</item>
 		<item name="android:layout_marginBottom">8dp</item>
-		<item name="android:background">@drawable/drawer_divider_background</item>
 	</style>
 
 	<!-- Dialog styles. -->
@@ -139,12 +150,6 @@
 		<item name="android:paddingRight">24dp</item>
 		<item name="android:paddingBottom">24dp</item>
 		<item name="android:paddingLeft">24dp</item>
-	</style>
-
-	<style name="Dialog.Divider" parent="Widget">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">1dp</item>
-		<item name="android:background">@drawable/dialog_divider_background</item>
 	</style>
 
 	<style name="Dialog.Actions" parent="Widget">

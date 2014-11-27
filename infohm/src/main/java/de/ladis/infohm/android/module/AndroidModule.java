@@ -2,11 +2,13 @@ package de.ladis.infohm.android.module;
 
 import javax.inject.Singleton;
 
+import android.accounts.AccountManager;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
+import de.ladis.infohm.android.component.account.AccountAuthenticator;
 
 @Module(library = true)
 public class AndroidModule {
@@ -27,6 +29,18 @@ public class AndroidModule {
 	@Singleton
 	public NotificationManager provideNotificationManager() {
 		return (NotificationManager) application.getSystemService(Context.NOTIFICATION_SERVICE);
+	}
+
+	@Provides
+	@Singleton
+	public AccountManager provideAccountManager(Context context) {
+		return AccountManager.get(context);
+	}
+
+	@Provides
+	@Singleton
+	public AccountAuthenticator provideAccountAuthenticator(Context context) {
+		return new AccountAuthenticator(context);
 	}
 
 }

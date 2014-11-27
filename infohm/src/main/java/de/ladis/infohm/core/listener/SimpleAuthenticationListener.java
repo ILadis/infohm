@@ -3,7 +3,7 @@ package de.ladis.infohm.core.listener;
 public abstract class SimpleAuthenticationListener implements AuthenticationListener {
 
 	@Override
-	public void onSignedIn() {
+	public void onSignedIn(String username, String password) {
 	}
 
 	@Override

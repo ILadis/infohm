@@ -1,4 +1,4 @@
-package de.ladis.infohm.android.content;
+package de.ladis.infohm.android.component;
 
 import android.content.ContentProvider;
 import de.ladis.infohm.android.Application;

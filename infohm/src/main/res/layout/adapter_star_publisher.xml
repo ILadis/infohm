@@ -3,15 +3,15 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:paddingTop="?attr/listViewContentPadding"
-	android:paddingRight="?attr/verticalSpaceBorder"
+	android:paddingRight="?attr/horizontalSpaceBorder"
 	android:paddingBottom="?attr/listViewContentPadding"
-	android:paddingLeft="?attr/verticalSpaceBorder">
+	android:paddingLeft="?attr/horizontalSpaceBorder">
 
 	<TextView
 		android:id="@+id/adapter_star_publisher_name"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="?attr/verticalSpaceKeyline"
+		android:layout_marginLeft="?attr/horizontalSpaceKeyline"
 		style="?attr/textAppearanceSubheader" />
 
 	<TextView
@@ -19,7 +19,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/adapter_star_publisher_name"
-		android:layout_marginLeft="?attr/verticalSpaceKeyline"
+		android:layout_marginLeft="?attr/horizontalSpaceKeyline"
 		android:singleLine="true"
 		android:ellipsize="end"
 		style="?attr/textAppearanceCaption" />

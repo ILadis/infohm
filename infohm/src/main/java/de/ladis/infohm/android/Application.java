@@ -7,7 +7,7 @@ import dagger.ObjectGraph;
 import de.ladis.infohm.android.module.ActivityModule;
 import de.ladis.infohm.android.module.AndroidModule;
 import de.ladis.infohm.android.module.ContentDaoModule;
-import de.ladis.infohm.android.module.ContentProviderModule;
+import de.ladis.infohm.android.module.ComponentModule;
 import de.ladis.infohm.android.module.FragmentModule;
 import de.ladis.infohm.android.module.HttpDaoModule;
 import de.ladis.infohm.android.module.SqliteDaoModule;
@@ -35,7 +35,7 @@ public class Application extends android.app.Application implements Injector {
 				// injection modules
 				new ActivityModule(),
 				new FragmentModule(),
-				new ContentProviderModule()
+				new ComponentModule()
 		);
 	}
 

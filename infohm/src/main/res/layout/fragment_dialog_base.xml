@@ -20,7 +20,7 @@
 		android:layout_height="wrap_content" />
 
 	<View
-		style="?attr/dialogDividerStyle"
+		style="?attr/dividerStyle"
 		android:id="@+id/fragment_dialog_base_divider" />
 
 	<RelativeLayout

@@ -1,4 +1,4 @@
-package de.ladis.infohm.android.content.sqlite;
+package de.ladis.infohm.android.component.content;
 
 import java.util.Locale;
 
@@ -8,9 +8,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-import de.ladis.infohm.android.content.BaseContentProvider;
+import de.ladis.infohm.android.component.BaseContentProvider;
 
-public class SqliteContentProvider extends BaseContentProvider {
+public class ContentProvider extends BaseContentProvider {
 
 	@Inject
 	protected SQLiteOpenHelper helper;

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<android.support.v7.widget.Toolbar
+		android:id="@id/activity_toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="?attr/verticalSpaceBorder"
+		android:paddingRight="?attr/horizontalSpaceBorder"
+		android:paddingBottom="8dp"
+		android:paddingLeft="?attr/horizontalSpaceBorder"
+		android:text="@string/activity_create_account_headline"
+		android:textAppearance="?attr/textAppearanceDisplay" />
+
+	<de.ladis.infohm.android.widget.TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingRight="?attr/horizontalSpaceBorder"
+		android:paddingBottom="24dp"
+		android:paddingLeft="?attr/horizontalSpaceBorder"
+		android:text="@string/activity_create_account_instructions"
+		android:textAppearance="?attr/textAppearanceSubheader" />
+
+	<fragment class="de.ladis.infohm.android.fragment.authentication.AuthenticationFragment"
+		android:id="@+id/activity_create_account_fragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:layout="@layout/fragment_authentication" />
+
+</LinearLayout>

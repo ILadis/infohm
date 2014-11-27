@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import de.ladis.infohm.R;
@@ -12,11 +13,14 @@ import de.ladis.infohm.android.activity.account.CreateAccountActivity;
 import de.ladis.infohm.android.activity.events.EventsActivity;
 import de.ladis.infohm.android.activity.welcome.WelcomeActivity;
 import de.ladis.infohm.core.domain.Publisher;
+import de.ladis.infohm.core.listener.AuthenticationListener;
 import de.ladis.infohm.core.listener.PublisherListener;
+import de.ladis.infohm.core.listener.SimpleAuthenticationListener;
+import de.ladis.infohm.core.listener.SimplePublisherListener;
 import de.ladis.infohm.core.service.AuthenticationService;
 import de.ladis.infohm.core.service.PublisherService;
 
-public class SplashActivity extends BaseActivity implements PublisherListener {
+public class SplashActivity extends BaseActivity {
 
 	@Inject
 	protected AuthenticationService authService;
@@ -34,12 +38,14 @@ public class SplashActivity extends BaseActivity implements PublisherListener {
 	protected void onResume() {
 		super.onResume();
 
-		pubService.registerListener(this);
+		pubService.registerListener(pubListener);
+		authService.registerListener(authListener);
 
-		if (authService.getAccount().doSync() == null) {
+		Account account = authService.getAccount().doSync();
+		if (account == null) {
 			launchCreateAccountActivity();
 		} else {
-			pubService.getStarred().doAsync();
+			authService.signIn(account).doAsync();
 		}
 	}
 
@@ -54,24 +60,34 @@ public class SplashActivity extends BaseActivity implements PublisherListener {
 		finish();
 	}
 
-	@Override
-	public void onUpdated(List<Publisher> publishers) {
-	}
+	private final AuthenticationListener authListener = new SimpleAuthenticationListener() {
 
-	@Override
-	public void onGathered(List<Publisher> publishers) {
-	}
-
-	@Override
-	public void onStarred(List<Publisher> publishers) {
-		if (publishers.size() <= 0) {
-			launchWelcomeActivity();
-		} else {
-			launchEventsActivity();
+		@Override
+		public void onSignedIn(String username, String password) {
+			pubService.getStarred().doAsync();
 		}
 
-		finish();
-	}
+		@Override
+		public void onSigninFailed() {
+			launchCreateAccountActivity();
+		}
+
+	};
+
+	private final PublisherListener pubListener = new SimplePublisherListener() {
+
+		@Override
+		public void onStarred(List<Publisher> publishers) {
+			if (publishers.size() <= 0) {
+				launchWelcomeActivity();
+			} else {
+				launchEventsActivity();
+			}
+
+			finish();
+		}
+
+	};
 
 	private void launchWelcomeActivity() {
 		Intent intent = new Intent(this, WelcomeActivity.class);
@@ -92,7 +108,8 @@ public class SplashActivity extends BaseActivity implements PublisherListener {
 	protected void onPause() {
 		super.onPause();
 
-		pubService.unregisterListener(this);
+		pubService.unregisterListener(pubListener);
+		authService.unregisterListener(authListener);
 	}
 
 }

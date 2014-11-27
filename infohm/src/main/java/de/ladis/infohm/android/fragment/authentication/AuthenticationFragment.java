@@ -48,8 +48,6 @@ public class AuthenticationFragment extends BaseFragment {
 			usernameView.setText(savedInstanceState.getString("username"));
 			passwordView.setText(savedInstanceState.getString("password"));
 		}
-
-		passwordView.setError("Test error");
 	}
 
 	@OnClick(R.id.fragment_authentication_submit)

@@ -48,7 +48,7 @@
 	<style name="Widget.TextView.Secondary">
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
-	
+
 	<style name="Widget.EditText" parent="@style/Widget.AppCompat.EditText" />
 
 	<style name="Widget.Button" parent="@android:style/Widget.Holo.Button">
@@ -122,9 +122,29 @@
 		<item name="spinBars">false</item>
 	</style>
 
-	<style name="Drawer.Divider" parent="@style/Widget.Divider">
+	<style name="Drawer.Header" parent="@style/Widget">
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:minHeight">81dp</item>
+		<item name="android:paddingTop">?attr/statusBarSize</item>
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:paddingBottom">8dp</item>
+		<item name="android:paddingLeft">16dp</item>
+	</style>
+
+	<style name="Drawer.Header.Title" parent="@style/TextAppearance.Body">
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:singleLine">true</item>
+	</style>
+
+	<style name="Drawer.Item" parent="@style/Widget">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">48dp</item>
+		<item name="android:clickable">true</item>
+		<item name="android:background">@drawable/drawer_item_background_selector</item>
+	</style>
+
+	<style name="Drawer.Divider" parent="@style/Widget.Divider">
 		<item name="android:layout_marginTop">8dp</item>
 		<item name="android:layout_marginBottom">8dp</item>
 	</style>
@@ -134,7 +154,7 @@
 		<item name="android:background">@drawable/dialog_background</item>
 	</style>
 
-	<style name="Dialog.Title" parent="Widget">
+	<style name="Dialog.Title" parent="@style/Widget">
 		<item name="android:paddingTop">24dp</item>
 		<item name="android:paddingRight">24dp</item>
 		<item name="android:paddingBottom">18dp</item>
@@ -146,13 +166,13 @@
 		<item name="android:ellipsize">end</item>
 	</style>
 
-	<style name="Dialog.Content" parent="Widget">
+	<style name="Dialog.Content" parent="@style/Widget">
 		<item name="android:paddingRight">24dp</item>
 		<item name="android:paddingBottom">24dp</item>
 		<item name="android:paddingLeft">24dp</item>
 	</style>
 
-	<style name="Dialog.Actions" parent="Widget">
+	<style name="Dialog.Actions" parent="@style/Widget">
 		<item name="android:paddingRight">16dp</item>
 		<item name="android:paddingLeft">16dp</item>
 	</style>

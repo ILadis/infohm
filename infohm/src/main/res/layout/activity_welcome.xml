@@ -8,7 +8,8 @@
 	<android.support.v7.widget.Toolbar
 		android:id="@id/activity_toolbar"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content"
+		android:paddingTop="?attr/statusBarSize" />
 
 	<fragment class="de.ladis.infohm.android.fragment.publisher.StarPublisherFragment"
 		android:id="@+id/activity_welcome_star_fragment"

@@ -5,6 +5,7 @@
 	<attr name="slidingTabIndicatorColor" type="color" />
 
 	<!-- Dimension references. -->
+	<attr name="statusBarSize" type="dimension" />
 	<attr name="horizontalSpaceBorder" type="dimension" />
 	<attr name="horizontalSpaceKeyline" type="dimension" />
 	<attr name="verticalSpaceBorder" type="dimension" />
@@ -34,6 +35,9 @@
 
 	<!-- Drawer styleables. -->
 	<attr name="drawerStyle" type="reference" />
+	<attr name="drawerHeaderStyle" type="reference" />
+	<attr name="drawerHeaderTitleStyle" type="reference" />
+	<attr name="drawerItemStyle" type="reference" />
 	<attr name="drawerDividerStyle" type="reference" />
 
 	<!-- Dialog styleables. -->

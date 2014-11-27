@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.fragment.BaseFragment;
 
-public class SearchFragment extends BaseFragment {
+public class SearchMenuFragment extends BaseFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

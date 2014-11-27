@@ -6,7 +6,7 @@ import de.ladis.infohm.android.fragment.drawer.NavigationDrawerFragment;
 import de.ladis.infohm.android.fragment.events.EventsFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
 import de.ladis.infohm.android.fragment.publisher.StarPublisherFragment;
-import de.ladis.infohm.android.fragment.search.SearchFragment;
+import de.ladis.infohm.android.fragment.search.SearchMenuFragment;
 
 @Module(
 includes = {
@@ -19,7 +19,7 @@ injects = {
 		EventsPagerFragment.class,
 		EventsFragment.class,
 		NavigationDrawerFragment.class,
-		SearchFragment.class,
+		SearchMenuFragment.class,
 })
 public class FragmentModule {
 }

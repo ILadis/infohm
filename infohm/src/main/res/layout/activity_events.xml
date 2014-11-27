@@ -16,7 +16,7 @@
 			android:layout_height="wrap_content"
 			android:paddingTop="?attr/statusBarSize" />
 
-		<fragment class="de.ladis.infohm.android.fragment.search.SearchFragment"
+		<fragment class="de.ladis.infohm.android.fragment.search.SearchMenuFragment"
 			android:id="@+id/activity_events_fragment_search"
 			android:layout_width="0dp"
 			android:layout_height="0dp" />

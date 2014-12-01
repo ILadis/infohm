@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.OnClick;
 import android.content.Intent;
 import android.os.Bundle;
 import de.ladis.infohm.R;
@@ -31,7 +32,10 @@ public class WelcomeActivity extends BaseActivity implements StarPublisherContro
 		for (Publisher publisher : publishers) {
 			service.starTo(publisher).doSync();
 		}
+	}
 
+	@OnClick(R.id.activity_welcome_submit)
+	public void submit() {
 		Intent intent = new Intent(this, EventsActivity.class);
 		startActivity(intent);
 	}

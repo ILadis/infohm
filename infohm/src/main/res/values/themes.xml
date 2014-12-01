@@ -35,12 +35,14 @@
 		<!-- Widget styles. -->
 		<item name="textViewStyle">@style/Widget.TextView</item>
 		<item name="textViewSecondaryStyle">@style/Widget.TextView.Secondary</item>
+		<item name="textViewErrorStyle">@style/Widget.TextView.Error</item>
 		<item name="editTextStyle">@style/Widget.EditText</item>
 		<item name="buttonStyle">@style/Widget.Button</item>
 		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
 		<item name="slidingTabTextViewStyle">@style/Widget.SlidingTab</item>
+		<item name="adapterStyle">@style/Widget.Adapter</item>
 		<item name="dividerStyle">@style/Widget.Divider</item>
 		<item name="drawerStyle">@style/Drawer</item>
 		<item name="drawerHeaderStyle">@style/Drawer.Header</item>

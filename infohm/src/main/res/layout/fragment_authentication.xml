@@ -3,7 +3,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<EditText
+	<de.ladis.infohm.android.widget.EditText
+		style="?attr/editTextStyle"
 		android:id="@+id/fragment_authentication_username"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -12,16 +13,35 @@
 		android:inputType="text|textCapWords"
 		android:hint="@string/fragment_authentication_username_hint" />
 
-	<EditText
+	<TextView
+		style="?attr/textViewErrorStyle"
+		android:id="@+id/fragment_authentication_username_error"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/fragment_authentication_username"
+		android:layout_marginRight="?attr/horizontalSpaceBorder"
+		android:layout_marginLeft="?attr/horizontalSpaceBorder" />
+
+	<de.ladis.infohm.android.widget.EditText
 		style="?attr/editTextStyle"
 		android:id="@+id/fragment_authentication_password"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_below="@id/fragment_authentication_username"
+		android:layout_marginTop="20dp"
 		android:layout_marginRight="?attr/horizontalSpaceBorder"
 		android:layout_marginLeft="?attr/horizontalSpaceBorder"
-		android:layout_below="@id/fragment_authentication_username"
 		android:inputType="text|textPassword"
-		android:hint="@string/fragment_authentication_username_password" />
+		android:hint="@string/fragment_authentication_password_hint" />
+
+	<TextView
+		style="?attr/textViewErrorStyle"
+		android:id="@+id/fragment_authentication_password_error"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/fragment_authentication_password"
+		android:layout_marginRight="?attr/horizontalSpaceBorder"
+		android:layout_marginLeft="?attr/horizontalSpaceBorder" />
 
 	<Button
 		style="?attr/buttonFlatStyle"

@@ -9,10 +9,11 @@
 		android:orientation="vertical">
 
 		<RelativeLayout
-			android:background="?attr/colorPrimary"
+			android:background="@drawable/drawer_header"
 			style="?attr/drawerHeaderStyle">
 
 			<TextView
+				android:id="@+id/fragment_navigation_drawer_username"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_alignParentBottom="true"

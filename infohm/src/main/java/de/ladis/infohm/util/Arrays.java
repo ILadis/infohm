@@ -6,4 +6,14 @@ public class Arrays {
 		return values;
 	}
 
+	public static <T> String glue(T... values) {
+		StringBuilder builder = new StringBuilder();
+
+		for (T value : values) {
+			builder.append(value);
+		}
+
+		return builder.toString();
+	}
+
 }

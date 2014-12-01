@@ -49,7 +49,15 @@
 		<item name="android:textColor">@color/text_secondary_color</item>
 	</style>
 
-	<style name="Widget.EditText" parent="@style/Widget.AppCompat.EditText" />
+	<style name="Widget.TextView.Error">
+		<item name="android:paddingRight">8dp</item>
+		<item name="android:paddingLeft">8dp</item>
+		<item name="android:textColor">@color/text_error_color</item>
+	</style>
+
+	<style name="Widget.EditText" parent="@style/Widget.AppCompat.EditText">
+		<item name="android:background">@drawable/edittext_selector</item>
+	</style>
 
 	<style name="Widget.Button" parent="@android:style/Widget.Holo.Button">
 		<item name="android:paddingTop">6dp</item>
@@ -69,12 +77,12 @@
 		<item name="android:paddingBottom">12dp</item>
 		<item name="android:paddingLeft">6dp</item>
 		<item name="android:textColor">@color/button_flat_color_selector</item>
-		<item name="android:background">@drawable/button_flat_background_selector</item>
+		<item name="android:background">@drawable/button_flat_selector</item>
 	</style>
 
 	<style name="Widget.Button.Flat.Secondary">
 		<item name="android:textColor">@color/button_flat_secondary_color_selector</item>
-		<item name="android:background">@drawable/button_flat_secondary_background_selector</item>
+		<item name="android:background">@drawable/button_flat_secondary_selector</item>
 	</style>
 
 	<style name="Widget.SlidingTab">
@@ -86,10 +94,15 @@
 		<item name="android:textStyle">bold</item>
 	</style>
 
-	<style name="Widget.Divider" parent="@android:Widget">
+	<style name="Widget.Divider" parent="@style/Widget">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">1dp</item>
 		<item name="android:background">@drawable/divider_background</item>
+	</style>
+
+	<style name="Widget.Adapter" parent="@style/Widget">
+		<item name="android:clickable">true</item>
+		<item name="android:background">@drawable/adapter_item_background_selector</item>
 	</style>
 
 	<!-- ActionBar styles. -->
@@ -99,7 +112,6 @@
 	</style>
 
 	<style name="ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-		<item name="android:gravity">center</item>
 		<item name="android:textColor">@color/actionbar_title_color</item>
 	</style>
 
@@ -127,21 +139,21 @@
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:minHeight">81dp</item>
 		<item name="android:paddingTop">?attr/statusBarSize</item>
-		<item name="android:paddingRight">16dp</item>
-		<item name="android:paddingBottom">8dp</item>
-		<item name="android:paddingLeft">16dp</item>
 	</style>
 
 	<style name="Drawer.Header.Title" parent="@style/TextAppearance.Body">
+		<item name="android:paddingTop">8dp</item>
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:paddingBottom">8dp</item>
+		<item name="android:paddingLeft">16dp</item>
 		<item name="android:textColor">@android:color/white</item>
 		<item name="android:singleLine">true</item>
+		<item name="android:background">@color/button_flat_disabled_color</item>
 	</style>
 
-	<style name="Drawer.Item" parent="@style/Widget">
+	<style name="Drawer.Item" parent="@style/Widget.Adapter">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">48dp</item>
-		<item name="android:clickable">true</item>
-		<item name="android:background">@drawable/drawer_item_background_selector</item>
 	</style>
 
 	<style name="Drawer.Divider" parent="@style/Widget.Divider">

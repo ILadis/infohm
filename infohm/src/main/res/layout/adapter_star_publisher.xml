@@ -5,7 +5,8 @@
 	android:paddingTop="?attr/listViewContentPadding"
 	android:paddingRight="?attr/horizontalSpaceBorder"
 	android:paddingBottom="?attr/listViewContentPadding"
-	android:paddingLeft="?attr/horizontalSpaceBorder">
+	android:paddingLeft="?attr/horizontalSpaceBorder"
+	style="?attr/adapterStyle">
 
 	<TextView
 		android:id="@+id/adapter_star_publisher_name"

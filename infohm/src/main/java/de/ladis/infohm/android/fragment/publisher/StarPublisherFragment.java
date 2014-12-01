@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.adapter.publisher.StarPublisherAdapter;
 import de.ladis.infohm.android.controller.StarPublisherController;
@@ -89,15 +88,11 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 		adapter.addItems(publishers);
 	}
 
-	@OnClick(R.id.fragment_start_publisher_submit)
-	protected void submitStarred() {
-		controller.star(adapter.getSelection());
-	}
-
 	@Override
 	public void onPause() {
 		super.onPause();
 
+		controller.star(adapter.getSelection());
 		service.unregisterListener(this);
 	}
 

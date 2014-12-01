@@ -7,13 +7,15 @@
 	<string name="activity_create_account_headline">InfOhm Account</string>
 	<string name="activity_create_account_instructions">Verwende deine Zugangsdaten des <![CDATA[<b>my.ohm</b>]]>-Systems um dich zu registrieren.</string>
 
-	<string name="activity_authentication_label">Anmelden</string>
+	<string name="activity_welcome_headline">Favorisiere deine Themenbereiche</string>
+	<string name="activity_welcome_instructions">Wähle aus verschiedenen Themenbereichen das aus, was dich wirklich interessiert.</string>
+	<string name="activity_welcome_submit">WEITER</string>
 
 	<string name="fragment_authentication_username_hint">Benutzername</string>
-	<string name="fragment_authentication_username_password">Passwort</string>
+	<string name="fragment_authentication_username_invalid">Dieser Benutzername ist ungültig.</string>
+	<string name="fragment_authentication_password_hint">Passwort</string>
+	<string name="fragment_authentication_password_invalid">Dieses Password ist ungültig.</string>
 	<string name="fragment_authentication_submit">ANMELDEN</string>
-
-	<string name="fragment_star_publisher_submit">WEITER</string>
 
 	<string name="fragment_navigation_drawer_newsfeed">Neuigkeiten</string>
 

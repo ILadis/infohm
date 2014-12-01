@@ -25,12 +25,14 @@
 	<!-- Widget styleables. -->
 	<attr name="textViewStyle" type="reference" />
 	<attr name="textViewSecondaryStyle" type="reference" />
+	<attr name="textViewErrorStyle" type="reference" />
 	<attr name="editTextStyle" type="reference" />
 	<attr name="buttonStyle" type="reference" />
 	<attr name="buttonSecondaryStyle" type="reference" />
 	<attr name="buttonFlatStyle" type="reference" />
 	<attr name="buttonFlatSecondaryStyle" type="reference" />
 	<attr name="slidingTabTextViewStyle" type="reference" />
+	<attr name="adapterStyle" type="reference" />
 	<attr name="dividerStyle" type="reference" />
 
 	<!-- Drawer styleables. -->

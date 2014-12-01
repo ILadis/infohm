@@ -35,18 +35,26 @@ public class SplashActivity extends BaseActivity {
 	}
 
 	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+
+		if (savedInstanceState == null) {
+			Account account = authService.getAccount().doSync();
+
+			if (account == null) {
+				launchCreateAccountActivity();
+			} else {
+				authService.signIn(account).doAsync();
+			}
+		}
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 
 		pubService.registerListener(pubListener);
 		authService.registerListener(authListener);
-
-		Account account = authService.getAccount().doSync();
-		if (account == null) {
-			launchCreateAccountActivity();
-		} else {
-			authService.signIn(account).doAsync();
-		}
 	}
 
 	@Override

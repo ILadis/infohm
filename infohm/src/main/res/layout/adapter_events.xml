@@ -19,14 +19,14 @@
 			android:padding="10dp"
 			android:singleLine="true"
 			android:ellipsize="end"
-			style="?attr/textAppearanceHeadline" />
+			android:textAppearance="?attr/textAppearanceHeadline" />
 
 		<TextView
 			android:id="@+id/adapter_events_content"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:padding="10dp"
-			style="?attr/textAppearanceBody" />
+			android:textAppearance="?attr/textAppearanceBody" />
 
 	</LinearLayout>
 

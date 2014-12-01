@@ -12,7 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="?attr/horizontalSpaceKeyline"
-		style="?attr/textAppearanceSubheader" />
+		android:textAppearance="?attr/textAppearanceSubheader" />
 
 	<TextView
 		android:id="@+id/adapter_star_publisher_description"
@@ -22,7 +22,7 @@
 		android:layout_marginLeft="?attr/horizontalSpaceKeyline"
 		android:singleLine="true"
 		android:ellipsize="end"
-		style="?attr/textAppearanceCaption" />
+		android:textAppearance="?attr/textAppearanceCaption" />
 
 	<CheckBox
 		android:id="@+id/adapter_star_publisher_checkbox"

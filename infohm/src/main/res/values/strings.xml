@@ -17,6 +17,6 @@
 
 	<string name="fragment_navigation_drawer_newsfeed">Neuigkeiten</string>
 
-	<string name="menu_fragment_search_title">Suchen</string>
+	<string name="fragment_search_menu_title">Suchen</string>
 
 </resources>

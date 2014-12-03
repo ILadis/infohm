@@ -54,6 +54,10 @@ public abstract class BaseDrawerActivity extends BaseActivity {
 		}
 	}
 
+	public DrawerLayout getDrawer() {
+		return drawer;
+	}
+
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);

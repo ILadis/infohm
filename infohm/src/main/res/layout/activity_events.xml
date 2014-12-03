@@ -32,7 +32,7 @@
 	<FrameLayout style="?attr/drawerStyle">
 
 		<fragment class="de.ladis.infohm.android.fragment.drawer.NavigationDrawerFragment"
-			android:id="@+id/activity_events_navigation"
+			android:id="@+id/activity_events_fragment_navigation"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
 

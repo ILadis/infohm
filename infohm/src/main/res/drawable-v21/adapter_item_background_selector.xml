@@ -7,5 +7,6 @@
 			<solid android:color="@color/adapter_item_color" />
 		</shape>
 	</item>
+	<item android:drawable="@drawable/adapter_item_background"/>
 
 </ripple>

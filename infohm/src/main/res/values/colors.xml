@@ -36,6 +36,7 @@
 
 	<!-- Adapter colors. -->
 	<color name="adapter_item_color">#ffdfdfdf</color>
+	<color name="adapter_item_selected_color">#ffc1c1c1</color>
 
 	<!-- Ripple colors. -->
 	<color name="ripple_default_color">#40000000</color>

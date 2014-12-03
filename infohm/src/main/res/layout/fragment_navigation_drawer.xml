@@ -24,20 +24,107 @@
 
 		<View style="?attr/dividerStyle" />
 
-		<include
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			layout="@layout/fragment_navigation_drawer_item" />
+		<RelativeLayout
+			android:id="@+id/fragment_navigation_drawer_item_newsfeed"
+			style="?attr/drawerItemStyle">
 
-		<include
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			layout="@layout/fragment_navigation_drawer_item" />
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceBorder"
+				android:src="@drawable/drawer_item_newsfeed" />
 
-		<include
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			layout="@layout/fragment_navigation_drawer_item" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
+				android:text="@string/fragment_navigation_drawer_newsfeed" />
+
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/fragment_navigation_drawer_item_cafeterian"
+			style="?attr/drawerItemStyle">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceBorder"
+				android:src="@drawable/drawer_item_cafeterian" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
+				android:text="@string/fragment_navigation_drawer_cafeterian" />
+
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/fragment_navigation_drawer_item_bookmarks"
+			style="?attr/drawerItemStyle">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceBorder"
+				android:src="@drawable/drawer_item_bookmarks" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
+				android:text="@string/fragment_navigation_drawer_bookmarks" />
+
+		</RelativeLayout>
+
+		<View style="?attr/drawerDividerStyle" />
+
+		<RelativeLayout
+			android:id="@+id/fragment_navigation_drawer_item_settings"
+			style="?attr/drawerItemStyle">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceBorder"
+				android:src="@drawable/drawer_item_settings" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
+				android:text="@string/fragment_navigation_drawer_settings" />
+
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/fragment_navigation_drawer_item_feedback"
+			style="?attr/drawerItemStyle">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceBorder"
+				android:src="@drawable/drawer_item_feedback" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
+				android:text="@string/fragment_navigation_drawer_feedback" />
+
+		</RelativeLayout>
 
 	</LinearLayout>
 	

@@ -18,6 +18,10 @@
 	<string name="fragment_authentication_submit">ANMELDEN</string>
 
 	<string name="fragment_navigation_drawer_newsfeed">Neuigkeiten</string>
+	<string name="fragment_navigation_drawer_cafeterian">Speisepläne</string>
+	<string name="fragment_navigation_drawer_bookmarks">Lesezeichen</string>
+	<string name="fragment_navigation_drawer_settings">Einstellungen</string>
+	<string name="fragment_navigation_drawer_feedback">Feedback</string>
 
 	<string name="fragment_search_menu_title">Suchen</string>
 

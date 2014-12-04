@@ -23,7 +23,9 @@ public class XmlPublishersParser extends XmlParser<List<Publisher>> implements P
 		List<Publisher> publishers = new ArrayList<Publisher>();
 
 		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.START_TAG) {
+			if (parser.getEventType() == XmlPullParser.END_DOCUMENT) {
+				throw new XmlPullParserException("reached unexpected end of document");
+			} else if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String tag = parser.getName();

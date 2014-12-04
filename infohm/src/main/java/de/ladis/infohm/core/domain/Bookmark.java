@@ -1,6 +1,6 @@
 package de.ladis.infohm.core.domain;
 
-public class Bookmark {
+public class Bookmark extends Entity {
 
 	private Long id;
 	private String url;

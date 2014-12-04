@@ -1,4 +1,4 @@
-package de.ladis.infohm.core.parser.xml.publisher;
+package de.ladis.infohm.core.parser.xml.bookmark;
 
 import static de.ladis.infohm.util.XmlParserUtil.*;
 
@@ -8,23 +8,24 @@ import org.joda.time.DateTime;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import de.ladis.infohm.core.domain.Publisher;
-import de.ladis.infohm.core.parser.domain.PublisherParser;
+import de.ladis.infohm.core.domain.Bookmark;
+import de.ladis.infohm.core.parser.domain.BookmarkParser;
 import de.ladis.infohm.core.parser.xml.XmlParser;
 
-public class XmlPublisherParser extends XmlParser<Publisher> implements PublisherParser {
+public class XmlBookmarkParser extends XmlParser<Bookmark> implements BookmarkParser {
 
 	@Override
-	protected Publisher parse(XmlPullParser parser) throws XmlPullParserException, IOException {
-		return parsePublisher(parser);
+	protected Bookmark parse(XmlPullParser parser) throws XmlPullParserException, IOException {
+		return parseBookmark(parser);
 	}
 
-	public static Publisher parsePublisher(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, null, "publisher");
+	public static Bookmark parseBookmark(XmlPullParser parser) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, "bookmark");
 
 		Long id = null;
-		String name = null;
+		String title = null;
 		String description = null;
+		String url = null;
 		DateTime created = null;
 		DateTime updated = null;
 
@@ -38,10 +39,12 @@ public class XmlPublisherParser extends XmlParser<Publisher> implements Publishe
 
 			if ("id".equals(tag)) {
 				id = nextLong(parser, "id");
-			} else if ("name".equals(tag)) {
-				name = nextString(parser, "name");
+			} else if ("title".equals(tag)) {
+				title = nextString(parser, "title");
 			} else if ("description".equals(tag)) {
 				description = nextString(parser, "description");
+			} else if ("url".equals(tag)) {
+				url = nextString(parser, "url");
 			} else if ("createdAt".equals(tag)) {
 				created = nextDateTime(parser, "createdAt");
 			} else if ("updatedAt".equals(tag)) {
@@ -51,16 +54,17 @@ public class XmlPublisherParser extends XmlParser<Publisher> implements Publishe
 			}
 		}
 
-		Publisher publisher = new Publisher();
-		publisher.setId(id);
-		publisher.setName(name);
-		publisher.setDescription(description);
-		publisher.setCreatedAt(created);
-		publisher.setUpdatedAt(updated);
+		Bookmark bookmark = new Bookmark();
+		bookmark.setId(id);
+		bookmark.setTitle(title);
+		bookmark.setUrl(url);
+		bookmark.setDescription(description);
+		bookmark.setCreatedAt(created);
+		bookmark.setUpdatedAt(updated);
 
-		parser.require(XmlPullParser.END_TAG, null, "publisher");
+		parser.require(XmlPullParser.END_TAG, null, "bookmark");
 
-		return publisher;
+		return bookmark;
 	}
 
 }

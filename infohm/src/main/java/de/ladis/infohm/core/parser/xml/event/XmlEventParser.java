@@ -29,21 +29,23 @@ public class XmlEventParser extends XmlParser<Event> implements EventParser {
 		DateTime updated = null;
 
 		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.START_TAG) {
+			if (parser.getEventType() == XmlPullParser.END_DOCUMENT) {
+				throw new XmlPullParserException("reached unexpected end of document");
+			} else if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String tag = parser.getName();
 
 			if ("id".equals(tag)) {
-				id = parseId(parser);
+				id = nextLong(parser, "id");
 			} else if ("headline".equals(tag)) {
-				headline = parseHeadline(parser);
+				headline = nextString(parser, "headline");
 			} else if ("content".equals(tag)) {
-				content = parseContent(parser);
+				content = nextString(parser, "content");
 			} else if ("createdAt".equals(tag)) {
-				created = parseCreatedAt(parser);
+				created = nextDateTime(parser, "createdAt");
 			} else if ("updatedAt".equals(tag)) {
-				updated = parseUpdatedAt(parser);
+				updated = nextDateTime(parser, "updatedAt");
 			} else {
 				skipTag(parser);
 			}
@@ -59,48 +61,6 @@ public class XmlEventParser extends XmlParser<Event> implements EventParser {
 		parser.require(XmlPullParser.END_TAG, null, "news");
 
 		return event;
-	}
-
-	public static String parseHeadline(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, null, "headline");
-
-		String value = null;
-
-		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.TEXT) {
-				continue;
-			}
-			String text = parser.getText();
-
-			value = text;
-		}
-
-		String headline = textOf(value);
-
-		parser.require(XmlPullParser.END_TAG, null, "headline");
-
-		return headline;
-	}
-
-	public static String parseContent(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, null, "content");
-
-		String value = null;
-
-		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.TEXT) {
-				continue;
-			}
-			String text = parser.getText();
-
-			value = text;
-		}
-
-		String content = textOf(value);
-
-		parser.require(XmlPullParser.END_TAG, null, "content");
-
-		return content;
 	}
 
 }

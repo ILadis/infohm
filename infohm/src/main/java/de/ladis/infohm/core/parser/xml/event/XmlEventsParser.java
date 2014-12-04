@@ -23,7 +23,9 @@ public class XmlEventsParser extends XmlParser<List<Event>> implements EventsPar
 		List<Event> events = new ArrayList<Event>();
 
 		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.START_TAG) {
+			if (parser.getEventType() == XmlPullParser.END_DOCUMENT) {
+				throw new XmlPullParserException("reached unexpected end of document");
+			} else if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String tag = parser.getName();

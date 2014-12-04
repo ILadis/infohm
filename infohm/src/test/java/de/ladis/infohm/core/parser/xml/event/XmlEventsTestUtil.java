@@ -50,7 +50,7 @@ public class XmlEventsTestUtil {
 		expected = new Event();
 		expected.setId(Long.valueOf(2l));
 		expected.setHeadline("Second Event");
-		expected.setContent("Another event, this time with some diffrent content.");
+		expected.setContent("Another event, this time with some different content.");
 		expected.setCreatedAt(new DateTime(2014, 11, 7, 12, 11, 0));
 		expected.setUpdatedAt(new DateTime(2014, 11, 7, 12, 11, 0));
 

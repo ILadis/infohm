@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bookmarks>
+	<bookmark>
+		<description>our first bookmark</description>
+		<updatedAt>2014-12-04T20:22:00+01:00</updatedAt>
+		<title>first bookmark</title>
+		<id>1</id>
+		<createdAt>2014-12-04T20:18:00+01:00</createdAt>
+		<url>http://our-first-bookmar.com/</url>
+		<meta>
+			<fields>
+				<name>meta name</name>
+				<value>meta value</value>
+			</fields>
+		</meta>
+	</bookmark>
+	<map>
+		<item>
+			<key>name</key>
+			<value>extended bookmark (should not be parsed)</value>
+		</item>
+	</map>
+	<bookmark>
+		<updatedAt>2014-12-04T20:19:00+01:00</updatedAt>
+		<url>http://the-second-bookmark.com/</url>
+		<content>
+			Another bookmark, this time with some different content.
+		</content>
+		<description>the second bookmark</description>
+		<createdAt>2014-12-04T20:19:00+01:00</createdAt>
+		<extensions>
+			<fields>
+				<name>extension name</name>
+				<value>extension value</value>
+			</fields>
+		</extensions>
+		<title>second bookmark</title>
+		<id>2</id>
+	</bookmark>
+</bookmarks>

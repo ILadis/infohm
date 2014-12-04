@@ -7,9 +7,10 @@ import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
 import de.ladis.infohm.android.controller.AuthenticationController;
 import de.ladis.infohm.core.listener.AuthenticationListener;
+import de.ladis.infohm.core.listener.SimpleAuthenticationListener;
 import de.ladis.infohm.core.service.AuthenticationService;
 
-public class CreateAccountActivity extends BaseActivity implements AuthenticationController, AuthenticationListener {
+public class CreateAccountActivity extends BaseActivity implements AuthenticationController {
 
 	@Inject
 	protected AuthenticationService service;
@@ -25,7 +26,7 @@ public class CreateAccountActivity extends BaseActivity implements Authenticatio
 	protected void onResume() {
 		super.onResume();
 
-		service.registerListener(this);
+		service.registerListener(listener);
 	}
 
 	@Override
@@ -33,28 +34,28 @@ public class CreateAccountActivity extends BaseActivity implements Authenticatio
 		service.signIn(username, password).doAsync();
 	}
 
-	@Override
-	public void onSignedIn(String username, String password) {
-		service.addAccount(username, password).doSync();
+	private final AuthenticationListener listener = new SimpleAuthenticationListener() {
 
-		setResult(RESULT_OK);
-		finish();
-	}
+		@Override
+		public void onSignedIn(String username, String password) {
+			service.addAccount(username, password).doSync();
 
-	@Override
-	public void onSigninFailed() {
-		setResult(RESULT_CANCELED);
-	}
+			setResult(RESULT_OK);
+			finish();
+		}
 
-	@Override
-	public void onSignedOut() {
-	}
+		@Override
+		public void onSigninFailed() {
+			setResult(RESULT_CANCELED);
+		}
+
+	};
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 
-		service.unregisterListener(this);
+		service.unregisterListener(listener);
 	}
 
 }

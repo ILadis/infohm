@@ -66,7 +66,7 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 	}
 
 	@Override
-	public boolean signin(Credentials credentials) throws DaoException {
+	public boolean signIn(Credentials credentials) throws DaoException {
 		try {
 			HttpEntityEnclosingRequest request = (HttpEntityEnclosingRequest) factory.newHttpRequest("POST", "/iscore/rest/auth/login");
 			ResponseHandler<Boolean> handler = new AuthenticationResponseHandler();
@@ -84,6 +84,11 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 		} catch (Exception e) {
 			throw new DaoException(this, e);
 		}
+	}
+
+	@Override
+	public void authenticate(Credentials credentials) throws DaoException {
+		addCredentialsToContext(context, credentials);
 	}
 
 	private void addCredentialsToContext(HttpContext context, Credentials credentials) {
@@ -106,7 +111,7 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 	}
 
 	@Override
-	public void signout() throws DaoException {
+	public void signOut() throws DaoException {
 		try {
 			HttpRequest request = factory.newHttpRequest("POST", "/rest/auth/logout");
 

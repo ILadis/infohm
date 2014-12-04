@@ -57,7 +57,7 @@ public class AuthenticationService {
 		};
 	}
 
-	public Call<Boolean> signIn(Account account) {
+	public Call<Boolean> signIn(final Account account) {
 		String username = account.name;
 		String password = manager.getPassword(account);
 
@@ -71,7 +71,7 @@ public class AuthenticationService {
 			public Boolean doSync() {
 				Credentials credentials = new UsernamePasswordCredentials(username, password);
 
-				Boolean result = dao.signin(credentials);
+				Boolean result = dao.signIn(credentials);
 
 				if (result) {
 					handler.callback().onSignedIn(username, password);
@@ -85,12 +85,34 @@ public class AuthenticationService {
 		};
 	}
 
+	public Call<Void> authenticate(Account account) {
+		String username = account.name;
+		String password = manager.getPassword(account);
+
+		return authenticate(username, password);
+	}
+
+	public Call<Void> authenticate(final String username, final String password) {
+		return new AbstractCall<Void>(executor) {
+
+			@Override
+			public Void doSync() {
+				Credentials credentials = new UsernamePasswordCredentials(username, password);
+
+				dao.authenticate(credentials);
+
+				return null;
+			}
+
+		};
+	}
+
 	public Call<Void> signOut() {
 		return new AbstractCall<Void>(executor) {
 
 			@Override
 			public Void doSync() {
-				dao.signout();
+				dao.signOut();
 
 				handler.callback().onSignedOut();
 

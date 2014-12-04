@@ -7,8 +7,10 @@ import de.ladis.infohm.core.dao.DaoException;
 
 public interface AuthenticationDao extends Dao<Credentials, Void> {
 
-	public boolean signin(Credentials credentials) throws DaoException;
+	public boolean signIn(Credentials credentials) throws DaoException;
 
-	public void signout() throws DaoException;
+	public void authenticate(Credentials credentials) throws DaoException;
+
+	public void signOut() throws DaoException;
 
 }

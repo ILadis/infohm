@@ -47,7 +47,7 @@ public class AuthenticationHttpDaoTest extends BaseTest {
 
 		Credentials credentials = new UsernamePasswordCredentials("yet another user", "yet another password");
 
-		boolean result = dao.signin(credentials);
+		boolean result = dao.signIn(credentials);
 
 		assertThat(result, is(true));
 
@@ -63,7 +63,7 @@ public class AuthenticationHttpDaoTest extends BaseTest {
 
 		Credentials credentials = new UsernamePasswordCredentials("yet another user", "yet another password");
 
-		boolean result = dao.signin(credentials);
+		boolean result = dao.signIn(credentials);
 
 		assertThat(result, is(false));
 
@@ -76,7 +76,7 @@ public class AuthenticationHttpDaoTest extends BaseTest {
 	public void httpDaoShouldSignOutSuccessfullIfPreviouslySignedIn() {
 		httpDaoShouldSignInSuccessfulOnValidHttpResponse();
 
-		dao.signout();
+		dao.signOut();
 
 		CredentialsProvider provider = (CredentialsProvider) context.getAttribute(ClientContext.CREDS_PROVIDER);
 

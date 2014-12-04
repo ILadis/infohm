@@ -13,9 +13,7 @@ import de.ladis.infohm.android.activity.account.CreateAccountActivity;
 import de.ladis.infohm.android.activity.events.EventsActivity;
 import de.ladis.infohm.android.activity.welcome.WelcomeActivity;
 import de.ladis.infohm.core.domain.Publisher;
-import de.ladis.infohm.core.listener.AuthenticationListener;
 import de.ladis.infohm.core.listener.PublisherListener;
-import de.ladis.infohm.core.listener.SimpleAuthenticationListener;
 import de.ladis.infohm.core.listener.SimplePublisherListener;
 import de.ladis.infohm.core.service.AuthenticationService;
 import de.ladis.infohm.core.service.PublisherService;
@@ -44,7 +42,8 @@ public class SplashActivity extends BaseActivity {
 			if (account == null) {
 				launchCreateAccountActivity();
 			} else {
-				authService.signIn(account).doAsync();
+				authService.authenticate(account).doSync();
+				pubService.getStarred().doAsync();
 			}
 		}
 	}
@@ -54,7 +53,6 @@ public class SplashActivity extends BaseActivity {
 		super.onResume();
 
 		pubService.registerListener(pubListener);
-		authService.registerListener(authListener);
 	}
 
 	@Override
@@ -67,20 +65,6 @@ public class SplashActivity extends BaseActivity {
 
 		finish();
 	}
-
-	private final AuthenticationListener authListener = new SimpleAuthenticationListener() {
-
-		@Override
-		public void onSignedIn(String username, String password) {
-			pubService.getStarred().doAsync();
-		}
-
-		@Override
-		public void onSigninFailed() {
-			launchCreateAccountActivity();
-		}
-
-	};
 
 	private final PublisherListener pubListener = new SimplePublisherListener() {
 
@@ -117,7 +101,6 @@ public class SplashActivity extends BaseActivity {
 		super.onPause();
 
 		pubService.unregisterListener(pubListener);
-		authService.unregisterListener(authListener);
 	}
 
 }

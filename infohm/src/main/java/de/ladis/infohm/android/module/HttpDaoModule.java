@@ -16,6 +16,7 @@ import android.net.http.AndroidHttpClient;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
+import de.ladis.infohm.core.dao.http.bookmark.BookmarkHttpDao;
 import de.ladis.infohm.core.dao.http.event.EventHttpDao;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
@@ -80,6 +81,12 @@ public class HttpDaoModule {
 	@Singleton
 	public EventHttpDao provideEventDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
 		return new EventHttpDao(client, host, context, factory);
+	}
+
+	@Provides
+	@Singleton
+	public BookmarkHttpDao provideBookmarkDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
+		return new BookmarkHttpDao(client, host, context, factory);
 	}
 
 }

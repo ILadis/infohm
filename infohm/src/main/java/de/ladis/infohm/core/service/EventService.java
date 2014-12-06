@@ -20,12 +20,27 @@ public class EventService {
 	private final EventDao cache, remote;
 	private final ExecutorService executor;
 	private final CallbackHandler<EventListener> handler;
+	private final List<Publisher> queue;
 
 	public EventService(EventDao cache, EventDao remote, ExecutorService executor) {
 		this.cache = cache;
 		this.remote = remote;
 		this.executor = executor;
 		this.handler = new CallbackHandler<EventListener>(EventListener.class);
+		this.queue = new ArrayList<Publisher>();
+	}
+
+	public Call<Boolean> isUpdating(final Publisher publisher) {
+		return new AbstractCall<Boolean>(executor) {
+
+			@Override
+			public Boolean doSync() {
+				synchronized (queue) {
+					return queue.contains(publisher);
+				}
+			}
+
+		};
 	}
 
 	public Call<List<Event>> updateAll(final Publisher publisher) {
@@ -33,6 +48,10 @@ public class EventService {
 
 			@Override
 			public List<Event> doSync() {
+				synchronized (queue) {
+					queue.add(publisher);
+				}
+
 				Event last = cache.lastOf(publisher);
 
 				List<Event> events = Collections.emptyList();
@@ -66,6 +85,10 @@ public class EventService {
 					}
 				}
 
+				synchronized (queue) {
+					queue.remove(publisher);
+				}
+
 				handler.callback().onUpdated(publisher, updated);
 
 				return updated;
@@ -82,6 +105,21 @@ public class EventService {
 				List<Event> events = cache.list(publisher, range);
 
 				handler.callback().onGathered(publisher, events);
+
+				return events;
+			}
+
+		};
+	}
+
+	public Call<List<Event>> getHighlights() {
+		return new AbstractCall<List<Event>>(executor) {
+
+			@Override
+			public List<Event> doSync() {
+				List<Event> events = cache.list();
+
+				handler.callback().onGathered(events);
 
 				return events;
 			}

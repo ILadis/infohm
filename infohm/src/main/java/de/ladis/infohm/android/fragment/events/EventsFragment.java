@@ -22,10 +22,10 @@ import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.parcel.publisher.PublisherParcelHolder;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Publisher;
-import de.ladis.infohm.core.listener.EventListener;
+import de.ladis.infohm.core.listener.SimpleEventListener;
 import de.ladis.infohm.core.service.EventService;
 
-public class EventsFragment extends BaseFragment implements OnRefreshListener, EventListener {
+public class EventsFragment extends BaseFragment implements OnRefreshListener {
 
 	public static EventsFragment newInstance(Publisher publisher) {
 		EventsFragment fragment = new EventsFragment();
@@ -83,7 +83,7 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener, E
 	public void onResume() {
 		super.onResume();
 
-		service.registerListener(this);
+		service.registerListener(listener);
 		service.getAll(publisher, Range.closed(0, 9)).doAsync();
 	}
 
@@ -92,30 +92,37 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener, E
 		service.updateAll(publisher).doAsync();
 	}
 
-	@Override
-	public void onGathered(Publisher publisher, List<Event> events) {
-		if (this.publisher.equals(publisher)) {
-			if (events.size() <= 0) {
-				service.updateAll(publisher).doAsync();
-			} else {
-				adapter.addItems(events);
+	private final SimpleEventListener listener = new SimpleEventListener() {
+
+		@Override
+		public void onGathered(Publisher target, List<Event> events) {
+			if (publisher.equals(target)) {
+				if (events.size() <= 0) {
+					service.updateAll(target).doAsync();
+				} else {
+					adapter.addItems(events);
+				}
 			}
 		}
-	}
 
-	@Override
-	public void onUpdated(Publisher publisher, List<Event> events) {
-		if (this.publisher.equals(publisher)) {
-			refreshView.setRefreshing(false);
-			adapter.addItems(events);
+		@Override
+		public void onUpdated(Publisher target, List<Event> events) {
+			if (publisher.equals(target)) {
+				refreshView.setRefreshing(false);
+
+				if (events != null) {
+					adapter.addItems(events);
+				}
+			}
 		}
-	}
+
+	};
 
 	@Override
 	public void onPause() {
 		super.onPause();
 
-		service.unregisterListener(this);
+		service.unregisterListener(listener);
 	}
 
 }

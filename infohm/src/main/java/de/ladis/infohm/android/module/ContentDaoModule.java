@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
+import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
 
@@ -40,6 +41,12 @@ public class ContentDaoModule {
 	@Singleton
 	public EventContentDao provideEventDao(ContentResolver resolver, URI base) {
 		return new EventContentDao(resolver, base);
+	}
+
+	@Provides
+	@Singleton
+	public BookmarkContentDao provideBookmarkDao(ContentResolver resolver, URI base) {
+		return new BookmarkContentDao(resolver, base);
 	}
 
 }

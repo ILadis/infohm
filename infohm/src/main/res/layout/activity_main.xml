@@ -21,11 +21,10 @@
 			android:layout_width="0dp"
 			android:layout_height="0dp" />
 
-		<fragment class="de.ladis.infohm.android.fragment.events.EventsPagerFragment"
-			android:id="@+id/activity_events_fragment_content"
+		<FrameLayout
+			android:id="@+id/activity_main_content"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			tools:layout="@layout/fragment_events_pager" />
+			android:layout_height="match_parent" />
 
 	</LinearLayout>
 

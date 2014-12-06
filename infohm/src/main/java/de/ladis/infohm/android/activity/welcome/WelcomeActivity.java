@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
-import de.ladis.infohm.android.activity.events.EventsActivity;
+import de.ladis.infohm.android.activity.events.MainActivity;
 import de.ladis.infohm.android.controller.StarPublisherController;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.service.PublisherService;
@@ -36,7 +36,7 @@ public class WelcomeActivity extends BaseActivity implements StarPublisherContro
 
 	@OnClick(R.id.activity_welcome_submit)
 	public void submit() {
-		Intent intent = new Intent(this, EventsActivity.class);
+		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
 

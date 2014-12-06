@@ -10,7 +10,7 @@ import android.os.Bundle;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
 import de.ladis.infohm.android.activity.account.CreateAccountActivity;
-import de.ladis.infohm.android.activity.events.EventsActivity;
+import de.ladis.infohm.android.activity.events.MainActivity;
 import de.ladis.infohm.android.activity.welcome.WelcomeActivity;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.PublisherListener;
@@ -73,7 +73,7 @@ public class SplashActivity extends BaseActivity {
 			if (publishers.size() <= 0) {
 				launchWelcomeActivity();
 			} else {
-				launchEventsActivity();
+				launchMainActivity();
 			}
 
 			finish();
@@ -91,8 +91,8 @@ public class SplashActivity extends BaseActivity {
 		startActivityForResult(intent, 1);
 	}
 
-	private void launchEventsActivity() {
-		Intent intent = new Intent(this, EventsActivity.class);
+	private void launchMainActivity() {
+		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
 

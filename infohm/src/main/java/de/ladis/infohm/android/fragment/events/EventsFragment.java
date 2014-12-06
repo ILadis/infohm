@@ -73,6 +73,7 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 
 		refreshView.setOnRefreshListener(this);
 		refreshView.setColorSchemeResources(R.color.actionbar_primary_color, R.color.actionbar_secondary_color);
+		refreshView.setRefreshing(service.isUpdating(publisher).doSync());
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(false);

@@ -2,6 +2,7 @@ package de.ladis.infohm.android.module;
 
 import dagger.Module;
 import de.ladis.infohm.android.fragment.authentication.AuthenticationFragment;
+import de.ladis.infohm.android.fragment.bookmarks.BookmarksFragment;
 import de.ladis.infohm.android.fragment.drawer.NavigationDrawerFragment;
 import de.ladis.infohm.android.fragment.events.EventsFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
@@ -20,6 +21,7 @@ injects = {
 		EventsFragment.class,
 		NavigationDrawerFragment.class,
 		SearchMenuFragment.class,
+		BookmarksFragment.class,
 })
 public class FragmentModule {
 }

@@ -38,6 +38,7 @@ public class WelcomeActivity extends BaseActivity implements StarPublisherContro
 	public void submit() {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 }

@@ -84,6 +84,11 @@ public class EventHttpDao extends HttpDao<Long, Event> implements EventDao {
 	}
 
 	@Override
+	public List<Event> highlights(Range<Integer> range) throws DaoException {
+		throw new DaoException(this, new UnsupportedOperationException());
+	}
+
+	@Override
 	public Event lastOf(Publisher entity) throws DaoException {
 		try {
 			HttpRequest request = factory.newHttpRequest("GET", "/iscore/rest/publishers/" + entity.getId() + "/events?events=1");

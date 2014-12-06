@@ -17,6 +17,8 @@ public interface EventDao extends Dao<Long, Event> {
 
 	public List<Event> list(Publisher entity, Range<Integer> range) throws DaoException;
 
+	public List<Event> highlights(Range<Integer> range) throws DaoException;
+
 	public Event lastOf(Publisher entity) throws DaoException;
 
 	public List<Event> since(Publisher key, Event entity) throws DaoException;

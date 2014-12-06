@@ -2,19 +2,23 @@ package de.ladis.infohm.core.dao.content.event;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.joda.time.DateTime;
-
-import com.google.common.collect.Range;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+
+import com.google.common.collect.Range;
+
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.content.ContentDao;
 import de.ladis.infohm.core.dao.domain.EventDao;
@@ -138,6 +142,44 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 			do {
 				events.add(fromCursor(cursor));
 			} while (cursor.moveToNext());
+		}
+
+		return events;
+	}
+
+	@Override
+	public List<Event> highlights(Range<Integer> range) throws DaoException {
+		Cursor cursor = content().query(
+				parse(base + "/event"),
+				from("pid"),
+				null,
+				null,
+				null);
+
+		List<Event> events = new ArrayList<Event>();
+
+		if (cursor.moveToFirst()) {
+			Set<String> pids = new HashSet<String>(cursor.getCount());
+
+			while (cursor.moveToNext()) {
+				pids.add(String.valueOf(cursor.getInt(0)));
+			}
+
+			Integer count = range.upperEndpoint() - range.lowerEndpoint() + 1;
+			Integer offset = range.lowerEndpoint();
+
+			cursor = content().query(
+					parse(base + "/event"),
+					from("id", "headline", "content", "created", "updated"),
+					"pid IN (" + makePlaceholders(pids.size()) +")",
+					from(pids.toArray(new String[] { })),
+					"datetime(created) DESC LIMIT "+ offset + ", " + count);
+
+			if (cursor.moveToFirst()) {
+				do {
+					events.add(fromCursor(cursor));
+				} while (cursor.moveToNext());
+			}
 		}
 
 		return events;

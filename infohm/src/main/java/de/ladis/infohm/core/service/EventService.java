@@ -112,16 +112,16 @@ public class EventService {
 		};
 	}
 
-	public Call<List<Event>> getHighlights() {
+	public Call<List<Event>> getHighlights(final Range<Integer> range) {
 		return new AbstractCall<List<Event>>(executor) {
 
 			@Override
 			public List<Event> doSync() {
-				List<Event> events = cache.list();
+				List<Event> highlights = cache.highlights(range);
 
-				handler.callback().onGathered(events);
+				handler.callback().onHighlights(highlights);
 
-				return events;
+				return highlights;
 			}
 
 		};

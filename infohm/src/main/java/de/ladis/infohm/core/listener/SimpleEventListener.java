@@ -12,7 +12,7 @@ public abstract class SimpleEventListener implements EventListener {
 	}
 
 	@Override
-	public void onGathered(List<Event> events) {
+	public void onHighlights(List<Event> events) {
 	}
 
 	@Override

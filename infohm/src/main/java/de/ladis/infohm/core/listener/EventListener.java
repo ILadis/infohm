@@ -9,7 +9,7 @@ public interface EventListener {
 
 	public void onUpdated(Publisher publisher, List<Event> events);
 
-	public void onGathered(List<Event> events);
+	public void onHighlights(List<Event> events);
 
 	public void onGathered(Publisher publisher, List<Event> events);
 

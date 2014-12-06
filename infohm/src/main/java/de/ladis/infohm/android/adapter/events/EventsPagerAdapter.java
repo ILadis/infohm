@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import de.ladis.infohm.android.fragment.events.EventsFragment;
+import de.ladis.infohm.android.fragment.events.EventsHighlightFragment;
 import de.ladis.infohm.core.domain.Publisher;
 
 public class EventsPagerAdapter extends FragmentPagerAdapter {
@@ -42,7 +43,11 @@ public class EventsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return items.get(position).getName().toUpperCase(Locale.US);
+		if (position == 0) {
+			return "HIGHLIGHTS";
+		} else {
+			return items.get(position-1).getName().toUpperCase(Locale.US);
+		}
 	}
 
 	public Collection<Publisher> getItems() {
@@ -51,12 +56,16 @@ public class EventsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-		return EventsFragment.newInstance(items.get(position));
+		if (position == 0) {
+			return new EventsHighlightFragment();
+		} else {
+			return EventsFragment.newInstance(items.get(position-1));
+		}
 	}
 
 	@Override
 	public int getCount() {
-		return items.size();
+		return items.size() + 1;
 	}
 
 }

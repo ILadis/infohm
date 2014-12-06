@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import de.ladis.infohm.R;
+import de.ladis.infohm.android.widget.TimestampView;
 import de.ladis.infohm.core.domain.Event;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
@@ -20,12 +21,14 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 	protected static class ViewHolder extends RecyclerView.ViewHolder {
 
 		private final TextView headlineView;
+		private final TimestampView timestampView;
 		private final TextView contentView;
 
 		public ViewHolder(View view) {
 			super(view);
 
 			this.headlineView = (TextView) view.findViewById(R.id.adapter_events_headline);
+			this.timestampView = (TimestampView) view.findViewById(R.id.adapter_events_timestamp);
 			this.contentView = (TextView) view.findViewById(R.id.adapter_events_content);
 		}
 
@@ -102,6 +105,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 		Event event = getItem(position);
 
 		holder.headlineView.setText(event.getHeadline());
+		holder.timestampView.setText(event.getCreatedAt());
 		holder.contentView.setText(event.getContent());
 	}
 

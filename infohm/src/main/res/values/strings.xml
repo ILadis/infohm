@@ -25,4 +25,23 @@
 
 	<string name="fragment_search_menu_title">Suchen</string>
 
+	<string name="view_timestamp_at">am %3$s.%2$s.%1$s</string>
+	<plurals name="view_timestamp_days_ago">
+		<item quantity="one">vor einem Tag</item>
+		<item quantity="other">vor %1$d Tagen</item>
+	</plurals>
+	<plurals name="view_timestamp_hours_ago">
+		<item quantity="one">vor einer Stunde</item>
+		<item quantity="other">vor %1$d Stunden</item>
+	</plurals>
+	<plurals name="view_timestamp_minutes_ago">
+		<item quantity="one">vor einer Minute</item>
+		<item quantity="other">vor %1$d Minuten</item>
+	</plurals>
+	<plurals name="view_timestamp_seconds_ago">
+		<item quantity="one">vor einer Sekunde</item>
+		<item quantity="other">vor %1$d Sekunden</item>
+	</plurals>
+	<string name="view_timestamp_just_now">gerade eben</string>
+
 </resources>

@@ -19,6 +19,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import de.ladis.infohm.core.domain.Bookmark;
 import de.ladis.infohm.core.parser.ParserException;
 import de.ladis.infohm.core.parser.domain.BookmarksParser;
+import de.ladis.infohm.core.parser.xml.XmlParserTestModule;
 import de.ladis.infohm.test.BaseTest;
 
 @RunWith(RobolectricTestRunner.class)
@@ -28,7 +29,7 @@ public class  XmlBookmarksParserTest extends BaseTest {
 	@Override
 	protected List<Object> getModules() {
 		return Arrays.<Object>asList(
-				new XmlBookmarksParserTestModule()
+				new XmlParserTestModule()
 		);
 	}
 

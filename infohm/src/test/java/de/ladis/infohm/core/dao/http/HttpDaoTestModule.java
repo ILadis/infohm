@@ -10,9 +10,19 @@ import org.apache.http.protocol.HttpContext;
 
 import dagger.Module;
 import dagger.Provides;
+import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
+import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDaoTest;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
+import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
+import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDaoTest;
+import de.ladis.infohm.test.mock.MockedHttpClient;
 
-@Module(library = true)
+@Module(
+library = true,
+injects = {
+		PublisherHttpDaoTest.class,
+		AuthenticationHttpDaoTest.class,
+})
 public class HttpDaoTestModule {
 
 	@Provides
@@ -37,6 +47,18 @@ public class HttpDaoTestModule {
 	@Singleton
 	public HttpRequestFactory provideHttpRequestFactory() {
 		return new HttpDaoRequestFactory();
+	}
+
+	@Provides
+	@Singleton
+	public AuthenticationHttpDao provideAuthenticationDao(MockedHttpClient client, HttpContext context, HttpRequestFactory factory) {
+		return new AuthenticationHttpDao(client, null, context, factory);
+	}
+
+	@Provides
+	@Singleton
+	public PublisherHttpDao providePublisherDao(MockedHttpClient client, HttpRequestFactory factory) {
+		return new PublisherHttpDao(client, null, null, factory);
 	}
 
 }

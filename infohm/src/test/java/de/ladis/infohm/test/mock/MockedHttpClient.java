@@ -1,4 +1,4 @@
-package de.ladis.infohm.core.dao.http;
+package de.ladis.infohm.test.mock;
 
 import static org.mockito.Mockito.*;
 

@@ -19,6 +19,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.parser.ParserException;
 import de.ladis.infohm.core.parser.domain.EventsParser;
+import de.ladis.infohm.core.parser.xml.XmlParserTestModule;
 import de.ladis.infohm.test.BaseTest;
 
 @RunWith(RobolectricTestRunner.class)
@@ -28,7 +29,7 @@ public class  XmlEventsParserTest extends BaseTest {
 	@Override
 	protected List<Object> getModules() {
 		return Arrays.<Object>asList(
-				new XmlEventsParserTestModule()
+				new XmlParserTestModule()
 		);
 	}
 

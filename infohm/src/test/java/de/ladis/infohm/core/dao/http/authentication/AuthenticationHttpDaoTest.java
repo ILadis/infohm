@@ -20,15 +20,16 @@ import org.apache.http.protocol.HttpContext;
 import org.junit.Test;
 
 import de.ladis.infohm.core.dao.DaoException;
-import de.ladis.infohm.core.dao.http.MockedHttpClient;
+import de.ladis.infohm.core.dao.http.HttpDaoTestModule;
 import de.ladis.infohm.test.BaseTest;
+import de.ladis.infohm.test.mock.MockedHttpClient;
 
 public class AuthenticationHttpDaoTest extends BaseTest {
 
 	@Override
 	protected List<Object> getModules() {
 		return Arrays.<Object>asList(
-				new AuthenticationHttpDaoTestModule()
+				new HttpDaoTestModule()
 		);
 	}
 

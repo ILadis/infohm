@@ -34,9 +34,10 @@ public class PublisherHttpDaoTest extends BaseTest {
 
 	@Test
 	public void httpDaoShouldFetchAndParseValidHttpResponseSuccessful() {
-		client.setResponseStatusCode(200);
-		client.setResponseContentType("application/xml");
-		client.setResponseStream(validResourceAsStream());
+		client.willRespondWith()
+				.statusCode(200)
+				.contentType("application/xml")
+				.andBody(validResourceAsStream());
 
 		List<Publisher> results = dao.list();
 

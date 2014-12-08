@@ -13,6 +13,8 @@ import dagger.Provides;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDaoTest;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
+import de.ladis.infohm.core.dao.http.feedback.FeedbackHttpDao;
+import de.ladis.infohm.core.dao.http.feedback.FeedbackHttpDaoTest;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDaoTest;
 import de.ladis.infohm.test.mock.MockedHttpClient;
@@ -22,6 +24,7 @@ library = true,
 injects = {
 		PublisherHttpDaoTest.class,
 		AuthenticationHttpDaoTest.class,
+		FeedbackHttpDaoTest.class,
 })
 public class HttpDaoTestModule {
 
@@ -59,6 +62,12 @@ public class HttpDaoTestModule {
 	@Singleton
 	public PublisherHttpDao providePublisherDao(MockedHttpClient client, HttpRequestFactory factory) {
 		return new PublisherHttpDao(client, null, null, factory);
+	}
+
+	@Provides
+	@Singleton
+	public FeedbackHttpDao provideFeedbackDao(MockedHttpClient client, HttpRequestFactory factory) {
+		return new FeedbackHttpDao(client, null, null, factory);
 	}
 
 }

@@ -44,7 +44,8 @@ public class AuthenticationHttpDaoTest extends BaseTest {
 
 	@Test
 	public void httpDaoShouldSignInSuccessfulOnValidHttpResponse() {
-		client.setResponseStatusCode(200);
+		client.willRespondWith()
+				.statusCode(200);
 
 		Credentials credentials = new UsernamePasswordCredentials("yet another user", "yet another password");
 
@@ -60,7 +61,8 @@ public class AuthenticationHttpDaoTest extends BaseTest {
 
 	@Test
 	public void httpDaoShouldFailToSignInOnInvalidHttpResponse() {
-		client.setResponseStatusCode(500);
+		client.willRespondWith()
+				.statusCode(500);
 
 		Credentials credentials = new UsernamePasswordCredentials("yet another user", "yet another password");
 

@@ -44,6 +44,13 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 				+ "updated TEXT NOT NULL, "
 				+ "PRIMARY KEY (id),"
 				+ "FOREIGN KEY (pid) REFERENCES publisher(id))");
+
+		db.execSQL("CREATE TABLE feedback ("
+				+ "id INTEGER NOT NULL, "
+				+ "subject TEXT NOT NULL, "
+				+ "message TEXT NOT NULL, "
+				+ "anonymous INTEGER NOT NULL, "
+				+ "PRIMARY KEY (id))");
 	}
 
 	@Override

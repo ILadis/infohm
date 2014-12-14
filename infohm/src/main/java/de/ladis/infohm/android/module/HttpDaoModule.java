@@ -19,6 +19,7 @@ import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
 import de.ladis.infohm.core.dao.http.bookmark.BookmarkHttpDao;
 import de.ladis.infohm.core.dao.http.event.EventHttpDao;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
+import de.ladis.infohm.core.dao.http.feedback.FeedbackHttpDao;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
 
 @Module(
@@ -87,6 +88,12 @@ public class HttpDaoModule {
 	@Singleton
 	public BookmarkHttpDao provideBookmarkDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
 		return new BookmarkHttpDao(client, host, context, factory);
+	}
+
+	@Provides
+	@Singleton
+	public FeedbackHttpDao provideFeedbackDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
+		return new FeedbackHttpDao(client, host, context, factory);
 	}
 
 }

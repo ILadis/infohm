@@ -10,6 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
+import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
 
 @Module(
@@ -47,6 +48,12 @@ public class ContentDaoModule {
 	@Singleton
 	public BookmarkContentDao provideBookmarkDao(ContentResolver resolver, URI base) {
 		return new BookmarkContentDao(resolver, base);
+	}
+
+	@Provides
+	@Singleton
+	public FeedbackContentDao provideFeedbackDao(ContentResolver resolver, URI base) {
+		return new FeedbackContentDao(resolver, base);
 	}
 
 }

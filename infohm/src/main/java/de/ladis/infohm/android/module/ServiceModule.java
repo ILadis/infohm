@@ -10,14 +10,17 @@ import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
+import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
 import de.ladis.infohm.core.dao.http.bookmark.BookmarkHttpDao;
 import de.ladis.infohm.core.dao.http.event.EventHttpDao;
+import de.ladis.infohm.core.dao.http.feedback.FeedbackHttpDao;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
 import de.ladis.infohm.core.service.AuthenticationService;
 import de.ladis.infohm.core.service.BookmarkService;
 import de.ladis.infohm.core.service.EventService;
+import de.ladis.infohm.core.service.FeedbackService;
 import de.ladis.infohm.core.service.PublisherService;
 
 @Module(
@@ -57,6 +60,12 @@ public class ServiceModule {
 	@Singleton
 	public BookmarkService provideBookmarkService(BookmarkContentDao cache, BookmarkHttpDao remote, ExecutorService executor) {
 		return new BookmarkService(cache, remote, executor);
+	}
+
+	@Provides
+	@Singleton
+	public FeedbackService provideFeedbackService(FeedbackContentDao cache, FeedbackHttpDao remote, ExecutorService executor) {
+		return new FeedbackService(cache, remote, executor);
 	}
 
 }

@@ -2,7 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!-- Application theme. -->
-	<style name="Theme" parent="Theme.AppCompat.Light.NoActionBar">
+	<style name="Theme" parent="@style/Theme.AppCompat.Light.NoActionBar">
 		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
 		<!-- Window styles. -->
 		<item name="android:windowBackground">@drawable/activity_background</item>
@@ -55,7 +55,7 @@
 	</style>
 
 	<!-- ActionBar theme. -->
-	<style name="Theme.ActionBar" parent="@style/ThemeOverlay.AppCompat.Light">
+	<style name="Theme.ActionBar" parent="@style/Theme.AppCompat.Light"><!-- ThemeOverlay.AppCompat.Dark -->
 		<!-- Common styles. -->
 		<item name="android:background">@color/actionbar_primary_color</item>
 
@@ -67,6 +67,7 @@
 		<item name="titleTextAppearance">@style/ActionBar.Title</item>
 		<item name="searchViewStyle">@style/ActionBar.Search</item>
 		<item name="drawerArrowStyle">@style/Drawer.Toggle</item>
+		<item name="homeAsUpIndicator">@drawable/actionbar_home_as_up</item>
 	</style>
 
 	<!-- Dialog theme. -->

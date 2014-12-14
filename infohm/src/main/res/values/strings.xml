@@ -11,11 +11,16 @@
 	<string name="activity_welcome_instructions">Wähle aus verschiedenen Themenbereichen das aus, was dich wirklich interessiert.</string>
 	<string name="activity_welcome_submit">WEITER</string>
 
+	<string name="activity_feedback_label">Feedback</string>
+
 	<string name="fragment_authentication_username_hint">Benutzername</string>
 	<string name="fragment_authentication_username_invalid">Dieser Benutzername ist ungültig.</string>
 	<string name="fragment_authentication_password_hint">Passwort</string>
 	<string name="fragment_authentication_password_invalid">Dieses Password ist ungültig.</string>
 	<string name="fragment_authentication_submit">ANMELDEN</string>
+
+	<string name="fragment_feedback_message_hint">Was möchtest du uns mitteilen?</string>
+	<string name="fragment_feedback_menu_submit">Abschicken</string>
 
 	<string name="fragment_navigation_drawer_newsfeed">Neuigkeiten</string>
 	<string name="fragment_navigation_drawer_cafeterian">Speisepläne</string>

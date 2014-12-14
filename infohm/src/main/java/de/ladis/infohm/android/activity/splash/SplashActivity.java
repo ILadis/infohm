@@ -36,15 +36,13 @@ public class SplashActivity extends BaseActivity {
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 
-		if (savedInstanceState == null) {
-			Account account = authService.getAccount().doSync();
+		Account account = authService.getAccount().doSync();
 
-			if (account == null) {
-				launchCreateAccountActivity();
-			} else {
-				authService.authenticate(account).doSync();
-				pubService.getStarred().doAsync();
-			}
+		if (account == null) {
+			launchCreateAccountActivity();
+		} else {
+			authService.authenticate(account).doSync();
+			pubService.getStarred().doAsync();
 		}
 	}
 

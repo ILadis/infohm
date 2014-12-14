@@ -16,9 +16,10 @@ import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.widget.SlidingTabLayout;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.PublisherListener;
+import de.ladis.infohm.core.listener.SimplePublisherListener;
 import de.ladis.infohm.core.service.PublisherService;
 
-public class EventsPagerFragment extends BaseFragment implements PublisherListener {
+public class EventsPagerFragment extends BaseFragment {
 
 	@Inject
 	protected PublisherService service;
@@ -55,28 +56,25 @@ public class EventsPagerFragment extends BaseFragment implements PublisherListen
 	public void onResume() {
 		super.onResume();
 
-		service.registerListener(this);
+		service.registerListener(listener);
 		service.getStarred().doAsync();
 	}
 
-	@Override
-	public void onUpdated(List<Publisher> publishers) {
-	}
+	private final PublisherListener listener = new SimplePublisherListener() {
 
-	@Override
-	public void onGathered(List<Publisher> publishers) {
-	}
+		@Override
+		public void onStarred(List<Publisher> publishers) {
+			adapter.addItems(publishers);
+		}
 
-	@Override
-	public void onStarred(List<Publisher> publishers) {
-		adapter.addItems(publishers);
-	}
+	};
+
 
 	@Override
 	public void onPause() {
 		super.onPause();
 
-		service.unregisterListener(this);
+		service.unregisterListener(listener);
 	}
 
 }

@@ -1,11 +1,14 @@
-package de.ladis.infohm.android.activity.events;
+package de.ladis.infohm.android.activity.main;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseDrawerActivity;
+import de.ladis.infohm.android.activity.feedback.FeedbackActivity;
 import de.ladis.infohm.android.controller.NavigationDrawerController;
 import de.ladis.infohm.android.fragment.bookmarks.BookmarksFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
@@ -35,6 +38,9 @@ public class MainActivity extends BaseDrawerActivity implements NavigationDrawer
 		case R.id.fragment_navigation_drawer_item_bookmarks:
 			switchFragment(BookmarksFragment.class);
 			break;
+		case R.id.fragment_navigation_drawer_item_feedback:
+			switchActivity(FeedbackActivity.class);
+			break;
 		}
 	}
 
@@ -62,6 +68,11 @@ public class MainActivity extends BaseDrawerActivity implements NavigationDrawer
 					.add(R.id.activity_main_content, fragment)
 					.commit();
 		}
+	}
+
+	private <T extends Activity> void switchActivity(Class<T> clazz) {
+		Intent intent = new Intent(this, clazz);
+		startActivity(intent);
 	}
 
 }

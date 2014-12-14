@@ -40,7 +40,7 @@
 			android:label="@string/app_name" />
 
 		<activity
-			android:name="de.ladis.infohm.android.activity.events.MainActivity"
+			android:name="de.ladis.infohm.android.activity.main.MainActivity"
 			android:label="@string/app_name" />
 
 		<provider

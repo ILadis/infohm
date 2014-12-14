@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
-import de.ladis.infohm.android.activity.events.MainActivity;
+import de.ladis.infohm.android.activity.main.MainActivity;
 import de.ladis.infohm.android.controller.StarPublisherController;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.service.PublisherService;

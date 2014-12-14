@@ -78,7 +78,7 @@ public class MockedHttpClient implements HttpClient {
 		return response;
 	}
 
-	public MockedHttpRequest lastRequest() {
+	public MockedHttpRequest fromLastRequest() {
 		return request;
 	}
 

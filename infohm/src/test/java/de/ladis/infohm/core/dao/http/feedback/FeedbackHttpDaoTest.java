@@ -43,7 +43,7 @@ public class FeedbackHttpDaoTest extends BaseTest {
 
 		dao.insert(feedback);
 
-		String body = client.lastRequest()
+		String body = client.fromLastRequest()
 				.readBody();
 
 		assertThat(body, notNullValue());

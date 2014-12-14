@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.Application;
@@ -42,6 +43,7 @@ public abstract class BaseActivity extends ActionBarActivity implements Injector
 		// find and set toolbar
 		toolbar = (Toolbar) findViewById(R.id.activity_toolbar);
 		if (toolbar != null) {
+			tweakToolbar(toolbar);
 			setSupportActionBar(toolbar);
 		}
 
@@ -51,6 +53,15 @@ public abstract class BaseActivity extends ActionBarActivity implements Injector
 
 	public final Toolbar getSupportToolbar() {
 		return toolbar;
+	}
+
+	private void tweakToolbar(Toolbar toolbar) {
+		if (toolbar.getChildCount() > 0) {
+			View titleView = toolbar.getChildAt(0);
+			if (titleView instanceof TextView) {
+				titleView.setBackground(null);
+			}
+		}
 	}
 
 	@Override

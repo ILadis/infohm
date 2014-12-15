@@ -31,7 +31,12 @@ public class TimestampView extends TextView {
 		String text;
 
 		if (period.getWeeks() > 0 || period.getMonths() > 0 || period.getYears() > 0) {
-			text = resources.getString(R.string.view_timestamp_at, String.format("%04d", timestamp.getYear()), String.format("%02d", timestamp.getMonthOfYear()), String.format("%02d", timestamp.getDayOfMonth()));
+			text = resources.getString(R.string.view_timestamp_at,
+					String.format("%04d", timestamp.getYear()),
+					String.format("%02d", timestamp.getMonthOfYear()),
+					String.format("%02d", timestamp.getDayOfMonth()),
+					String.format("%02d", timestamp.getHourOfDay()),
+					String.format("%02d", timestamp.getMinuteOfHour()));
 		} else if (period.getDays() > 0) {
 			text = resources.getQuantityString(R.plurals.view_timestamp_days_ago, period.getDays(), period.getDays());
 		} else if (period.getHours() > 0) {

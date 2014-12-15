@@ -34,7 +34,7 @@
 
 	<string name="fragment_search_menu_title">Suchen</string>
 
-	<string name="view_timestamp_at">am %3$s.%2$s.%1$s</string>
+	<string name="view_timestamp_at">am %3$s.%2$s.%1$s um %4$s:%5$s Uhr</string>
 	<plurals name="view_timestamp_days_ago">
 		<item quantity="one">vor einem Tag</item>
 		<item quantity="other">vor %1$d Tagen</item>

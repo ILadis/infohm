@@ -10,7 +10,7 @@ public class Feedback {
 	private Boolean anonymous;
 
 	public Feedback() {
-		this.id = Long.valueOf(0);
+		this.id = null;
 		this.subject = Strings.empty();
 		this.message = Strings.empty();
 		this.anonymous = Boolean.valueOf(false);
@@ -50,15 +50,15 @@ public class Feedback {
 
 	@Override
 	public int hashCode() {
-		return id.intValue();
+		return id == null ? 0 : id.intValue();
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this.getClass().isInstance(object)) {
+		if (getClass().isInstance(object)) {
 			Feedback other = (Feedback) object;
 
-			return this.id == other.id;
+			return id != null && id == other.id;
 		}
 
 		return false;

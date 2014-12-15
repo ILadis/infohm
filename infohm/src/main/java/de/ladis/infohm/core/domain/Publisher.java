@@ -9,7 +9,7 @@ public class Publisher extends Entity {
 	private String description;
 
 	public Publisher() {
-		this.id = Long.valueOf(0);
+		this.id = null;
 		this.name = Strings.empty();
 		this.description = Strings.empty();
 	}
@@ -40,15 +40,15 @@ public class Publisher extends Entity {
 
 	@Override
 	public int hashCode() {
-		return id.intValue();
+		return id == null ? 0 : id.intValue();
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this.getClass().isInstance(object)) {
+		if (getClass().isInstance(object)) {
 			Publisher other = (Publisher) object;
 
-			return this.id == other.id;
+			return id != null && id == other.id;
 		}
 
 		return false;

@@ -9,7 +9,7 @@ public class Event extends Entity {
 	private String content;
 
 	public Event() {
-		this.id = Long.valueOf(0);
+		this.id = null;
 		this.headline = Strings.empty();
 		this.content = Strings.empty();
 	}
@@ -40,15 +40,15 @@ public class Event extends Entity {
 
 	@Override
 	public int hashCode() {
-		return id.intValue();
+		return id == null ? 0 : id.intValue();
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this.getClass().isInstance(object)) {
+		if (getClass().isInstance(object)) {
 			Event other = (Event) object;
 
-			return this.id == other.id;
+			return id != null && id == other.id;
 		}
 
 		return false;

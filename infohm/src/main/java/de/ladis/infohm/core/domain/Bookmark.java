@@ -1,11 +1,21 @@
 package de.ladis.infohm.core.domain;
 
+import de.ladis.infohm.util.Strings;
+
+
 public class Bookmark extends Entity {
 
 	private Long id;
 	private String url;
 	private String title;
 	private String description;
+
+	public Bookmark() {
+		this.id = null;
+		this.url = Strings.empty();
+		this.title = Strings.empty();
+		this.description = Strings.empty();
+	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -41,15 +51,15 @@ public class Bookmark extends Entity {
 
 	@Override
 	public int hashCode() {
-		return id.intValue();
+		return id == null ? 0 : id.intValue();
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof Bookmark) {
+		if (getClass().isInstance(object)) {
 			Bookmark other = (Bookmark) object;
 
-			return this.id == other.id;
+			return id != null && id == other.id;
 		}
 
 		return false;

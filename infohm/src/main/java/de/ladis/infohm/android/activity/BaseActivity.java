@@ -43,8 +43,8 @@ public abstract class BaseActivity extends ActionBarActivity implements Injector
 		// find and set toolbar
 		toolbar = (Toolbar) findViewById(R.id.activity_toolbar);
 		if (toolbar != null) {
-			tweakToolbar(toolbar);
 			setSupportActionBar(toolbar);
+			tweakToolbar(toolbar);
 		}
 
 		// inject views

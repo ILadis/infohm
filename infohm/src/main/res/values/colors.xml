@@ -21,6 +21,7 @@
 
 	<color name="button_float_primary_color">#ff2196f3</color>
 	<color name="button_float_pressed_color">#ff4faaf3</color>
+	<color name="button_float_ripple_color">#88ffffff</color>
 
 	<!-- Activity colors. -->
 	<color name="activity_background_color">#ffeeeeee</color>

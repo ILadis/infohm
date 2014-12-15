@@ -40,6 +40,7 @@ public class FeedbackService {
 				List<Feedback> all = cache.list();
 
 				for (Feedback feedback : all) {
+					cache.delete(feedback);
 					remote.insert(feedback);
 				}
 

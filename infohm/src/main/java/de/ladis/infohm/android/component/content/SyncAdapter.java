@@ -12,10 +12,14 @@ import android.content.SyncResult;
 import android.os.Bundle;
 import android.os.IBinder;
 import de.ladis.infohm.android.component.BaseSyncAdapter;
+import de.ladis.infohm.core.domain.Bookmark;
 import de.ladis.infohm.core.domain.Event;
+import de.ladis.infohm.core.domain.Feedback;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.service.AuthenticationService;
+import de.ladis.infohm.core.service.BookmarkService;
 import de.ladis.infohm.core.service.EventService;
+import de.ladis.infohm.core.service.FeedbackService;
 import de.ladis.infohm.core.service.PublisherService;
 
 public class SyncAdapter extends BaseSyncAdapter {
@@ -45,6 +49,12 @@ public class SyncAdapter extends BaseSyncAdapter {
 	@Inject
 	protected EventService eventService;
 
+	@Inject
+	protected BookmarkService bookmarkService;
+
+	@Inject
+	protected FeedbackService feedbackService;
+
 	public SyncAdapter(Context context, boolean autoInitialize) {
 		super(context, autoInitialize);
 	}
@@ -55,26 +65,50 @@ public class SyncAdapter extends BaseSyncAdapter {
 
 	@Override
 	public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
+		android.os.Debug.waitForDebugger();
+
 		if (!authService.signIn(account).doSync()) {
 			syncResult.stats.numAuthExceptions++;
 		} else {
-			List<Publisher> publishers = pubService.updateAll().doSync();
+			performPublisherSync(syncResult);
+			performBoockmarkSync(syncResult);
+			performFeedbackSync(syncResult);
+		}
+	}
 
-			if (publishers == null) {
-				syncResult.stats.numParseExceptions++;
-			} else {
-				syncResult.stats.numUpdates += publishers.size();
+	private void performPublisherSync(SyncResult syncResult) {
+		List<Publisher> publishers = pubService.updateAll().doSync();
 
-				for (Publisher publisher : publishers) {
-					List<Event> events = eventService.updateAll(publisher).doSync();
+		if (writeToSyncStats(syncResult, publishers)) {
+			for (Publisher publisher : publishers) {
+				List<Event> events = eventService.updateAll(publisher).doSync();
 
-					if (events == null) {
-						syncResult.stats.numParseExceptions++;
-					} else {
-						syncResult.stats.numUpdates = events.size();
-					}
-				}
+				writeToSyncStats(syncResult, events);
 			}
+		}
+	}
+
+	private void performBoockmarkSync(SyncResult syncResult) {
+		List<Bookmark> bookmarks = bookmarkService.updateAll().doSync();
+
+		writeToSyncStats(syncResult, bookmarks);
+	}
+
+	private void performFeedbackSync(SyncResult syncResult) {
+		List<Feedback> feedbacks = feedbackService.syncAll().doSync();
+
+		writeToSyncStats(syncResult, feedbacks);
+	}
+
+	private boolean writeToSyncStats(SyncResult sync, List<?> result) {
+		if (result == null) {
+			sync.stats.numParseExceptions++;
+
+			return false;
+		} else {
+			sync.stats.numUpdates += result.size();
+
+			return true;
 		}
 	}
 

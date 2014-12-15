@@ -35,7 +35,7 @@ public class BookmarkContentDao extends ContentDao<Long, Bookmark> implements Bo
 
 	@Override
 	public Bookmark find(Long key) throws DaoException {
-		if (key <= 0) {
+		if (key == null || key <= 0) {
 			return null;
 		}
 

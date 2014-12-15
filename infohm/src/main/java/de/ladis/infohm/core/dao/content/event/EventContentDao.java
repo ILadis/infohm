@@ -41,7 +41,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 
 	@Override
 	public Event find(Long key) throws DaoException {
-		if (key <= 0) {
+		if (key == null || key <= 0) {
 			return null;
 		}
 

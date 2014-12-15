@@ -32,7 +32,7 @@ public class FeedbackContentDao extends ContentDao<Long, Feedback> implements Fe
 
 	@Override
 	public Feedback find(Long key) throws DaoException {
-		if (key <= 0) {
+		if (key == null || key <= 0) {
 			return null;
 		}
 

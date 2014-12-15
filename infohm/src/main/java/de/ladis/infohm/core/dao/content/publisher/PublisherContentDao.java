@@ -34,7 +34,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 
 	@Override
 	public Publisher find(Long key) throws DaoException {
-		if (key <= 0) {
+		if (key == null || key <= 0) {
 			return null;
 		}
 

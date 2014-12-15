@@ -47,6 +47,9 @@ public class ContentProvider extends BaseContentProvider {
 		);
 
 		if (id != -1) {
+			getContext().getContentResolver()
+					.notifyChange(uri, null);
+
 			return Uri.parse(uri + "/" + id);
 		} else {
 			return null;
@@ -57,23 +60,37 @@ public class ContentProvider extends BaseContentProvider {
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 		String table = getTableFrom(uri);
 
-		return helper.getWritableDatabase().update(
+		int count = helper.getWritableDatabase().update(
 				table,
 				values,
 				selection,
 				selectionArgs
 		);
+
+		if (count != 0) {
+			getContext().getContentResolver()
+					.notifyChange(uri, null);
+		}
+
+		return count;
 	}
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		String table = getTableFrom(uri);
 
-		return helper.getWritableDatabase().delete(
+		int count = helper.getWritableDatabase().delete(
 				table,
 				selection,
 				selectionArgs
 		);
+
+		if (count != 0) {
+			getContext().getContentResolver()
+					.notifyChange(uri, null);
+		}
+
+		return count;
 	}
 
 	@Override

@@ -24,7 +24,15 @@ public class MainActivity extends BaseDrawerActivity implements NavigationDrawer
 
 	@Override
 	public int initialItem() {
-		return R.id.fragment_navigation_drawer_item_newsfeed;
+		Fragment current = curretFragment();
+
+		if (EventsPagerFragment.class.isInstance(current)) {
+			return R.id.fragment_navigation_drawer_item_newsfeed;
+		} else if (BookmarksFragment.class.isInstance(current)) {
+			return R.id.fragment_navigation_drawer_item_bookmarks;
+		} else {
+			return R.id.fragment_navigation_drawer_item_newsfeed;
+		}
 	}
 
 	@Override
@@ -44,6 +52,12 @@ public class MainActivity extends BaseDrawerActivity implements NavigationDrawer
 		}
 	}
 
+	private Fragment curretFragment() {
+		FragmentManager manager = getSupportFragmentManager();
+
+		return manager.findFragmentById(R.id.activity_main_content);
+	}
+
 	private <T extends Fragment> void switchFragment(Class<T> clazz) {
 		FragmentManager manager = getSupportFragmentManager();
 		Fragment fragment;
@@ -54,7 +68,7 @@ public class MainActivity extends BaseDrawerActivity implements NavigationDrawer
 			throw new RuntimeException(e);
 		}
 
-		Fragment current = manager.findFragmentById(R.id.activity_main_content);
+		Fragment current = curretFragment();
 
 		if (current != null) {
 			if (clazz != current.getClass()) {

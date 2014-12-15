@@ -44,17 +44,18 @@ public class NavigationDrawerFragment extends BaseFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		if (savedInstanceState != null) {
-			setSelectionTo(savedInstanceState.getInt("selectedView"));
-		} else {
-			setSelectionTo(controller.initialItem());
-		}
-
 		Account account = service.getAccount().doSync();
 
 		if (account != null) {
 			usernameView.setText(account.name);
 		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		setSelectionTo(controller.initialItem());
 	}
 
 	@OnClick({
@@ -80,15 +81,6 @@ public class NavigationDrawerFragment extends BaseFragment {
 			}
 
 			selectedView = view;
-		}
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-
-		if (selectedView != null) {
-			outState.putInt("selectedView", selectedView.getId());
 		}
 	}
 

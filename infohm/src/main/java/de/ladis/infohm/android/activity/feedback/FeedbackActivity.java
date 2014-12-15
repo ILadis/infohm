@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.Toast;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
 import de.ladis.infohm.android.controller.FeedbackController;
@@ -44,6 +45,9 @@ public class FeedbackActivity extends BaseActivity implements FeedbackController
 		feedback.setAnonymous(true);
 
 		service.submitNew(feedback).doAsync();
+
+		Toast.makeText(this, R.string.activity_feedback_submit, Toast.LENGTH_SHORT).show();
+		NavUtils.navigateUpFromSameTask(this);
 	}
 
 }

@@ -6,8 +6,10 @@
 
 	<!-- Dimension references. -->
 	<attr name="statusBarSize" type="dimension" />
+	<attr name="horizontalPadding" type="dimension" />
 	<attr name="horizontalSpaceBorder" type="dimension" />
 	<attr name="horizontalSpaceKeyline" type="dimension" />
+	<attr name="verticalPadding" type="dimension" />
 	<attr name="verticalSpaceBorder" type="dimension" />
 	<attr name="cardViewGuttersPadding" type="dimension" />
 	<attr name="cardViewContentPadding" type="dimension" />

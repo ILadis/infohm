@@ -2,19 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:paddingTop="?attr/verticalPadding"
+	android:paddingRight="?attr/horizontalPadding"
+	android:paddingBottom="?attr/verticalPadding"
+	android:paddingLeft="?attr/horizontalPadding">
 
-	<EditText
+	<de.ladis.infohm.android.widget.EditText
+		style="?attr/editTextStyle"
 		android:id="@+id/fragment_feedback_subject"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:hint="@string/fragment_feedback_subject_hint"
 		android:inputType="textCapSentences" />
 
-	<EditText
+	<de.ladis.infohm.android.widget.EditText
+		style="?attr/editTextStyle"
 		android:id="@+id/fragment_feedback_message"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:minHeight="72dp"
+		android:gravity="top"
 		android:hint="@string/fragment_feedback_message_hint"
 		android:inputType="textMultiLine|textCapSentences" />
+
+	<TextView
+		style="?attr/textViewErrorStyle"
+		android:id="@+id/fragment_feedback_message_error"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
 
 </LinearLayout>

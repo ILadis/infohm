@@ -16,8 +16,10 @@
 
 		<!-- Dimension values. -->
 		<item name="statusBarSize">25dp</item>
+		<item name="horizontalPadding">8dp</item>
 		<item name="horizontalSpaceBorder">16dp</item>
 		<item name="horizontalSpaceKeyline">72dp</item>
+		<item name="verticalPadding">8dp</item>
 		<item name="verticalSpaceBorder">48dp</item>
 		<item name="cardViewGuttersPadding">8dp</item>
 		<item name="cardViewContentPadding">16dp</item>

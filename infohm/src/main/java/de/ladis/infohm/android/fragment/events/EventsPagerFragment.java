@@ -64,11 +64,12 @@ public class EventsPagerFragment extends BaseFragment {
 
 		@Override
 		public void onStarred(List<Publisher> publishers) {
-			adapter.addItems(publishers);
+			if (publishers != null) {
+				adapter.addItems(publishers);
+			}
 		}
 
 	};
-
 
 	@Override
 	public void onPause() {

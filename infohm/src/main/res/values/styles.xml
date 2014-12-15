@@ -85,6 +85,12 @@
 		<item name="android:background">@drawable/button_flat_secondary_selector</item>
 	</style>
 
+	<style name="Widget.Button.Float" parent="@android:Widget">
+		<item name="android:layout_width">82dp</item>
+		<item name="android:layout_height">82dp</item>
+		<item name="android:background">@drawable/button_flaot_selector</item>
+	</style>
+
 	<style name="Widget.SlidingTab">
 		<item name="android:clickable">true</item>
 		<item name="android:padding">16dp</item>

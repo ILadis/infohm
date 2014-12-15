@@ -43,6 +43,7 @@
 		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
 		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
 		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+		<item name="buttonFloatStyle">@style/Widget.Button.Float</item>
 		<item name="slidingTabTextViewStyle">@style/Widget.SlidingTab</item>
 		<item name="adapterStyle">@style/Widget.Adapter</item>
 		<item name="dividerStyle">@style/Widget.Divider</item>

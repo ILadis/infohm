@@ -7,6 +7,8 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.ContentResolver;
+import android.os.Bundle;
 import de.ladis.infohm.core.dao.domain.AuthenticationDao;
 import de.ladis.infohm.core.listener.AuthenticationListener;
 import de.ladis.infohm.util.AbstractCall;
@@ -51,7 +53,14 @@ public class AuthenticationService {
 			public Boolean doSync() {
 				Account account = new Account(username, "de.infohm");
 
-				return manager.addAccountExplicitly(account, password, null);
+				Boolean result = manager.addAccountExplicitly(account, password, null);
+
+				if (result) {
+					ContentResolver.setSyncAutomatically(account, "de.ladis.infohm.provider", true);
+					ContentResolver.requestSync(account, "de.ladis.infohm.provider", Bundle.EMPTY);
+				}
+
+				return result;
 			}
 
 		};

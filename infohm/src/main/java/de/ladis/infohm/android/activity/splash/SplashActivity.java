@@ -11,7 +11,6 @@ import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
 import de.ladis.infohm.android.activity.account.CreateAccountActivity;
 import de.ladis.infohm.android.activity.main.MainActivity;
-import de.ladis.infohm.android.activity.welcome.WelcomeActivity;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.PublisherListener;
 import de.ladis.infohm.core.listener.SimplePublisherListener;
@@ -58,7 +57,7 @@ public class SplashActivity extends BaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (resultCode == RESULT_OK) {
-			launchWelcomeActivity();
+			launchMainActivity();
 		}
 
 		finish();
@@ -68,21 +67,11 @@ public class SplashActivity extends BaseActivity {
 
 		@Override
 		public void onStarred(List<Publisher> publishers) {
-			if (publishers.size() <= 0) {
-				launchWelcomeActivity();
-			} else {
-				launchMainActivity();
-			}
-
+			launchMainActivity();
 			finish();
 		}
 
 	};
-
-	private void launchWelcomeActivity() {
-		Intent intent = new Intent(this, WelcomeActivity.class);
-		startActivity(intent);
-	}
 
 	private void launchCreateAccountActivity() {
 		Intent intent = new Intent(this, CreateAccountActivity.class);

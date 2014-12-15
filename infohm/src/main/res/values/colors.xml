@@ -19,6 +19,9 @@
 	<color name="button_flat_disabled_color">#42000000</color>
 	<color name="button_flat_pressed_color">#1e000000</color>
 
+	<color name="button_float_primary_color">#ff2196f3</color>
+	<color name="button_float_pressed_color">#ff4faaf3</color>
+
 	<!-- Activity colors. -->
 	<color name="activity_background_color">#ffeeeeee</color>
 

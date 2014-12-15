@@ -23,11 +23,15 @@ import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.SimpleEventListener;
 import de.ladis.infohm.core.service.EventService;
+import de.ladis.infohm.core.service.PublisherService;
 
 public class EventsHighlightFragment extends BaseFragment implements OnRefreshListener {
 
 	@Inject
 	protected EventService service;
+
+	@Inject
+	protected PublisherService pubService;
 
 	@InjectView(R.id.fragment_events_refresh)
 	protected SwipeRefreshLayout refreshView;
@@ -83,7 +87,10 @@ public class EventsHighlightFragment extends BaseFragment implements OnRefreshLi
 
 		@Override
 		public void onHighlights(List<Event> events) {
-			adapter.addItems(events);
+			if (events != null) {
+				adapter.addItems(events);
+			}
+
 			refreshView.setRefreshing(false);
 		}
 

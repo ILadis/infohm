@@ -73,12 +73,16 @@ public class SyncAdapter extends BaseSyncAdapter {
 
 	@Override
 	public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
-		if (!authService.signIn(account).doSync()) {
-			syncResult.stats.numAuthExceptions++;
-		} else {
-			performPublisherSync(syncResult);
-			performBoockmarkSync(syncResult);
-			performFeedbackSync(syncResult);
+		try {
+			if (!authService.signIn(account).doSync()) {
+				syncResult.stats.numAuthExceptions++;
+			} else {
+				performPublisherSync(syncResult);
+				performBoockmarkSync(syncResult);
+				performFeedbackSync(syncResult);
+			}
+		} catch (Exception e) {
+			syncResult.stats.numIoExceptions++;
 		}
 
 		finishSync(account);

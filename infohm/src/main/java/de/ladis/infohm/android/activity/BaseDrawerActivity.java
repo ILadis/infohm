@@ -1,8 +1,10 @@
 package de.ladis.infohm.android.activity;
 
+import static android.support.v4.widget.DrawerLayout.*;
+import static android.support.v4.view.GravityCompat.*;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -66,11 +68,11 @@ public abstract class BaseDrawerActivity extends BaseActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			if (drawer.isDrawerOpen(GravityCompat.START)) {
-				drawer.closeDrawer(GravityCompat.START);
+		if (item.getItemId() == android.R.id.home && drawer.getDrawerLockMode(START) == LOCK_MODE_UNLOCKED) {
+			if (drawer.isDrawerOpen(START)) {
+				drawer.closeDrawer(START);
 			} else {
-				drawer.openDrawer(GravityCompat.END);
+				drawer.openDrawer(END);
 			}
 		}
 
@@ -80,8 +82,8 @@ public abstract class BaseDrawerActivity extends BaseActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (drawer.isDrawerOpen(GravityCompat.START)) {
-				drawer.closeDrawer(GravityCompat.START);
+			if (drawer.isDrawerOpen(START)) {
+				drawer.closeDrawer(START);
 				return true;
 			}
 		}

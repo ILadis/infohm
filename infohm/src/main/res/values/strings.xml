@@ -12,7 +12,7 @@
 	<string name="activity_welcome_submit">WEITER</string>
 
 	<string name="activity_feedback_label">Feedback</string>
-	<string name="activity_feedback_submit">Vielen Dank für dein Feedback</string>
+	<string name="activity_feedback_submit">Vielen Dank für dein Feedback!</string>
 
 	<string name="fragment_authentication_username_hint">Benutzername</string>
 	<string name="fragment_authentication_username_invalid">Dieser Benutzername ist ungültig.</string>
@@ -25,6 +25,8 @@
 	<string name="fragment_feedback_message_hint">Was möchtest du uns mitteilen?</string>
 	<string name="fragment_feedback_message_invalid">Bitte gib zuerst eine Nachricht ein.</string>
 	<string name="fragment_feedback_menu_submit">Abschicken</string>
+
+	<string name="fragment_events_no_content">Noch keine Inhalte verfügbar</string>
 
 	<string name="fragment_navigation_newsfeed">Neuigkeiten</string>
 	<string name="fragment_navigation_cafeterian">Speisepläne</string>

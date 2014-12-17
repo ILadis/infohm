@@ -74,7 +74,6 @@ public class StarPublisherFragment extends BaseFragment {
 		public void onGathered(List<Publisher> publishers) {
 			adapter.addItems(publishers);
 
-			service.updateAll().doAsync();
 			service.getStarred().doAsync();
 		}
 
@@ -85,10 +84,6 @@ public class StarPublisherFragment extends BaseFragment {
 			}
 		}
 
-		@Override
-		public void onUpdated(List<Publisher> publishers) {
-			adapter.addItems(publishers);
-		}
 	};
 
 	@Override

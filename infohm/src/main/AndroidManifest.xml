@@ -36,12 +36,17 @@
 			android:label="@string/activity_create_account_label" />
 
 		<activity
-			android:name="de.ladis.infohm.android.activity.welcome.WelcomeActivity"
+			android:name="de.ladis.infohm.android.activity.main.MainActivity"
 			android:label="@string/app_name" />
 
 		<activity
-			android:name="de.ladis.infohm.android.activity.main.MainActivity"
-			android:label="@string/app_name" />
+			android:name="de.ladis.infohm.android.activity.publisher.StarPublisherActivity"
+			android:label="@string/app_name">
+
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="de.ladis.infohm.android.activity.main.MainActivity" />
+		</activity>
 
 		<activity
 			android:name="de.ladis.infohm.android.activity.feedback.FeedbackActivity"
@@ -50,7 +55,7 @@
 
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value="com.example.myfirstapp.MainActivity" />
+				android:value="de.ladis.infohm.android.activity.main.MainActivity" />
 		</activity>
 
 		<provider

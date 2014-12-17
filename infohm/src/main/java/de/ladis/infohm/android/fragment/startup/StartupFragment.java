@@ -50,6 +50,8 @@ public class StartupFragment extends BaseFragment {
 		syncService.registerListener(syncListener);
 
 		Account account = authService.getAccount().doSync();
+
+		authService.authenticate(account).doSync();
 		syncService.lastSync(account).doAsync();
 	}
 

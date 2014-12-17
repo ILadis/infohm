@@ -1,6 +1,6 @@
 package de.ladis.infohm.android.controller;
 
-public interface NavigationDrawerController {
+public interface NavigationController {
 
 	public int initialItem();
 

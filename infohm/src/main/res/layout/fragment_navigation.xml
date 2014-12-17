@@ -13,7 +13,7 @@
 			style="?attr/drawerHeaderStyle">
 
 			<TextView
-				android:id="@+id/fragment_navigation_drawer_username"
+				android:id="@+id/fragment_navigation_username"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_alignParentBottom="true"
@@ -24,7 +24,7 @@
 		<View style="?attr/dividerStyle" />
 
 		<RelativeLayout
-			android:id="@+id/fragment_navigation_drawer_item_newsfeed"
+			android:id="@+id/fragment_navigation_newsfeed"
 			style="?attr/drawerItemStyle">
 
 			<ImageView
@@ -32,19 +32,19 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceBorder"
-				android:src="@drawable/drawer_item_newsfeed" />
+				android:src="@drawable/navigation_newsfeed" />
 
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
-				android:text="@string/fragment_navigation_drawer_newsfeed" />
+				android:text="@string/fragment_navigation_newsfeed" />
 
 		</RelativeLayout>
 
 		<RelativeLayout
-			android:id="@+id/fragment_navigation_drawer_item_cafeterian"
+			android:id="@+id/fragment_navigation_cafeterian"
 			style="?attr/drawerItemStyle">
 
 			<ImageView
@@ -52,19 +52,19 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceBorder"
-				android:src="@drawable/drawer_item_cafeterian" />
+				android:src="@drawable/navigation_cafeterian" />
 
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
-				android:text="@string/fragment_navigation_drawer_cafeterian" />
+				android:text="@string/fragment_navigation_cafeterian" />
 
 		</RelativeLayout>
 
 		<RelativeLayout
-			android:id="@+id/fragment_navigation_drawer_item_bookmarks"
+			android:id="@+id/fragment_navigation_bookmarks"
 			style="?attr/drawerItemStyle">
 
 			<ImageView
@@ -72,21 +72,21 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceBorder"
-				android:src="@drawable/drawer_item_bookmarks" />
+				android:src="@drawable/navigation_bookmarks" />
 
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
-				android:text="@string/fragment_navigation_drawer_bookmarks" />
+				android:text="@string/fragment_navigation_bookmarks" />
 
 		</RelativeLayout>
 
 		<View style="?attr/drawerDividerStyle" />
 
 		<RelativeLayout
-			android:id="@+id/fragment_navigation_drawer_item_settings"
+			android:id="@+id/fragment_navigation_settings"
 			style="?attr/drawerItemStyle">
 
 			<ImageView
@@ -94,19 +94,19 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceBorder"
-				android:src="@drawable/drawer_item_settings" />
+				android:src="@drawable/navigation_settings" />
 
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
-				android:text="@string/fragment_navigation_drawer_settings" />
+				android:text="@string/fragment_navigation_settings" />
 
 		</RelativeLayout>
 
 		<RelativeLayout
-			android:id="@+id/fragment_navigation_drawer_item_feedback"
+			android:id="@+id/fragment_navigation_feedback"
 			style="?attr/drawerItemStyle">
 
 			<ImageView
@@ -114,14 +114,14 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceBorder"
-				android:src="@drawable/drawer_item_feedback" />
+				android:src="@drawable/navigation_feedback" />
 
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
-				android:text="@string/fragment_navigation_drawer_feedback" />
+				android:text="@string/fragment_navigation_feedback" />
 
 		</RelativeLayout>
 

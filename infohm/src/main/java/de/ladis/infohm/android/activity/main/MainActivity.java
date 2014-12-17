@@ -9,17 +9,20 @@ import android.support.v4.view.GravityCompat;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseDrawerActivity;
 import de.ladis.infohm.android.activity.feedback.FeedbackActivity;
-import de.ladis.infohm.android.controller.NavigationDrawerController;
+import de.ladis.infohm.android.controller.NavigationController;
 import de.ladis.infohm.android.fragment.bookmarks.BookmarksFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
 
-public class MainActivity extends BaseDrawerActivity implements NavigationDrawerController {
+public class MainActivity extends BaseDrawerActivity implements NavigationController {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		switchFragment(EventsPagerFragment.class);
+
+		if (savedInstanceState == null) {
+			switchFragment(EventsPagerFragment.class);
+		}
 	}
 
 	@Override
@@ -27,11 +30,11 @@ public class MainActivity extends BaseDrawerActivity implements NavigationDrawer
 		Fragment current = curretFragment();
 
 		if (EventsPagerFragment.class.isInstance(current)) {
-			return R.id.fragment_navigation_drawer_item_newsfeed;
+			return R.id.fragment_navigation_newsfeed;
 		} else if (BookmarksFragment.class.isInstance(current)) {
-			return R.id.fragment_navigation_drawer_item_bookmarks;
+			return R.id.fragment_navigation_bookmarks;
 		} else {
-			return R.id.fragment_navigation_drawer_item_newsfeed;
+			return R.id.fragment_navigation_newsfeed;
 		}
 	}
 
@@ -40,13 +43,13 @@ public class MainActivity extends BaseDrawerActivity implements NavigationDrawer
 		getDrawer().closeDrawer(GravityCompat.START);
 
 		switch (item) {
-		case R.id.fragment_navigation_drawer_item_newsfeed:
+		case R.id.fragment_navigation_newsfeed:
 			switchFragment(EventsPagerFragment.class);
 			break;
-		case R.id.fragment_navigation_drawer_item_bookmarks:
+		case R.id.fragment_navigation_bookmarks:
 			switchFragment(BookmarksFragment.class);
 			break;
-		case R.id.fragment_navigation_drawer_item_feedback:
+		case R.id.fragment_navigation_feedback:
 			switchActivity(FeedbackActivity.class);
 			break;
 		}

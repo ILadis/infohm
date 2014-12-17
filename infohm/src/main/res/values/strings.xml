@@ -26,11 +26,11 @@
 	<string name="fragment_feedback_message_invalid">Bitte gib zuerst eine Nachricht ein.</string>
 	<string name="fragment_feedback_menu_submit">Abschicken</string>
 
-	<string name="fragment_navigation_drawer_newsfeed">Neuigkeiten</string>
-	<string name="fragment_navigation_drawer_cafeterian">Speisepläne</string>
-	<string name="fragment_navigation_drawer_bookmarks">Lesezeichen</string>
-	<string name="fragment_navigation_drawer_settings">Einstellungen</string>
-	<string name="fragment_navigation_drawer_feedback">Feedback</string>
+	<string name="fragment_navigation_newsfeed">Neuigkeiten</string>
+	<string name="fragment_navigation_cafeterian">Speisepläne</string>
+	<string name="fragment_navigation_bookmarks">Lesezeichen</string>
+	<string name="fragment_navigation_settings">Einstellungen</string>
+	<string name="fragment_navigation_feedback">Feedback</string>
 
 	<string name="fragment_search_menu_title">Suchen</string>
 

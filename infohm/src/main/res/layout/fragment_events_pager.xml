@@ -18,10 +18,17 @@
 
 	<ImageButton
 		style="?attr/buttonFloatStyle"
-		android:id="@+id/frabment_events_pager_floating"
+		android:id="@+id/fragment_events_pager_action"
 		android:layout_marginTop="4dp"
 		android:layout_marginRight="20dp"
 		android:layout_alignParentRight="true"
 		android:src="@drawable/events_star_publisher" />
+
+	<ProgressBar
+		android:id="@+id/fragment_events_pager_progress"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:visibility="gone" />
 
 </RelativeLayout>

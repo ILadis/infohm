@@ -1,4 +1,4 @@
-package de.ladis.infohm.android.fragment.drawer;
+package de.ladis.infohm.android.fragment.navigation;
 
 import javax.inject.Inject;
 
@@ -12,18 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import de.ladis.infohm.R;
-import de.ladis.infohm.android.controller.NavigationDrawerController;
+import de.ladis.infohm.android.controller.NavigationController;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.core.service.AuthenticationService;
 
-public class NavigationDrawerFragment extends BaseFragment {
+public class NavigationFragment extends BaseFragment {
 
-	private NavigationDrawerController controller;
+	private NavigationController controller;
 
 	@Inject
 	protected AuthenticationService service;
 
-	@InjectView(R.id.fragment_navigation_drawer_username)
+	@InjectView(R.id.fragment_navigation_username)
 	protected TextView usernameView;
 
 	protected View selectedView;
@@ -32,12 +32,12 @@ public class NavigationDrawerFragment extends BaseFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
-		controller = (NavigationDrawerController) activity;
+		controller = (NavigationController) activity;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+		return inflater.inflate(R.layout.fragment_navigation, container, false);
 	}
 
 	@Override
@@ -59,11 +59,11 @@ public class NavigationDrawerFragment extends BaseFragment {
 	}
 
 	@OnClick({
-			R.id.fragment_navigation_drawer_item_newsfeed,
-			R.id.fragment_navigation_drawer_item_bookmarks,
-			R.id.fragment_navigation_drawer_item_cafeterian,
-			R.id.fragment_navigation_drawer_item_feedback,
-			R.id.fragment_navigation_drawer_item_settings,
+			R.id.fragment_navigation_newsfeed,
+			R.id.fragment_navigation_bookmarks,
+			R.id.fragment_navigation_cafeterian,
+			R.id.fragment_navigation_feedback,
+			R.id.fragment_navigation_settings,
 	})
 	protected void setSelectionTo(View view) {
 		setSelectionTo(view.getId());

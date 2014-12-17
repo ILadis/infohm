@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,12 +22,15 @@ import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.SimplePublisherListener;
 import de.ladis.infohm.core.service.PublisherService;
 
-public class StarPublisherFragment extends BaseFragment {
+public class StarPublisherFragment extends BaseFragment implements OnRefreshListener {
 
 	private StarPublisherController controller;
 
 	@Inject
 	protected PublisherService service;
+
+	@InjectView(R.id.fragment_start_publisher_refresh)
+	protected SwipeRefreshLayout refreshView;
 
 	@InjectView(R.id.fragment_start_publisher_list)
 	protected RecyclerView recyclerView;
@@ -55,6 +60,10 @@ public class StarPublisherFragment extends BaseFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		refreshView.setOnRefreshListener(this);
+		refreshView.setColorSchemeResources(R.color.actionbar_primary_color, R.color.actionbar_secondary_color);
+//		refreshView.setRefreshing(service.isUpdating().doSync());
+
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -68,6 +77,11 @@ public class StarPublisherFragment extends BaseFragment {
 		service.getAll().doAsync();
 	}
 
+	@Override
+	public void onRefresh() {
+		service.updateAll().doAsync();
+	}
+
 	private SimplePublisherListener listener = new SimplePublisherListener() {
 
 		@Override
@@ -75,6 +89,15 @@ public class StarPublisherFragment extends BaseFragment {
 			adapter.addItems(publishers);
 
 			service.getStarred().doAsync();
+		}
+
+		@Override
+		public void onUpdated(List<Publisher> publishers) {
+			refreshView.setRefreshing(false);
+
+			if (publishers != null) {
+				adapter.addItems(publishers);
+			}
 		}
 
 		@Override

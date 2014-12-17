@@ -28,10 +28,10 @@ import de.ladis.infohm.core.service.PublisherService;
 public class EventsHighlightFragment extends BaseFragment implements OnRefreshListener {
 
 	@Inject
-	protected EventService service;
+	protected EventService eventService;
 
 	@Inject
-	protected PublisherService pubService;
+	protected PublisherService publisherService;
 
 	@InjectView(R.id.fragment_events_refresh)
 	protected SwipeRefreshLayout refreshView;
@@ -69,20 +69,20 @@ public class EventsHighlightFragment extends BaseFragment implements OnRefreshLi
 	public void onResume() {
 		super.onResume();
 
-		service.registerListener(listener);
-		service.getHighlights(Range.closed(0, 9)).doAsync();
+		eventService.registerListener(listener);
+		eventService.getHighlights(Range.closed(0, 9)).doAsync();
 	}
 
 	@Override
 	public void onRefresh() {
-		service.getHighlights(Range.closed(0, 9)).doAsync();
+		eventService.getHighlights(Range.closed(0, 9)).doAsync();
 	}
 
 	private final SimpleEventListener listener = new SimpleEventListener() {
 
 		@Override
 		public void onUpdated(Publisher publisher, List<Event> events) {
-			service.getHighlights(Range.closed(0, 9)).doAsync();
+			eventService.getHighlights(Range.closed(0, 9)).doAsync();
 		}
 
 		@Override
@@ -100,7 +100,7 @@ public class EventsHighlightFragment extends BaseFragment implements OnRefreshLi
 	public void onPause() {
 		super.onPause();
 
-		service.unregisterListener(listener);
+		eventService.unregisterListener(listener);
 	}
 
 }

@@ -6,12 +6,14 @@ import java.util.concurrent.Executors;
 import javax.inject.Singleton;
 
 import android.accounts.AccountManager;
+import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
+import de.ladis.infohm.core.dao.content.synchronize.SynchronizeContentDao;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
 import de.ladis.infohm.core.dao.http.bookmark.BookmarkHttpDao;
 import de.ladis.infohm.core.dao.http.event.EventHttpDao;
@@ -22,6 +24,7 @@ import de.ladis.infohm.core.service.BookmarkService;
 import de.ladis.infohm.core.service.EventService;
 import de.ladis.infohm.core.service.FeedbackService;
 import de.ladis.infohm.core.service.PublisherService;
+import de.ladis.infohm.core.service.SynchronizeService;
 
 @Module(
 library = true,
@@ -66,6 +69,12 @@ public class ServiceModule {
 	@Singleton
 	public FeedbackService provideFeedbackService(FeedbackContentDao cache, FeedbackHttpDao remote, ExecutorService executor) {
 		return new FeedbackService(cache, remote, executor);
+	}
+
+	@Provides
+	@Singleton
+	public SynchronizeService provideSynchronizeService(Context context, SynchronizeContentDao dao, ExecutorService executor) {
+		return new SynchronizeService(context, dao, executor);
 	}
 
 }

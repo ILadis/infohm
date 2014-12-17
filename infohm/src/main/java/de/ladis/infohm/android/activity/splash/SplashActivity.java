@@ -1,56 +1,48 @@
 package de.ladis.infohm.android.activity.splash;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
 import de.ladis.infohm.android.activity.account.CreateAccountActivity;
 import de.ladis.infohm.android.activity.main.MainActivity;
-import de.ladis.infohm.core.domain.Publisher;
-import de.ladis.infohm.core.listener.PublisherListener;
-import de.ladis.infohm.core.listener.SimplePublisherListener;
 import de.ladis.infohm.core.service.AuthenticationService;
-import de.ladis.infohm.core.service.PublisherService;
 
 public class SplashActivity extends BaseActivity {
 
 	@Inject
-	protected AuthenticationService authService;
-
-	@Inject
-	protected PublisherService pubService;
+	protected AuthenticationService service;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
-	}
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-
-		Account account = authService.getAccount().doSync();
-
-		if (account == null) {
-			launchCreateAccountActivity();
-		} else {
-			authService.authenticate(account).doSync();
-			pubService.getStarred().doAsync();
+		if (savedInstanceState == null) {
+			handler.sendMessageDelayed(Message.obtain(), 2000);
 		}
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+	private Handler handler = new Handler() {
 
-		pubService.registerListener(pubListener);
-	}
+		@Override
+		public void handleMessage(Message msg) {
+			Account account = service.getAccount().doSync();
+
+			if (account == null) {
+				launchCreateAccountActivity();
+			} else {
+				launchMainActivity();
+				finish();
+			}
+		}
+
+	};
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -63,16 +55,6 @@ public class SplashActivity extends BaseActivity {
 		finish();
 	}
 
-	private final PublisherListener pubListener = new SimplePublisherListener() {
-
-		@Override
-		public void onStarred(List<Publisher> publishers) {
-			launchMainActivity();
-			finish();
-		}
-
-	};
-
 	private void launchCreateAccountActivity() {
 		Intent intent = new Intent(this, CreateAccountActivity.class);
 		startActivityForResult(intent, 1);
@@ -81,13 +63,6 @@ public class SplashActivity extends BaseActivity {
 	private void launchMainActivity() {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		pubService.unregisterListener(pubListener);
 	}
 
 }

@@ -1,19 +1,23 @@
 package de.ladis.infohm.android.activity.main;
 
+import static android.support.v4.widget.DrawerLayout.*;
+import static android.support.v4.view.GravityCompat.*;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseDrawerActivity;
 import de.ladis.infohm.android.activity.feedback.FeedbackActivity;
 import de.ladis.infohm.android.controller.NavigationController;
+import de.ladis.infohm.android.controller.StartupController;
 import de.ladis.infohm.android.fragment.bookmarks.BookmarksFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
+import de.ladis.infohm.android.fragment.startup.StartupFragment;
 
-public class MainActivity extends BaseDrawerActivity implements NavigationController {
+public class MainActivity extends BaseDrawerActivity implements StartupController, NavigationController {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +25,15 @@ public class MainActivity extends BaseDrawerActivity implements NavigationContro
 		setContentView(R.layout.activity_main);
 
 		if (savedInstanceState == null) {
-			switchFragment(EventsPagerFragment.class);
+			switchFragment(StartupFragment.class);
+			getDrawer().setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED);
 		}
+	}
+
+	@Override
+	public void startupComplete() {
+		switchFragment(EventsPagerFragment.class);
+		getDrawer().setDrawerLockMode(LOCK_MODE_UNLOCKED);
 	}
 
 	@Override
@@ -40,7 +51,7 @@ public class MainActivity extends BaseDrawerActivity implements NavigationContro
 
 	@Override
 	public void selected(int item) {
-		getDrawer().closeDrawer(GravityCompat.START);
+		getDrawer().closeDrawer(START);
 
 		switch (item) {
 		case R.id.fragment_navigation_newsfeed:

@@ -17,10 +17,10 @@ import de.ladis.infohm.android.adapter.publisher.StarPublisherAdapter;
 import de.ladis.infohm.android.controller.StarPublisherController;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.core.domain.Publisher;
-import de.ladis.infohm.core.listener.PublisherListener;
+import de.ladis.infohm.core.listener.SimplePublisherListener;
 import de.ladis.infohm.core.service.PublisherService;
 
-public class StarPublisherFragment extends BaseFragment implements PublisherListener {
+public class StarPublisherFragment extends BaseFragment {
 
 	private StarPublisherController controller;
 
@@ -64,36 +64,39 @@ public class StarPublisherFragment extends BaseFragment implements PublisherList
 	public void onResume() {
 		super.onResume();
 
-		service.registerListener(this);
+		service.registerListener(listener);
 		service.getAll().doAsync();
 	}
 
-	@Override
-	public void onGathered(List<Publisher> publishers) {
-		adapter.addItems(publishers);
+	private SimplePublisherListener listener = new SimplePublisherListener() {
 
-		service.updateAll().doAsync();
-		service.getStarred().doAsync();
-	}
+		@Override
+		public void onGathered(List<Publisher> publishers) {
+			adapter.addItems(publishers);
 
-	@Override
-	public void onStarred(List<Publisher> publishers) {
-		for (Publisher starred : publishers) {
-			adapter.selectItem(starred);
+			service.updateAll().doAsync();
+			service.getStarred().doAsync();
 		}
-	}
 
-	@Override
-	public void onUpdated(List<Publisher> publishers) {
-		adapter.addItems(publishers);
-	}
+		@Override
+		public void onStarred(List<Publisher> publishers) {
+			for (Publisher starred : publishers) {
+				adapter.selectItem(starred);
+			}
+		}
+
+		@Override
+		public void onUpdated(List<Publisher> publishers) {
+			adapter.addItems(publishers);
+		}
+	};
 
 	@Override
 	public void onPause() {
 		super.onPause();
 
 		controller.star(adapter.getSelection());
-		service.unregisterListener(this);
+		service.unregisterListener(listener);
 	}
 
 }

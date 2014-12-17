@@ -51,6 +51,12 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 				+ "message TEXT NOT NULL, "
 				+ "anonymous INTEGER NOT NULL, "
 				+ "PRIMARY KEY (id))");
+
+		db.execSQL("CREATE TABLE sync ("
+				+ "id INTEGER NOT NULL, "
+				+ "account TEXT NOT NULL, "
+				+ "synced TEXT NOT NULL, "
+				+ "PRIMARY KEY (id))");
 	}
 
 	@Override

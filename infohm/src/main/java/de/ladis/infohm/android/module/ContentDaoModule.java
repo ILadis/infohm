@@ -12,6 +12,7 @@ import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
+import de.ladis.infohm.core.dao.content.synchronize.SynchronizeContentDao;
 
 @Module(
 library = true,
@@ -54,6 +55,12 @@ public class ContentDaoModule {
 	@Singleton
 	public FeedbackContentDao provideFeedbackDao(ContentResolver resolver, URI base) {
 		return new FeedbackContentDao(resolver, base);
+	}
+
+	@Provides
+	@Singleton
+	public SynchronizeContentDao provideSynchronizeDao(ContentResolver resolver, URI base) {
+		return new SynchronizeContentDao(resolver, base);
 	}
 
 }

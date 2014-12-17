@@ -2,6 +2,7 @@ package de.ladis.infohm.android.activity.account;
 
 import javax.inject.Inject;
 
+import android.accounts.Account;
 import android.os.Bundle;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
@@ -9,11 +10,15 @@ import de.ladis.infohm.android.controller.AuthenticationController;
 import de.ladis.infohm.core.listener.AuthenticationListener;
 import de.ladis.infohm.core.listener.SimpleAuthenticationListener;
 import de.ladis.infohm.core.service.AuthenticationService;
+import de.ladis.infohm.core.service.SynchronizeService;
 
 public class CreateAccountActivity extends BaseActivity implements AuthenticationController {
 
 	@Inject
-	protected AuthenticationService service;
+	protected AuthenticationService authService;
+
+	@Inject
+	protected SynchronizeService syncService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +31,22 @@ public class CreateAccountActivity extends BaseActivity implements Authenticatio
 	protected void onResume() {
 		super.onResume();
 
-		service.registerListener(listener);
+		authService.registerListener(listener);
 	}
 
 	@Override
 	public void signIn(String username, String password) {
-		service.signIn(username, password).doAsync();
+		authService.signIn(username, password).doAsync();
 	}
 
 	private final AuthenticationListener listener = new SimpleAuthenticationListener() {
 
 		@Override
 		public void onSignedIn(String username, String password) {
-			service.addAccount(username, password).doSync();
+			authService.addAccount(username, password).doSync();
+
+			Account account = authService.getAccount().doSync();
+			syncService.autoSync(account, true);
 
 			setResult(RESULT_OK);
 			finish();
@@ -55,7 +63,7 @@ public class CreateAccountActivity extends BaseActivity implements Authenticatio
 	protected void onPause() {
 		super.onPause();
 
-		service.unregisterListener(listener);
+		authService.unregisterListener(listener);
 	}
 
 }

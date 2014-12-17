@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.joda.time.DateTime;
+
 import android.accounts.Account;
 import android.content.ContentProviderClient;
 import android.content.Context;
@@ -21,8 +23,11 @@ import de.ladis.infohm.core.service.BookmarkService;
 import de.ladis.infohm.core.service.EventService;
 import de.ladis.infohm.core.service.FeedbackService;
 import de.ladis.infohm.core.service.PublisherService;
+import de.ladis.infohm.core.service.SynchronizeService;
 
 public class SyncAdapter extends BaseSyncAdapter {
+
+	public static final String SYNC_FINISHED_ACTION = "de.ladis.infohm.android.component.content.SYNC_FINISHED_ACTION";
 
 	public static class Service extends android.app.Service {
 
@@ -44,7 +49,7 @@ public class SyncAdapter extends BaseSyncAdapter {
 	protected AuthenticationService authService;
 
 	@Inject
-	protected PublisherService pubService;
+	protected PublisherService publisherService;
 
 	@Inject
 	protected EventService eventService;
@@ -54,6 +59,9 @@ public class SyncAdapter extends BaseSyncAdapter {
 
 	@Inject
 	protected FeedbackService feedbackService;
+
+	@Inject
+	protected SynchronizeService syncService;
 
 	public SyncAdapter(Context context, boolean autoInitialize) {
 		super(context, autoInitialize);
@@ -72,10 +80,12 @@ public class SyncAdapter extends BaseSyncAdapter {
 			performBoockmarkSync(syncResult);
 			performFeedbackSync(syncResult);
 		}
+
+		finishSync(account);
 	}
 
 	private void performPublisherSync(SyncResult syncResult) {
-		List<Publisher> publishers = pubService.updateAll().doSync();
+		List<Publisher> publishers = publisherService.updateAll().doSync();
 
 		if (writeToSyncStats(syncResult, publishers)) {
 			for (Publisher publisher : publishers) {
@@ -108,6 +118,12 @@ public class SyncAdapter extends BaseSyncAdapter {
 
 			return true;
 		}
+	}
+
+	private void finishSync(Account account) {
+		syncService.setSynced(account, DateTime.now()).doSync();
+
+		sendBroadcast(new Intent(SYNC_FINISHED_ACTION));
 	}
 
 }

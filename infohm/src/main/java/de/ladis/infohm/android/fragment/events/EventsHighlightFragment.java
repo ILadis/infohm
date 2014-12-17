@@ -1,12 +1,14 @@
 package de.ladis.infohm.android.fragment.events;
 
+import static android.view.View.*;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,7 +27,7 @@ import de.ladis.infohm.core.listener.SimpleEventListener;
 import de.ladis.infohm.core.service.EventService;
 import de.ladis.infohm.core.service.PublisherService;
 
-public class EventsHighlightFragment extends BaseFragment implements OnRefreshListener {
+public class EventsHighlightFragment extends BaseFragment {
 
 	@Inject
 	protected EventService eventService;
@@ -38,6 +40,9 @@ public class EventsHighlightFragment extends BaseFragment implements OnRefreshLi
 
 	@InjectView(R.id.fragment_events_list)
 	protected RecyclerView recyclerView;
+
+	@InjectView(R.id.fragment_events_no_content)
+	protected View noContentView;
 
 	private EventsAdapter adapter;
 
@@ -57,8 +62,7 @@ public class EventsHighlightFragment extends BaseFragment implements OnRefreshLi
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		refreshView.setOnRefreshListener(this);
-		refreshView.setColorSchemeResources(R.color.actionbar_primary_color, R.color.actionbar_secondary_color);
+		refreshView.setEnabled(false);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(false);
@@ -73,11 +77,6 @@ public class EventsHighlightFragment extends BaseFragment implements OnRefreshLi
 		eventService.getHighlights(Range.closed(0, 9)).doAsync();
 	}
 
-	@Override
-	public void onRefresh() {
-		eventService.getHighlights(Range.closed(0, 9)).doAsync();
-	}
-
 	private final SimpleEventListener listener = new SimpleEventListener() {
 
 		@Override
@@ -87,11 +86,24 @@ public class EventsHighlightFragment extends BaseFragment implements OnRefreshLi
 
 		@Override
 		public void onHighlights(List<Event> events) {
+			refreshView.setRefreshing(false);
+
 			if (events != null) {
 				adapter.addItems(events);
 			}
 
-			refreshView.setRefreshing(false);
+			if (adapter.getItemCount() <= 0) {
+				if (noContentView.getVisibility() != VISIBLE) {
+					ViewCompat.setAlpha(noContentView, 0);
+					ViewCompat.animate(noContentView)
+							.alpha(1)
+							.start();
+				}
+
+				noContentView.setVisibility(VISIBLE);
+			} else {
+				noContentView.setVisibility(GONE);
+			}
 		}
 
 	};

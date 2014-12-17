@@ -1,5 +1,7 @@
 package de.ladis.infohm.android.fragment.events;
 
+import static android.view.View.*;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,6 +11,7 @@ import butterknife.InjectView;
 import com.google.common.collect.Range;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +49,9 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 
 	@InjectView(R.id.fragment_events_list)
 	protected RecyclerView recyclerView;
+
+	@InjectView(R.id.fragment_events_no_content)
+	protected View noContentView;
 
 	private Publisher publisher;
 	private EventsAdapter adapter;
@@ -101,7 +107,7 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 				if (events.size() <= 0) {
 					service.updateAll(target).doAsync();
 				} else {
-					adapter.addItems(events);
+					onUpdated(target, events);
 				}
 			}
 		}
@@ -114,6 +120,19 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 				if (events != null) {
 					adapter.addItems(events);
 				}
+			}
+
+			if (adapter.getItemCount() <= 0) {
+				if (noContentView.getVisibility() != VISIBLE) {
+					ViewCompat.setAlpha(noContentView, 0);
+					ViewCompat.animate(noContentView)
+							.alpha(1)
+							.start();
+				}
+
+				noContentView.setVisibility(VISIBLE);
+			} else {
+				noContentView.setVisibility(GONE);
 			}
 		}
 

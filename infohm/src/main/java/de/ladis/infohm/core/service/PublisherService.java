@@ -15,12 +15,25 @@ public class PublisherService {
 	private final PublisherDao cache, remote;
 	private final ExecutorFactory executor;
 	private final CallbackHandler<PublisherListener> handler;
+	private Boolean updating;
 
 	public PublisherService(PublisherDao cache, PublisherDao remote, ExecutorFactory executor) {
 		this.cache = cache;
 		this.remote = remote;
 		this.executor = executor;
 		this.handler = new CallbackHandler<PublisherListener>(PublisherListener.class);
+		this.updating = false;
+	}
+
+	public Call<Boolean> isUpdating() {
+		return new AbstractCall<Boolean>(executor.forLocal()) {
+
+			@Override
+			public Boolean doSync() {
+				return updating;
+			}
+
+		};
 	}
 
 	public Call<List<Publisher>> updateAll() {
@@ -28,6 +41,8 @@ public class PublisherService {
 
 			@Override
 			public List<Publisher> doSync() {
+				updating = true;
+
 				List<Publisher> updated = remote.list();
 
 				if (updated != null) {
@@ -35,6 +50,8 @@ public class PublisherService {
 						cache.insert(entity);
 					}
 				}
+
+				updating = false;
 
 				handler.callback().onUpdated(updated);
 

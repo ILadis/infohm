@@ -62,7 +62,14 @@ public class StarPublisherFragment extends BaseFragment implements OnRefreshList
 
 		refreshView.setOnRefreshListener(this);
 		refreshView.setColorSchemeResources(R.color.actionbar_primary_color, R.color.actionbar_secondary_color);
-//		refreshView.setRefreshing(service.isUpdating().doSync());
+		refreshView.setEnabled(false);
+		refreshView.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				refreshView.setEnabled(true);
+				refreshView.setRefreshing(service.isUpdating().doSync());
+			}
+		}, 1000);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(true);
@@ -79,7 +86,9 @@ public class StarPublisherFragment extends BaseFragment implements OnRefreshList
 
 	@Override
 	public void onRefresh() {
-		service.updateAll().doAsync();
+		if (!service.isUpdating().doSync()) {
+			service.updateAll().doAsync();
+		}
 	}
 
 	private SimplePublisherListener listener = new SimplePublisherListener() {

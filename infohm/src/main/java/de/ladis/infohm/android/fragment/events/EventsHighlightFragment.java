@@ -20,6 +20,7 @@ import com.google.common.collect.Range;
 
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.adapter.events.EventsAdapter;
+import de.ladis.infohm.android.adapter.events.EventsAdapterAnimator;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Publisher;
@@ -67,6 +68,7 @@ public class EventsHighlightFragment extends BaseFragment {
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+		recyclerView.setItemAnimator(new EventsAdapterAnimator());
 	}
 
 	@Override
@@ -86,27 +88,31 @@ public class EventsHighlightFragment extends BaseFragment {
 
 		@Override
 		public void onHighlights(List<Event> events) {
-			refreshView.setRefreshing(false);
-
 			if (events != null) {
 				adapter.addItems(events);
 			}
 
-			if (adapter.getItemCount() <= 0) {
-				if (noContentView.getVisibility() != VISIBLE) {
-					ViewCompat.setAlpha(noContentView, 0);
-					ViewCompat.animate(noContentView)
-							.alpha(1)
-							.start();
-				}
-
-				noContentView.setVisibility(VISIBLE);
-			} else {
-				noContentView.setVisibility(GONE);
-			}
+			showNoContentView();
 		}
 
 	};
+
+	private void showNoContentView() {
+		boolean show = adapter.getItemCount() <= 0;
+
+		if (show) {
+			if (noContentView.getVisibility() != VISIBLE) {
+				ViewCompat.setAlpha(noContentView, 0);
+				ViewCompat.animate(noContentView)
+						.alpha(1)
+						.start();
+			}
+
+			noContentView.setVisibility(VISIBLE);
+		} else {
+			noContentView.setVisibility(GONE);
+		}
+	}
 
 	@Override
 	public void onPause() {

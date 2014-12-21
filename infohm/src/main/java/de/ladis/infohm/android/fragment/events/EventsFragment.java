@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -79,11 +80,19 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 
 		refreshView.setOnRefreshListener(this);
 		refreshView.setColorSchemeResources(R.color.actionbar_primary_color, R.color.actionbar_secondary_color);
-		refreshView.setRefreshing(service.isUpdating(publisher).doSync());
+		refreshView.setEnabled(false);
+		refreshView.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				refreshView.setEnabled(true);
+				refreshView.setRefreshing(service.isUpdating(publisher).doSync());
+			}
+		}, 1000);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+		recyclerView.setItemAnimator(new DefaultItemAnimator());
 	}
 
 	@Override
@@ -96,20 +105,16 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 
 	@Override
 	public void onRefresh() {
-		service.updateAll(publisher).doAsync();
+		if (!service.isUpdating(publisher).doSync()) {
+			service.updateAll(publisher).doAsync();
+		}
 	}
 
 	private final SimpleEventListener listener = new SimpleEventListener() {
 
 		@Override
 		public void onGathered(Publisher target, List<Event> events) {
-			if (publisher.equals(target)) {
-				if (events.size() <= 0) {
-					service.updateAll(target).doAsync();
-				} else {
-					onUpdated(target, events);
-				}
-			}
+			onUpdated(target, events);
 		}
 
 		@Override
@@ -122,21 +127,27 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 				}
 			}
 
-			if (adapter.getItemCount() <= 0) {
-				if (noContentView.getVisibility() != VISIBLE) {
-					ViewCompat.setAlpha(noContentView, 0);
-					ViewCompat.animate(noContentView)
-							.alpha(1)
-							.start();
-				}
-
-				noContentView.setVisibility(VISIBLE);
-			} else {
-				noContentView.setVisibility(GONE);
-			}
+			showNoContentView();
 		}
 
 	};
+
+	private void showNoContentView() {
+		boolean show = adapter.getItemCount() <= 0;
+
+		if (show) {
+			if (noContentView.getVisibility() != VISIBLE) {
+				ViewCompat.setAlpha(noContentView, 0);
+				ViewCompat.animate(noContentView)
+						.alpha(1)
+						.start();
+			}
+
+			noContentView.setVisibility(VISIBLE);
+		} else {
+			noContentView.setVisibility(GONE);
+		}
+	}
 
 	@Override
 	public void onPause() {

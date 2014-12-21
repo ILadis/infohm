@@ -41,6 +41,12 @@ public class EventsPagerAdapter extends FragmentPagerAdapter {
 		notifyDataSetChanged();
 	}
 
+	public void clearItems() {
+		items.clear();
+
+		notifyDataSetChanged();
+	}
+
 	@Override
 	public CharSequence getPageTitle(int position) {
 		if (position == 0) {

@@ -57,26 +57,26 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 		}
 	}
 
-	public void addItem(Event publisher) {
-		int index = items.indexOf(publisher);
+	public void addItem(Event event) {
+		int index = items.indexOf(event);
 
 		if (index >= 0) {
 			items.remove(index);
-			items.add(index, publisher);
+			items.add(index, event);
 
 			notifyItemChanged(index);
 
 			Collections.sort(items, comparator);
-			int newIndex = items.indexOf(publisher);
+			int newIndex = items.indexOf(event);
 
 			if (index != newIndex) {
 				notifyItemMoved(index, newIndex);
 			}
 		} else {
-			items.add(publisher);
+			items.add(event);
 			Collections.sort(items, comparator);
 
-			index = items.indexOf(publisher);
+			index = items.indexOf(event);
 
 			notifyItemInserted(index);
 		}

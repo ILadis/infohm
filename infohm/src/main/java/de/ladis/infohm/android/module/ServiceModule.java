@@ -9,6 +9,7 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
+import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
@@ -37,44 +38,59 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public ExecutorService provideExecutorService() {
-		return Executors.newFixedThreadPool(3);
+	public ExecutorFactory provideExecutorFactory() {
+		final ExecutorService remote = Executors.newFixedThreadPool(3);
+		final ExecutorService local = Executors.newSingleThreadExecutor();
+
+		return new ExecutorFactory() {
+
+			@Override
+			public ExecutorService forRemote() {
+				return remote;
+			}
+
+			@Override
+			public ExecutorService forLocal() {
+				return local;
+			}
+
+		};
 	}
 
 	@Provides
 	@Singleton
-	public AuthenticationService provideAuthenticationService(AccountManager manager, AuthenticationHttpDao dao, ExecutorService executor) {
-		return new AuthenticationService(manager, dao, executor);
+	public AuthenticationService provideAuthenticationService(AccountManager manager, AuthenticationHttpDao dao, ExecutorFactory factory) {
+		return new AuthenticationService(manager, dao, factory);
 	}
 
 	@Provides
 	@Singleton
-	public PublisherService providePublisherService(PublisherContentDao cache, PublisherHttpDao remote, ExecutorService executor) {
-		return new PublisherService(cache, remote, executor);
+	public PublisherService providePublisherService(PublisherContentDao cache, PublisherHttpDao remote, ExecutorFactory factory) {
+		return new PublisherService(cache, remote, factory);
 	}
 
 	@Provides
 	@Singleton
-	public EventService provideEventService(EventContentDao cache, EventHttpDao remote, ExecutorService executor) {
-		return new EventService(cache, remote, executor);
+	public EventService provideEventService(EventContentDao cache, EventHttpDao remote, ExecutorFactory factory) {
+		return new EventService(cache, remote, factory);
 	}
 
 	@Provides
 	@Singleton
-	public BookmarkService provideBookmarkService(BookmarkContentDao cache, BookmarkHttpDao remote, ExecutorService executor) {
-		return new BookmarkService(cache, remote, executor);
+	public BookmarkService provideBookmarkService(BookmarkContentDao cache, BookmarkHttpDao remote, ExecutorFactory factory) {
+		return new BookmarkService(cache, remote, factory);
 	}
 
 	@Provides
 	@Singleton
-	public FeedbackService provideFeedbackService(FeedbackContentDao cache, FeedbackHttpDao remote, ExecutorService executor) {
-		return new FeedbackService(cache, remote, executor);
+	public FeedbackService provideFeedbackService(FeedbackContentDao cache, FeedbackHttpDao remote, ExecutorFactory factory) {
+		return new FeedbackService(cache, remote, factory);
 	}
 
 	@Provides
 	@Singleton
-	public SynchronizeService provideSynchronizeService(Context context, SynchronizeContentDao dao, ExecutorService executor) {
-		return new SynchronizeService(context, dao, executor);
+	public SynchronizeService provideSynchronizeService(Context context, SynchronizeContentDao dao, ExecutorFactory factory) {
+		return new SynchronizeService(context, dao, factory);
 	}
 
 }

@@ -1,8 +1,8 @@
 package de.ladis.infohm.core.service;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
+import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.domain.PublisherDao;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.listener.PublisherListener;
@@ -13,10 +13,10 @@ import de.ladis.infohm.util.CallbackHandler;
 public class PublisherService {
 
 	private final PublisherDao cache, remote;
-	private final ExecutorService executor;
+	private final ExecutorFactory executor;
 	private final CallbackHandler<PublisherListener> handler;
 
-	public PublisherService(PublisherDao cache, PublisherDao remote, ExecutorService executor) {
+	public PublisherService(PublisherDao cache, PublisherDao remote, ExecutorFactory executor) {
 		this.cache = cache;
 		this.remote = remote;
 		this.executor = executor;
@@ -24,7 +24,7 @@ public class PublisherService {
 	}
 
 	public Call<List<Publisher>> updateAll() {
-		return new AbstractCall<List<Publisher>>(executor) {
+		return new AbstractCall<List<Publisher>>(executor.forRemote()) {
 
 			@Override
 			public List<Publisher> doSync() {
@@ -45,7 +45,7 @@ public class PublisherService {
 	}
 
 	public Call<List<Publisher>> getAll() {
-		return new AbstractCall<List<Publisher>>(executor) {
+		return new AbstractCall<List<Publisher>>(executor.forLocal()) {
 
 			@Override
 			public List<Publisher> doSync() {
@@ -60,7 +60,7 @@ public class PublisherService {
 	}
 
 	public Call<List<Publisher>> getStarred() {
-		return new AbstractCall<List<Publisher>>(executor) {
+		return new AbstractCall<List<Publisher>>(executor.forLocal()) {
 
 			@Override
 			public List<Publisher> doSync() {
@@ -75,7 +75,7 @@ public class PublisherService {
 	}
 
 	public Call<Void> starTo(final Publisher publisher) {
-		return new AbstractCall<Void>(executor) {
+		return new AbstractCall<Void>(executor.forLocal()) {
 
 			@Override
 			public Void doSync() {
@@ -88,7 +88,7 @@ public class PublisherService {
 	}
 
 	public Call<Void> unstarFromAll() {
-		return new AbstractCall<Void>(executor) {
+		return new AbstractCall<Void>(executor.forLocal()) {
 
 			@Override
 			public Void doSync() {
@@ -101,7 +101,7 @@ public class PublisherService {
 	}
 
 	public Call<Void> unstarFrom(final Publisher publisher) {
-		return new AbstractCall<Void>(executor) {
+		return new AbstractCall<Void>(executor.forLocal()) {
 
 			@Override
 			public Void doSync() {

@@ -3,10 +3,10 @@ package de.ladis.infohm.core.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 import com.google.common.collect.Range;
 
+import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.domain.EventDao;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Publisher;
@@ -18,11 +18,11 @@ import de.ladis.infohm.util.CallbackHandler;
 public class EventService {
 
 	private final EventDao cache, remote;
-	private final ExecutorService executor;
+	private final ExecutorFactory executor;
 	private final CallbackHandler<EventListener> handler;
 	private final List<Publisher> queue;
 
-	public EventService(EventDao cache, EventDao remote, ExecutorService executor) {
+	public EventService(EventDao cache, EventDao remote, ExecutorFactory executor) {
 		this.cache = cache;
 		this.remote = remote;
 		this.executor = executor;
@@ -31,7 +31,7 @@ public class EventService {
 	}
 
 	public Call<Boolean> isUpdating(final Publisher publisher) {
-		return new AbstractCall<Boolean>(executor) {
+		return new AbstractCall<Boolean>(executor.forLocal()) {
 
 			@Override
 			public Boolean doSync() {
@@ -44,7 +44,7 @@ public class EventService {
 	}
 
 	public Call<List<Event>> updateAll(final Publisher publisher) {
-		return new AbstractCall<List<Event>>(executor) {
+		return new AbstractCall<List<Event>>(executor.forRemote()) {
 
 			@Override
 			public List<Event> doSync() {
@@ -98,7 +98,7 @@ public class EventService {
 	}
 
 	public Call<List<Event>> getAll(final Publisher publisher, final Range<Integer> range) {
-		return new AbstractCall<List<Event>>(executor) {
+		return new AbstractCall<List<Event>>(executor.forLocal()) {
 
 			@Override
 			public List<Event> doSync() {
@@ -113,7 +113,7 @@ public class EventService {
 	}
 
 	public Call<List<Event>> getHighlights(final Range<Integer> range) {
-		return new AbstractCall<List<Event>>(executor) {
+		return new AbstractCall<List<Event>>(executor.forLocal()) {
 
 			@Override
 			public List<Event> doSync() {

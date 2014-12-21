@@ -1,13 +1,12 @@
 package de.ladis.infohm.core.service;
 
-import java.util.concurrent.ExecutorService;
-
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
+import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.domain.AuthenticationDao;
 import de.ladis.infohm.core.listener.AuthenticationListener;
 import de.ladis.infohm.util.AbstractCall;
@@ -18,10 +17,10 @@ public class AuthenticationService {
 
 	private final AccountManager manager;
 	private final AuthenticationDao dao;
-	private final ExecutorService executor;
+	private final ExecutorFactory executor;
 	private final CallbackHandler<AuthenticationListener> handler;
 
-	public AuthenticationService(AccountManager manager, AuthenticationDao dao, ExecutorService executor) {
+	public AuthenticationService(AccountManager manager, AuthenticationDao dao, ExecutorFactory executor) {
 		this.manager = manager;
 		this.dao = dao;
 		this.executor = executor;
@@ -29,7 +28,7 @@ public class AuthenticationService {
 	}
 
 	public Call<Account> getAccount() {
-		return new AbstractCall<Account>(executor) {
+		return new AbstractCall<Account>(executor.forLocal()) {
 
 			@Override
 			public Account doSync() {
@@ -46,7 +45,7 @@ public class AuthenticationService {
 	}
 
 	public Call<Boolean> addAccount(final String username, final String password) {
-		return new AbstractCall<Boolean>(executor) {
+		return new AbstractCall<Boolean>(executor.forLocal()) {
 
 			@Override
 			public Boolean doSync() {
@@ -72,7 +71,7 @@ public class AuthenticationService {
 	}
 
 	public Call<Boolean> signIn(final String username, final String password) {
-		return new AbstractCall<Boolean>(executor) {
+		return new AbstractCall<Boolean>(executor.forRemote()) {
 
 			@Override
 			public Boolean doSync() {
@@ -100,7 +99,7 @@ public class AuthenticationService {
 	}
 
 	public Call<Void> authenticate(final String username, final String password) {
-		return new AbstractCall<Void>(executor) {
+		return new AbstractCall<Void>(executor.forLocal()) {
 
 			@Override
 			public Void doSync() {
@@ -115,7 +114,7 @@ public class AuthenticationService {
 	}
 
 	public Call<Void> signOut() {
-		return new AbstractCall<Void>(executor) {
+		return new AbstractCall<Void>(executor.forRemote()) {
 
 			@Override
 			public Void doSync() {

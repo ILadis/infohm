@@ -1,8 +1,8 @@
 package de.ladis.infohm.core.service;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
+import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.domain.FeedbackDao;
 import de.ladis.infohm.core.domain.Feedback;
 import de.ladis.infohm.util.AbstractCall;
@@ -11,16 +11,16 @@ import de.ladis.infohm.util.Call;
 public class FeedbackService {
 
 	private final FeedbackDao cache, remote;
-	private final ExecutorService executor;
+	private final ExecutorFactory executor;
 
-	public FeedbackService(FeedbackDao cache, FeedbackDao remote, ExecutorService executor) {
+	public FeedbackService(FeedbackDao cache, FeedbackDao remote, ExecutorFactory executor) {
 		this.cache = cache;
 		this.remote = remote;
 		this.executor = executor;
 	}
 
 	public Call<Void> submitNew(final Feedback feedback) {
-		return new AbstractCall<Void>(executor) {
+		return new AbstractCall<Void>(executor.forLocal()) {
 
 			@Override
 			public Void doSync() {
@@ -33,7 +33,7 @@ public class FeedbackService {
 	}
 
 	public Call<List<Feedback>> syncAll() {
-		return new AbstractCall<List<Feedback>>(executor) {
+		return new AbstractCall<List<Feedback>>(executor.forRemote()) {
 
 			@Override
 			public List<Feedback> doSync() {

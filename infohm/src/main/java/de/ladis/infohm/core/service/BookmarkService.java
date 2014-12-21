@@ -1,8 +1,8 @@
 package de.ladis.infohm.core.service;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
+import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.domain.BookmarkDao;
 import de.ladis.infohm.core.domain.Bookmark;
 import de.ladis.infohm.core.listener.BookmarkListener;
@@ -13,10 +13,10 @@ import de.ladis.infohm.util.CallbackHandler;
 public class BookmarkService {
 
 	private final BookmarkDao cache, remote;
-	private final ExecutorService executor;
+	private final ExecutorFactory executor;
 	private final CallbackHandler<BookmarkListener> handler;
 
-	public BookmarkService(BookmarkDao cache, BookmarkDao remote, ExecutorService executor) {
+	public BookmarkService(BookmarkDao cache, BookmarkDao remote, ExecutorFactory executor) {
 		this.cache = cache;
 		this.remote = remote;
 		this.executor = executor;
@@ -24,7 +24,7 @@ public class BookmarkService {
 	}
 
 	public Call<List<Bookmark>> updateAll() {
-		return new AbstractCall<List<Bookmark>>(executor) {
+		return new AbstractCall<List<Bookmark>>(executor.forRemote()) {
 
 			@Override
 			public List<Bookmark> doSync() {
@@ -45,7 +45,7 @@ public class BookmarkService {
 	}
 
 	public Call<List<Bookmark>> getAll() {
-		return new AbstractCall<List<Bookmark>>(executor) {
+		return new AbstractCall<List<Bookmark>>(executor.forLocal()) {
 
 			@Override
 			public List<Bookmark> doSync() {

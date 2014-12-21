@@ -71,8 +71,8 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 			HttpEntityEnclosingRequest request = (HttpEntityEnclosingRequest) factory.newHttpRequest("POST", "/iscore/rest/auth/login");
 			ResponseHandler<Boolean> handler = new AuthenticationResponseHandler();
 
-			addCredentialsToContext(context, credentials);
-			addCredentialsToRequest(request, credentials);
+			addCredentialsTo(context, credentials);
+			addCredentialsTo(request, credentials);
 
 			boolean result = http().execute(host, request, handler, context);
 
@@ -88,10 +88,10 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 
 	@Override
 	public void authenticate(Credentials credentials) throws DaoException {
-		addCredentialsToContext(context, credentials);
+		addCredentialsTo(context, credentials);
 	}
 
-	private void addCredentialsToContext(HttpContext context, Credentials credentials) {
+	private void addCredentialsTo(HttpContext context, Credentials credentials) {
 		CredentialsProvider provider = new BasicCredentialsProvider();
 		provider.setCredentials(AuthScope.ANY, credentials);
 
@@ -99,7 +99,7 @@ public class AuthenticationHttpDao extends HttpDao<Credentials, Void> implements
 		context.setAttribute(ClientPNames.HANDLE_AUTHENTICATION, true);
 	}
 
-	private void addCredentialsToRequest(HttpEntityEnclosingRequest request, Credentials credentials)
+	private void addCredentialsTo(HttpEntityEnclosingRequest request, Credentials credentials)
 			throws UnsupportedEncodingException {
 
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();

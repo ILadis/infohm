@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ public class EventsPagerFragment extends BaseFragment {
 
 	@Inject
 	protected PublisherService service;
+
+	@Inject
+	protected DisplayMetrics metrics;
 
 	@InjectView(R.id.fragment_events_pager_tabs)
 	protected SlidingTabLayout tabView;
@@ -82,31 +86,52 @@ public class EventsPagerFragment extends BaseFragment {
 			if (publishers != null) {
 				adapter.addItems(publishers);
 
-				animateTabAppearance();
 				alignActionButton();
+
+				if (animate) {
+					animateTabAppearance();
+					animateActionButton();
+				}
 			}
 		}
 
 	};
 
 	private void animateTabAppearance() {
-		if (animate) {
-			animate = false;
+		int count = adapter.getCount();
 
-			int count = adapter.getCount();
+		ViewCompat.setAlpha(tabView, 0);
+		ViewCompat.setTranslationY(tabView, -50 * metrics.density);
+		ViewCompat.animate(tabView)
+				.translationY(0)
+				.alpha(1)
+				.setDuration(600)
+				.start();
 
-			ViewGroup tabStrip = (ViewGroup) tabView.getChildAt(0);
-			for (int i = 0; i < count; i++) {
-				View viewView = tabStrip.getChildAt(i);
+		ViewGroup tabStrip = (ViewGroup) tabView.getChildAt(0);
+		for (int i = 0; i < count; i++) {
+			View viewView = tabStrip.getChildAt(i);
 
-				ViewCompat.setAlpha(viewView, 0);
-				ViewCompat.setTranslationX(viewView, 25);
-				ViewCompat.animate(viewView)
-						.alpha(1)
-						.translationX(0)
-						.setStartDelay(300 * i)
-						.start();
-			}
+			ViewCompat.setAlpha(viewView, 0);
+			ViewCompat.setTranslationX(viewView, 25 * metrics.density);
+			ViewCompat.animate(viewView)
+					.alpha(1)
+					.translationX(0)
+					.setStartDelay(300 * (i+1))
+					.start();
+		}
+	}
+
+	private void animateActionButton() {
+		int count = adapter.getCount();
+
+		if (count > 1) {
+			ViewCompat.setTranslationY(actionView, 200 * metrics.density);
+
+			ViewCompat.animate(actionView)
+					.translationY(0)
+					.setDuration(800)
+					.start();
 		}
 	}
 
@@ -133,6 +158,7 @@ public class EventsPagerFragment extends BaseFragment {
 	public void onPause() {
 		super.onPause();
 
+		animate = false;
 		service.unregisterListener(listener);
 	}
 

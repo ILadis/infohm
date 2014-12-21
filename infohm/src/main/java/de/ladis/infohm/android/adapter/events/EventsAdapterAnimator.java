@@ -20,6 +20,7 @@ public class EventsAdapterAnimator extends RecyclerView.ItemAnimator {
 			ViewCompat.animate(holder.itemView)
 					.translationY(0)
 					.alpha(1)
+					.setDuration(800)
 					.start();
 		}
 

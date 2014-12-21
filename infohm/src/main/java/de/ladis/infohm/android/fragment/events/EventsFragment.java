@@ -6,22 +6,22 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.InjectView;
-
-import com.google.common.collect.Range;
-
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.InjectView;
+
+import com.google.common.collect.Range;
+
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.adapter.events.EventsAdapter;
+import de.ladis.infohm.android.adapter.events.EventsAdapterAnimator;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.parcel.publisher.PublisherParcelHolder;
 import de.ladis.infohm.core.domain.Event;
@@ -92,7 +92,7 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		recyclerView.setItemAnimator(new DefaultItemAnimator());
+		recyclerView.setItemAnimator(new EventsAdapterAnimator());
 	}
 
 	@Override

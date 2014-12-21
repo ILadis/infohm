@@ -6,6 +6,7 @@ import android.accounts.AccountManager;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.android.component.account.AccountAuthenticator;
@@ -23,6 +24,12 @@ public class AndroidModule {
 	@Singleton
 	public Context provideApplicationContext() {
 		return application.getApplicationContext();
+	}
+
+	@Provides
+	@Singleton
+	public DisplayMetrics provideDisplayMetrics(Context context) {
+		return context.getResources().getDisplayMetrics();
 	}
 
 	@Provides

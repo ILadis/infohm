@@ -6,6 +6,7 @@
 		android:id="@+id/fragment_feedback_menu_submit"
 		android:title="@string/fragment_feedback_menu_submit"
 		android:icon="@drawable/feedback_submit"
-		custom:showAsAction="always|withText" />
+		custom:showAsAction="always|withText"
+		custom:actionLayout="@layout/menu_feedback_submit" />
 
 </menu>

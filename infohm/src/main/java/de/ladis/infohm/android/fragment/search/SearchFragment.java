@@ -1,5 +1,7 @@
 package de.ladis.infohm.android.fragment.search;
 
+import static android.view.View.*;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +29,9 @@ public class SearchFragment extends BaseFragment {
 	@InjectView(R.id.fragment_search_list)
 	protected ListView listView;
 
+	@InjectView(R.id.fragment_search_no_content)
+	protected View noContentView;
+
 	private SearchAdapter adapter;
 
 	@Override
@@ -52,7 +57,7 @@ public class SearchFragment extends BaseFragment {
 	public void onResume() {
 		super.onResume();
 
-		String query = getQuery();
+		String query = obtainQuery();
 
 		service.registerListener(listener);
 		if (query != null) {
@@ -60,7 +65,7 @@ public class SearchFragment extends BaseFragment {
 		}
 	}
 
-	private String getQuery() {
+	private String obtainQuery() {
 		Intent intent = getActivity().getIntent();
 
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -76,7 +81,14 @@ public class SearchFragment extends BaseFragment {
 
 		@Override
 		public void onSearchCompleted(List<Search> results) {
+			adapter.clearItems();
 			adapter.addItems(results);
+
+			if (results.size() <= 0) {
+				noContentView.setVisibility(VISIBLE);
+			} else {
+				noContentView.setVisibility(GONE);
+			}
 		}
 
 	};

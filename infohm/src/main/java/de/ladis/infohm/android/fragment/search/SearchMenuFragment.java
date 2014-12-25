@@ -1,13 +1,17 @@
 package de.ladis.infohm.android.fragment.search;
 
+import static android.support.v4.view.MenuItemCompat.*;
+
 import javax.inject.Inject;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnCloseListener;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,17 +20,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.search.SearchActivity;
+import de.ladis.infohm.android.controller.SearchController;
 import de.ladis.infohm.android.fragment.BaseFragment;
 
 public class SearchMenuFragment extends BaseFragment {
 
+	private SearchController controller;
+
 	@Inject
 	protected SearchManager manager;
+
+	private MenuItem menuItem;
+
+	private SearchView searchView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		try {
+			controller = (SearchController) activity;
+		} catch (ClassCastException e) { }
 	}
 
 	@Override
@@ -38,21 +58,21 @@ public class SearchMenuFragment extends BaseFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.fragment_search, menu);
 
-		MenuItem item = menu.findItem(R.id.fragment_search_menu);
+		menuItem = menu.findItem(R.id.fragment_search_menu);
 
-		SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+		searchView = (SearchView) getActionView(menuItem);
 		searchView.setSearchableInfo(manager.getSearchableInfo(new ComponentName(getActivity(), SearchActivity.class)));
+		searchView.setOnQueryTextListener(queryListener);
+		searchView.setOnCloseListener(closeListener);
 
-		String query = getQuery();
+		String query = obtainQuery();
 
 		if (query != null) {
-			searchView.setIconified(false);
-			searchView.clearFocus();
-			searchView.setQuery(query, false);
+			expandSearch(query);
 		}
 	}
 
-	private String getQuery() {
+	private String obtainQuery() {
 		Intent intent = getActivity().getIntent();
 
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -63,5 +83,59 @@ public class SearchMenuFragment extends BaseFragment {
 
 		return null;
 	}
+
+	private void expandSearch(String query) {
+		searchView.setIconified(false);
+		searchView.setQuery(query, false);
+		searchView.clearFocus();
+
+		expandActionView(menuItem);
+	}
+
+	private void collapseSearch() {
+		searchView.setQuery("", false);
+		searchView.clearFocus();
+		searchView.setIconified(true);
+
+		collapseActionView(menuItem);
+	}
+
+	private OnQueryTextListener queryListener = new OnQueryTextListener() {
+
+		@Override
+		public boolean onQueryTextChange(String query) {
+			if (controller != null) {
+				controller.onQueryChanged(query);
+				return true;
+			}
+
+			return false;
+		}
+
+		@Override
+		public boolean onQueryTextSubmit(String query) {
+			if (controller != null) {
+				controller.onQuerySubmitted(query);
+				return true;
+			}
+
+			collapseSearch();
+			return false;
+		}
+
+	};
+
+	private OnCloseListener closeListener = new OnCloseListener() {
+
+		@Override
+		public boolean onClose() {
+			if (controller != null) {
+				controller.onQueryClosed();
+			}
+
+			return false;
+		}
+
+	};
 
 }

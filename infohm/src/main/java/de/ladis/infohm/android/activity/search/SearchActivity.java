@@ -1,12 +1,19 @@
 package de.ladis.infohm.android.activity.search;
 
+import javax.inject.Inject;
+
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.activity.BaseActivity;
+import de.ladis.infohm.android.controller.SearchController;
+import de.ladis.infohm.core.service.SearchService;
 
-public class SearchActivity extends BaseActivity {
+public class SearchActivity extends BaseActivity implements SearchController {
+
+	@Inject
+	protected SearchService service;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,20 @@ public class SearchActivity extends BaseActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onQueryChanged(String query) {
+		service.searchFor(query).doAsync();
+	}
+
+	@Override
+	public void onQuerySubmitted(String query) {
+	}
+
+	@Override
+	public void onQueryClosed() {
+		finish();
 	}
 
 }

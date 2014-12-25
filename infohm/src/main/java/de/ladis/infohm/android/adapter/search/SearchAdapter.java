@@ -32,6 +32,11 @@ public class SearchAdapter extends BaseAdapter {
 		this.items = new ArrayList<Search>();
 	}
 
+	public void clearItems() {
+		items.clear();
+		notifyDataSetChanged();
+	}
+
 	public void addItems(Collection<Search> results) {
 		for (Search search : results) {
 			addItem(search);

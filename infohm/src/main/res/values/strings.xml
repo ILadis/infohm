@@ -14,6 +14,8 @@
 	<string name="activity_feedback_label">Feedback</string>
 	<string name="activity_feedback_submit">Vielen Dank für dein Feedback!</string>
 
+	<string name="activity_search_label">Suche</string>
+
 	<string name="fragment_authentication_username_hint">Benutzername</string>
 	<string name="fragment_authentication_username_invalid">Dieser Benutzername ist ungültig.</string>
 	<string name="fragment_authentication_password_hint">Passwort</string>
@@ -26,7 +28,7 @@
 	<string name="fragment_feedback_message_invalid">Bitte gib zuerst eine Nachricht ein.</string>
 	<string name="fragment_feedback_menu_submit">Abschicken</string>
 
-	<string name="fragment_events_no_content">Noch keine Inhalte verfügbar</string>
+	<string name="fragment_events_no_content">noch keine Inhalte verfügbar</string>
 
 	<string name="fragment_navigation_newsfeed">Neuigkeiten</string>
 	<string name="fragment_navigation_cafeterian">Speisepläne</string>
@@ -35,6 +37,7 @@
 	<string name="fragment_navigation_feedback">Feedback</string>
 
 	<string name="fragment_search_menu_title">Suchen</string>
+	<string name="fragment_search_no_content">keine Inhalte gefunden</string>
 
 	<string name="view_timestamp_at">am %3$s.%2$s.%1$s um %4$s:%5$s Uhr</string>
 	<plurals name="view_timestamp_days_ago">

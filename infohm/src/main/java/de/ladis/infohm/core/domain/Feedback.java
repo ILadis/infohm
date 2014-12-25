@@ -2,7 +2,7 @@ package de.ladis.infohm.core.domain;
 
 import de.ladis.infohm.util.Strings;
 
-public class Feedback {
+public class Feedback implements Entity {
 
 	private Long id;
 	private String subject;

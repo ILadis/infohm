@@ -61,6 +61,20 @@
 				android:value="de.ladis.infohm.android.activity.main.MainActivity" />
 		</activity>
 
+		<activity android:name="de.ladis.infohm.android.activity.search.SearchActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.SEARCH" />
+			</intent-filter>
+
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="de.ladis.infohm.android.activity.main.MainActivity" />
+
+			<meta-data
+				android:name="android.app.searchable"
+				android:resource="@xml/searchable" />
+		</activity>
+
 		<provider
 			android:name="de.ladis.infohm.android.component.content.ContentProvider"
 			android:authorities="de.ladis.infohm.provider"

@@ -57,6 +57,12 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 				+ "account TEXT NOT NULL, "
 				+ "synced TEXT NOT NULL, "
 				+ "PRIMARY KEY (id))");
+
+		db.execSQL("CREATE VIRTUAL TABLE search USING fts4("
+				+ "id INTEGER NOT NULL, "
+				+ "type TEXT NOT NULL, "
+				+ "content TEXT NOT NULL, "
+				+ "PRIMARY KEY (pid, type))");
 	}
 
 	@Override

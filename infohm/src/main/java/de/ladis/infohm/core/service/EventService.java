@@ -8,8 +8,10 @@ import com.google.common.collect.Range;
 
 import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.domain.EventDao;
+import de.ladis.infohm.core.dao.domain.SearchDao;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Publisher;
+import de.ladis.infohm.core.domain.Search;
 import de.ladis.infohm.core.listener.EventListener;
 import de.ladis.infohm.util.AbstractCall;
 import de.ladis.infohm.util.Call;
@@ -18,13 +20,15 @@ import de.ladis.infohm.util.CallbackHandler;
 public class EventService {
 
 	private final EventDao cache, remote;
+	private final SearchDao search;
 	private final ExecutorFactory executor;
 	private final CallbackHandler<EventListener> handler;
 	private final List<Publisher> updating;
 
-	public EventService(EventDao cache, EventDao remote, ExecutorFactory executor) {
+	public EventService(EventDao cache, EventDao remote, SearchDao search, ExecutorFactory executor) {
 		this.cache = cache;
 		this.remote = remote;
+		this.search = search;
 		this.executor = executor;
 		this.handler = new CallbackHandler<EventListener>(EventListener.class);
 		this.updating = new ArrayList<Publisher>();
@@ -68,6 +72,7 @@ public class EventService {
 
 							for (Event event : events) {
 								cache.insert(publisher, event);
+								search.insert(Search.with(event));
 							}
 
 							range = Range.closed(range.upperEndpoint() + 1, range.upperEndpoint() + 10);

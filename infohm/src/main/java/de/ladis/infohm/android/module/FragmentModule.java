@@ -9,6 +9,7 @@ import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
 import de.ladis.infohm.android.fragment.feedback.FeedbackFragment;
 import de.ladis.infohm.android.fragment.navigation.NavigationFragment;
 import de.ladis.infohm.android.fragment.publisher.StarPublisherFragment;
+import de.ladis.infohm.android.fragment.search.SearchFragment;
 import de.ladis.infohm.android.fragment.search.SearchMenuFragment;
 import de.ladis.infohm.android.fragment.startup.StartupFragment;
 
@@ -28,6 +29,7 @@ injects = {
 		BookmarksFragment.class,
 		FeedbackFragment.class,
 		StartupFragment.class,
+		SearchFragment.class,
 })
 public class FragmentModule {
 }

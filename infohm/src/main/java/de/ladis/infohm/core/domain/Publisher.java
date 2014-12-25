@@ -1,17 +1,23 @@
 package de.ladis.infohm.core.domain;
 
+import org.joda.time.DateTime;
+
 import de.ladis.infohm.util.Strings;
 
-public class Publisher extends Entity {
+public class Publisher implements Entity {
 
 	private Long id;
 	private String name;
 	private String description;
+	private DateTime created;
+	private DateTime updated;
 
 	public Publisher() {
 		this.id = null;
 		this.name = Strings.empty();
 		this.description = Strings.empty();
+		this.created = DateTime.now();
+		this.updated = DateTime.now();
 	}
 
 	public void setId(Long id) {
@@ -38,6 +44,22 @@ public class Publisher extends Entity {
 		return description;
 	}
 
+	public void setCreatedAt(DateTime created) {
+		this.created = created;
+	}
+
+	public DateTime getCreatedAt() {
+		return created;
+	}
+
+	public void setUpdatedAt(DateTime updated) {
+		this.updated = updated;
+	}
+
+	public DateTime getUpdatedAt() {
+		return updated;
+	}
+
 	@Override
 	public int hashCode() {
 		return id == null ? 0 : id.intValue();
@@ -52,6 +74,17 @@ public class Publisher extends Entity {
 		}
 
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(getName())
+				.append('\n')
+				.append(getDescription());
+
+		return builder.toString();
 	}
 
 }

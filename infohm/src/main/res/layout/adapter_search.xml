@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:paddingTop="?attr/listViewContentPadding"
+	android:paddingRight="?attr/listViewContentPadding"
+	android:paddingBottom="?attr/listViewContentPadding"
+	android:paddingLeft="?attr/listViewContentPadding"
+	style="?attr/adapterStyle">
+
+	<TextView
+		android:id="@+id/adapter_search_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:singleLine="true"
+		android:ellipsize="end"
+		android:textAppearance="?attr/textAppearanceSubheader" />
+
+	<TextView
+		android:id="@+id/adapter_search_content"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:maxLines="2"
+		android:ellipsize="end"
+		android:textAppearance="?attr/textAppearanceCaption" />
+
+</LinearLayout>

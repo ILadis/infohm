@@ -6,6 +6,6 @@
 		android:id="@+id/fragment_search_menu"
 		android:title="@string/fragment_search_menu_title"
 		custom:showAsAction="always"
-		custom:actionViewClass="android.support.v7.widget.SearchView" />
+		custom:actionLayout="@layout/menu_search_submit" />
 
 </menu>

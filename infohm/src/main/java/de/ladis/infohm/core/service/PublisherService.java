@@ -4,7 +4,9 @@ import java.util.List;
 
 import de.ladis.infohm.core.concurrent.ExecutorFactory;
 import de.ladis.infohm.core.dao.domain.PublisherDao;
+import de.ladis.infohm.core.dao.domain.SearchDao;
 import de.ladis.infohm.core.domain.Publisher;
+import de.ladis.infohm.core.domain.Search;
 import de.ladis.infohm.core.listener.PublisherListener;
 import de.ladis.infohm.util.AbstractCall;
 import de.ladis.infohm.util.Call;
@@ -13,13 +15,15 @@ import de.ladis.infohm.util.CallbackHandler;
 public class PublisherService {
 
 	private final PublisherDao cache, remote;
+	private final SearchDao search;
 	private final ExecutorFactory executor;
 	private final CallbackHandler<PublisherListener> handler;
 	private Boolean updating;
 
-	public PublisherService(PublisherDao cache, PublisherDao remote, ExecutorFactory executor) {
+	public PublisherService(PublisherDao cache, PublisherDao remote, SearchDao search, ExecutorFactory executor) {
 		this.cache = cache;
 		this.remote = remote;
+		this.search = search;
 		this.executor = executor;
 		this.handler = new CallbackHandler<PublisherListener>(PublisherListener.class);
 		this.updating = false;
@@ -48,6 +52,7 @@ public class PublisherService {
 				if (updated != null) {
 					for (Publisher entity : updated) {
 						cache.insert(entity);
+						search.insert(Search.with(entity));
 					}
 				}
 
@@ -131,11 +136,9 @@ public class PublisherService {
 	}
 
 	public void subscribeTo(Publisher publisher) {
-
 	}
 
 	public void unsubscribeFrom(Publisher publisher) {
-
 	}
 
 	public void registerListener(PublisherListener listener) {

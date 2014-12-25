@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import android.accounts.AccountManager;
 import android.app.Application;
 import android.app.NotificationManager;
+import android.app.SearchManager;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import dagger.Module;
@@ -28,14 +29,20 @@ public class AndroidModule {
 
 	@Provides
 	@Singleton
-	public DisplayMetrics provideDisplayMetrics(Context context) {
-		return context.getResources().getDisplayMetrics();
+	public DisplayMetrics provideDisplayMetrics() {
+		return application.getResources().getDisplayMetrics();
 	}
 
 	@Provides
 	@Singleton
 	public NotificationManager provideNotificationManager() {
 		return (NotificationManager) application.getSystemService(Context.NOTIFICATION_SERVICE);
+	}
+
+	@Provides
+	@Singleton
+	public SearchManager provideSearchManager() {
+		return (SearchManager) application.getSystemService(Context.SEARCH_SERVICE);
 	}
 
 	@Provides

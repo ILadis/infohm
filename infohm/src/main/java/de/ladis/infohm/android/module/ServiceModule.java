@@ -14,6 +14,7 @@ import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
+import de.ladis.infohm.core.dao.content.search.SearchContentDao;
 import de.ladis.infohm.core.dao.content.synchronize.SynchronizeContentDao;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
 import de.ladis.infohm.core.dao.http.bookmark.BookmarkHttpDao;
@@ -25,6 +26,7 @@ import de.ladis.infohm.core.service.BookmarkService;
 import de.ladis.infohm.core.service.EventService;
 import de.ladis.infohm.core.service.FeedbackService;
 import de.ladis.infohm.core.service.PublisherService;
+import de.ladis.infohm.core.service.SearchService;
 import de.ladis.infohm.core.service.SynchronizeService;
 
 @Module(
@@ -65,20 +67,20 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public PublisherService providePublisherService(PublisherContentDao cache, PublisherHttpDao remote, ExecutorFactory factory) {
-		return new PublisherService(cache, remote, factory);
+	public PublisherService providePublisherService(PublisherContentDao cache, PublisherHttpDao remote, SearchContentDao search, ExecutorFactory factory) {
+		return new PublisherService(cache, remote, search, factory);
 	}
 
 	@Provides
 	@Singleton
-	public EventService provideEventService(EventContentDao cache, EventHttpDao remote, ExecutorFactory factory) {
-		return new EventService(cache, remote, factory);
+	public EventService provideEventService(EventContentDao cache, EventHttpDao remote, SearchContentDao search, ExecutorFactory factory) {
+		return new EventService(cache, remote, search, factory);
 	}
 
 	@Provides
 	@Singleton
-	public BookmarkService provideBookmarkService(BookmarkContentDao cache, BookmarkHttpDao remote, ExecutorFactory factory) {
-		return new BookmarkService(cache, remote, factory);
+	public BookmarkService provideBookmarkService(BookmarkContentDao cache, BookmarkHttpDao remote, SearchContentDao search, ExecutorFactory factory) {
+		return new BookmarkService(cache, remote, search, factory);
 	}
 
 	@Provides
@@ -91,6 +93,12 @@ public class ServiceModule {
 	@Singleton
 	public SynchronizeService provideSynchronizeService(Context context, SynchronizeContentDao dao, ExecutorFactory factory) {
 		return new SynchronizeService(context, dao, factory);
+	}
+
+	@Provides
+	@Singleton
+	public SearchService provideSearchService(SearchContentDao dao, ExecutorFactory factory) {
+		return new SearchService(dao, factory);
 	}
 
 }

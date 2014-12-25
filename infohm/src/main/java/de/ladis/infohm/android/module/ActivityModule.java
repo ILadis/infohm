@@ -5,6 +5,7 @@ import de.ladis.infohm.android.activity.account.CreateAccountActivity;
 import de.ladis.infohm.android.activity.feedback.FeedbackActivity;
 import de.ladis.infohm.android.activity.main.MainActivity;
 import de.ladis.infohm.android.activity.publisher.StarPublisherActivity;
+import de.ladis.infohm.android.activity.search.SearchActivity;
 import de.ladis.infohm.android.activity.splash.SplashActivity;
 
 @Module(
@@ -18,6 +19,7 @@ injects = {
 		MainActivity.class,
 		FeedbackActivity.class,
 		StarPublisherActivity.class,
+		SearchActivity.class,
 })
 public class ActivityModule {
 }

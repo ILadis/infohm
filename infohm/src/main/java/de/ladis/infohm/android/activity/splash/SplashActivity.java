@@ -65,4 +65,13 @@ public class SplashActivity extends BaseActivity {
 		startActivity(intent);
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		if (isFinishing()) {
+			handler.removeMessages(0);
+		}
+	}
+
 }

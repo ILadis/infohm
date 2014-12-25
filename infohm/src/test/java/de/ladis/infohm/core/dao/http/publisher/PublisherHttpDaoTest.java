@@ -10,6 +10,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.http.HttpDaoTestModule;
@@ -17,6 +20,8 @@ import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.test.BaseTest;
 import de.ladis.infohm.test.mock.MockedHttpClient;
 
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest = Config.NONE)
 public class PublisherHttpDaoTest extends BaseTest {
 
 	@Override

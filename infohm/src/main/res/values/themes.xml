@@ -7,6 +7,7 @@
 		<!-- Window styles. -->
 		<item name="android:windowBackground">@drawable/activity_background</item>
 		<item name="android:windowTranslucentStatus">true</item>
+		<item name="android:windowContentTransitions">true</item>
 
 		<!-- Color palette. -->
 		<item name="colorPrimary">@color/actionbar_primary_color</item>

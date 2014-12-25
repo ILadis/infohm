@@ -18,12 +18,17 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.protocol.HttpContext;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.http.HttpDaoTestModule;
 import de.ladis.infohm.test.BaseTest;
 import de.ladis.infohm.test.mock.MockedHttpClient;
 
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest = Config.NONE)
 public class AuthenticationHttpDaoTest extends BaseTest {
 
 	@Override

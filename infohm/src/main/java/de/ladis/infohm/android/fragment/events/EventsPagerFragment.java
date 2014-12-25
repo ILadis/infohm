@@ -1,10 +1,17 @@
 package de.ladis.infohm.android.fragment.events;
 
+import static android.os.Build.*;
+import static android.view.View.*;
+import static android.widget.RelativeLayout.*;
+import static android.view.ViewAnimationUtils.*;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
-import android.content.Context;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
@@ -44,6 +51,9 @@ public class EventsPagerFragment extends BaseFragment {
 	@InjectView(R.id.fragment_events_pager_action)
 	protected View actionView;
 
+	@InjectView(R.id.fragment_events_pager_action_overlay)
+	protected View overlayView;
+
 	private EventsPagerAdapter adapter;
 	private Boolean animate;
 
@@ -74,6 +84,8 @@ public class EventsPagerFragment extends BaseFragment {
 		super.onResume();
 
 		adapter.clearItems();
+
+		overlayView.setVisibility(INVISIBLE);
 
 		service.registerListener(listener);
 		service.getStarred().doAsync();
@@ -140,18 +152,39 @@ public class EventsPagerFragment extends BaseFragment {
 
 		if (count > 1) {
 			RelativeLayout.LayoutParams params = (LayoutParams) actionView.getLayoutParams();
-			params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+			params.addRule(ALIGN_PARENT_BOTTOM);
 
 			actionView.setLayoutParams(params);
 		}
 	}
 
 	@OnClick(R.id.fragment_events_pager_action)
-	public void starPublisher(View view) {
-		Context context = view.getContext();
+	protected void starPublisher(View view) {
+		final Activity activity = getActivity();
+		final Intent intent = new Intent(activity, StarPublisherActivity.class);
 
-		Intent intent = new Intent(context, StarPublisherActivity.class);
-		startActivity(intent);
+		if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+			int cx = (view.getLeft() + view.getRight()) / 2;
+			int cy = (view.getTop() + view.getBottom()) / 2;
+			int finalRadius = Math.max(overlayView.getWidth(), overlayView.getHeight());
+
+			Animator animator = createCircularReveal(overlayView, cx, cy, 0, finalRadius);
+			animator.setDuration(130);
+			animator.addListener(new AnimatorListenerAdapter() {
+
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					activity.startActivity(intent);
+					activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+				}
+
+			});
+
+			overlayView.setVisibility(VISIBLE);
+			animator.start();
+		} else {
+			startActivity(intent);
+		}
 	}
 
 	@Override

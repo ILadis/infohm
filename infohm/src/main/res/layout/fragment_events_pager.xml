@@ -25,4 +25,11 @@
 		android:layout_alignParentRight="true"
 		android:src="@drawable/events_star_publisher" />
 
+	<View
+		android:id="@+id/fragment_events_pager_action_overlay"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/actionbar_primary_color"
+		android:visibility="invisible" />
+
 </RelativeLayout>

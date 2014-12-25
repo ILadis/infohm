@@ -21,7 +21,6 @@ import com.google.common.collect.Range;
 
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.adapter.events.EventsAdapter;
-import de.ladis.infohm.android.adapter.events.EventsAdapterAnimator;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.parcel.publisher.PublisherParcelHolder;
 import de.ladis.infohm.core.domain.Event;
@@ -56,6 +55,7 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 
 	private Publisher publisher;
 	private EventsAdapter adapter;
+	private Boolean animate;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,8 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		recyclerView.setItemAnimator(new EventsAdapterAnimator());
+
+		animate = savedInstanceState == null;
 	}
 
 	@Override
@@ -127,14 +128,42 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 				}
 			}
 
-			showNoContentView();
+			if (animate) {
+				animate = false;
+				animateItems();
+			}
+
+			showNoContentView(adapter.getItemCount() <= 0);
 		}
 
 	};
 
-	private void showNoContentView() {
-		boolean show = adapter.getItemCount() <= 0;
+	private void animateItems() {
+		recyclerView.post(new Runnable() {
 
+			@Override
+			public void run() {
+				int count = recyclerView.getChildCount();
+
+				for (int i = 0; i < count; i++) {
+					View child = recyclerView.getChildAt(i);
+
+					ViewCompat.setTranslationY(child, 100);
+					ViewCompat.setAlpha(child, 0);
+
+					ViewCompat.animate(child)
+							.translationY(0)
+							.alpha(1)
+							.setStartDelay(i * 120)
+							.setDuration(300)
+							.start();
+				}
+			}
+
+		});
+	}
+
+	private void showNoContentView(boolean show) {
 		if (show) {
 			if (noContentView.getVisibility() != VISIBLE) {
 				ViewCompat.setAlpha(noContentView, 0);

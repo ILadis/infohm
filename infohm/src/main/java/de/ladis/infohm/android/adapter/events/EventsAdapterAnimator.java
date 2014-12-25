@@ -14,13 +14,13 @@ public class EventsAdapterAnimator extends RecyclerView.ItemAnimator {
 	@Override
 	public void runPendingAnimations() {
 		for (ViewHolder holder : pending) {
-			ViewCompat.setTranslationY(holder.itemView, 200);
+			ViewCompat.setTranslationY(holder.itemView, 100);
 			ViewCompat.setAlpha(holder.itemView, 0);
 
 			ViewCompat.animate(holder.itemView)
 					.translationY(0)
 					.alpha(1)
-					.setDuration(800)
+					.setDuration(400)
 					.start();
 		}
 

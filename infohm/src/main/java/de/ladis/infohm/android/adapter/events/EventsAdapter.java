@@ -82,6 +82,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 		}
 	}
 
+	public void clearItems() {
+		items.clear();
+		notifyDataSetChanged();
+	}
+
 	public Event getItem(int position) {
 		return items.get(position);
 	}

@@ -7,12 +7,13 @@ import java.util.Locale;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import de.ladis.infohm.android.fragment.events.EventsFragment;
 import de.ladis.infohm.android.fragment.events.EventsHighlightFragment;
+import de.ladis.infohm.android.parcel.publisher.PublisherParcelHolder;
 import de.ladis.infohm.core.domain.Publisher;
 
-public class EventsPagerAdapter extends FragmentPagerAdapter {
+public class EventsPagerAdapter extends FragmentStatePagerAdapter {
 
 	private final List<Publisher> items;
 
@@ -67,6 +68,24 @@ public class EventsPagerAdapter extends FragmentPagerAdapter {
 		} else {
 			return EventsFragment.newInstance(items.get(position-1));
 		}
+	}
+
+	@Override
+	public int getItemPosition(Object item) {
+		if (item instanceof EventsHighlightFragment) {
+			return POSITION_UNCHANGED;
+		} else if (item instanceof EventsFragment) {
+			EventsFragment fragment = (EventsFragment) item;
+			PublisherParcelHolder holder = fragment.getArguments().getParcelable("publisher");
+
+			int position = items.indexOf(holder.get()) + 1;
+
+			if (position > 0) {
+				return position;
+			}
+		}
+
+		return POSITION_NONE;
 	}
 
 	@Override

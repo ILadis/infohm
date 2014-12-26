@@ -58,13 +58,6 @@ public class EventsPagerFragment extends BaseFragment {
 	private Boolean animate;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		adapter = new EventsPagerAdapter(getChildFragmentManager());
-	}
-
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_events_pager, container, false);
 	}
@@ -72,6 +65,8 @@ public class EventsPagerFragment extends BaseFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		adapter = new EventsPagerAdapter(getChildFragmentManager());
 
 		pagerView.setAdapter(adapter);
 		tabView.setViewPager(pagerView);

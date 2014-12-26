@@ -100,6 +100,8 @@ public class EventsFragment extends BaseFragment implements OnRefreshListener {
 	public void onResume() {
 		super.onResume();
 
+		adapter.clearItems();
+
 		service.registerListener(listener);
 		service.getAll(publisher, Range.closed(0, 9)).doAsync();
 	}

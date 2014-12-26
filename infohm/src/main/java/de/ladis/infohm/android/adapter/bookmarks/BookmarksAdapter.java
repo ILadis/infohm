@@ -61,6 +61,11 @@ public class BookmarksAdapter extends BaseAdapter {
 		return items.get(position);
 	}
 
+	public void clearItems() {
+		items.clear();
+		notifyDataSetChanged();
+	}
+
 	@Override
 	public long getItemId(int position) {
 		return position;

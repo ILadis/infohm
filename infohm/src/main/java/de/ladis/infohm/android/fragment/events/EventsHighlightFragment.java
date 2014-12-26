@@ -1,13 +1,10 @@
 package de.ladis.infohm.android.fragment.events;
 
-import static android.view.View.*;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +17,7 @@ import com.google.common.collect.Range;
 
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.adapter.events.EventsAdapter;
+import de.ladis.infohm.android.animation.events.EventsAnimator;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Publisher;
@@ -41,11 +39,8 @@ public class EventsHighlightFragment extends BaseFragment {
 	@InjectView(R.id.fragment_events_list)
 	protected RecyclerView recyclerView;
 
-	@InjectView(R.id.fragment_events_no_content)
-	protected View noContentView;
-
 	private EventsAdapter adapter;
-	private Boolean animate;
+	private EventsAnimator animator;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,13 +58,14 @@ public class EventsHighlightFragment extends BaseFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		animator = new EventsAnimator(this);
+		animator.animateOneShots(savedInstanceState == null);
+
 		refreshView.setEnabled(false);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setHasFixedSize(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-		animate = savedInstanceState == null;
 	}
 
 	@Override
@@ -93,55 +89,11 @@ public class EventsHighlightFragment extends BaseFragment {
 				adapter.addItems(events);
 			}
 
-			if (animate) {
-				animate = false;
-				animateItems();
-			}
-
-			showNoContentView(adapter.getItemCount() <= 0);
+			animator.animateItems();
+			animator.animateNoContents(adapter.getItemCount() <= 0);
 		}
 
 	};
-
-	private void animateItems() {
-		recyclerView.post(new Runnable() {
-
-			@Override
-			public void run() {
-				int count = recyclerView.getChildCount();
-
-				for (int i = 0; i < count; i++) {
-					View child = recyclerView.getChildAt(i);
-
-					ViewCompat.setTranslationY(child, 100);
-					ViewCompat.setAlpha(child, 0);
-
-					ViewCompat.animate(child)
-							.translationY(0)
-							.alpha(1)
-							.setStartDelay(i * 120)
-							.setDuration(300)
-							.start();
-				}
-			}
-
-		});
-	}
-
-	private void showNoContentView(boolean show) {
-		if (show) {
-			if (noContentView.getVisibility() != VISIBLE) {
-				ViewCompat.setAlpha(noContentView, 0);
-				ViewCompat.animate(noContentView)
-						.alpha(1)
-						.start();
-			}
-
-			noContentView.setVisibility(VISIBLE);
-		} else {
-			noContentView.setVisibility(GONE);
-		}
-	}
 
 	@Override
 	public void onPause() {

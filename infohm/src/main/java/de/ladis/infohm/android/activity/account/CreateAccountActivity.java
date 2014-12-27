@@ -46,7 +46,7 @@ public class CreateAccountActivity extends BaseActivity implements Authenticatio
 			authService.addAccount(username, password).doSync();
 
 			Account account = authService.getAccount().doSync();
-			syncService.autoSync(account, true);
+			syncService.autoSync(account, true).doSync();
 
 			setResult(RESULT_OK);
 			finish();

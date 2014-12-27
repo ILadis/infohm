@@ -64,7 +64,7 @@ public class StartupFragment extends BaseFragment {
 
 		@Override
 		public void onLastSync(Account account, DateTime when) {
-			if (when == null) {
+			if (when == null && !syncService.isSyncing(account).doSync()) {
 				progressView.setVisibility(VISIBLE);
 				syncService.requestSync(account).doSync();
 			} else {

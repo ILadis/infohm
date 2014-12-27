@@ -77,6 +77,17 @@ public class SynchronizeService {
 		};
 	}
 
+	public Call<Boolean> isSyncing(final Account account) {
+		return new AbstractCall<Boolean>(executor.forLocal()) {
+
+			@Override
+			public Boolean doSync() {
+				return ContentResolver.isSyncActive(account, "de.ladis.infohm.provider.CacheProvider");
+			}
+
+		};
+	}
+
 	public Call<Void> autoSync(final Account account, final Boolean enable) {
 		return new AbstractCall<Void>(executor.forLocal()) {
 

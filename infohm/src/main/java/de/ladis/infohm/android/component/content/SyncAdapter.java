@@ -15,11 +15,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import de.ladis.infohm.android.component.BaseSyncAdapter;
 import de.ladis.infohm.core.domain.Bookmark;
+import de.ladis.infohm.core.domain.Cafeteria;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Feedback;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.service.AuthenticationService;
 import de.ladis.infohm.core.service.BookmarkService;
+import de.ladis.infohm.core.service.CafeteriaService;
 import de.ladis.infohm.core.service.EventService;
 import de.ladis.infohm.core.service.FeedbackService;
 import de.ladis.infohm.core.service.PublisherService;
@@ -58,6 +60,9 @@ public class SyncAdapter extends BaseSyncAdapter {
 	protected BookmarkService bookmarkService;
 
 	@Inject
+	protected CafeteriaService cafeService;
+
+	@Inject
 	protected FeedbackService feedbackService;
 
 	@Inject
@@ -80,6 +85,7 @@ public class SyncAdapter extends BaseSyncAdapter {
 				performPublisherSync(syncResult);
 				performBoockmarkSync(syncResult);
 				performFeedbackSync(syncResult);
+				performCafeteriaSync(syncResult);
 			}
 		} catch (Exception e) {
 			syncResult.stats.numIoExceptions++;
@@ -110,6 +116,12 @@ public class SyncAdapter extends BaseSyncAdapter {
 		List<Feedback> feedbacks = feedbackService.syncAll().doSync();
 
 		writeToSyncStats(syncResult, feedbacks);
+	}
+
+	private void performCafeteriaSync(SyncResult syncResult) {
+		List<Cafeteria> cafeterias = cafeService.updateAll().doSync();
+
+		writeToSyncStats(syncResult, cafeterias);
 	}
 
 	private boolean writeToSyncStats(SyncResult sync, List<?> result) {

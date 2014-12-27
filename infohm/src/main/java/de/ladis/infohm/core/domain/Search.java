@@ -34,6 +34,16 @@ public class Search implements Entity {
 		return search;
 	}
 
+	public static Search with(Cafeteria cafeteria) {
+		Search search = new Search();
+
+		search.id = cafeteria.getId();
+		search.type = "cafeteria";
+		search.content = cafeteria.toString();
+
+		return search;
+	}
+
 	private Long id;
 	private String type;
 	private String content;

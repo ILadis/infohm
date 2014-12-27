@@ -9,6 +9,7 @@ import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
+import de.ladis.infohm.core.dao.content.cafeteria.CafeteriaContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
@@ -68,6 +69,12 @@ public class ContentDaoModule {
 	@Singleton
 	public SearchContentDao provideSearchDao(ContentResolver resolver, URI base) {
 		return new SearchContentDao(resolver, base);
+	}
+
+	@Provides
+	@Singleton
+	public CafeteriaContentDao provideCafeteriaDao(ContentResolver resolver, URI base) {
+		return new CafeteriaContentDao(resolver, base);
 	}
 
 }

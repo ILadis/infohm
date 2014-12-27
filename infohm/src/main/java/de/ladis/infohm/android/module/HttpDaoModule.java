@@ -17,6 +17,7 @@ import dagger.Module;
 import dagger.Provides;
 import de.ladis.infohm.core.dao.http.authentication.AuthenticationHttpDao;
 import de.ladis.infohm.core.dao.http.bookmark.BookmarkHttpDao;
+import de.ladis.infohm.core.dao.http.cafeteria.CafeteriaHttpDao;
 import de.ladis.infohm.core.dao.http.event.EventHttpDao;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
 import de.ladis.infohm.core.dao.http.feedback.FeedbackHttpDao;
@@ -94,6 +95,12 @@ public class HttpDaoModule {
 	@Singleton
 	public FeedbackHttpDao provideFeedbackDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
 		return new FeedbackHttpDao(client, host, context, factory);
+	}
+
+	@Provides
+	@Singleton
+	public CafeteriaHttpDao provideCafeteriaDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
+		return new CafeteriaHttpDao(client, host, context, factory);
 	}
 
 }

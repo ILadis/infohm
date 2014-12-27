@@ -18,6 +18,16 @@ public class XmlParserUtil {
 		return value;
 	}
 
+	public static Double nextDouble(XmlPullParser parser, String tag) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, tag);
+
+		Double value = Double.parseDouble(readText(parser));
+
+		parser.require(XmlPullParser.END_TAG, null, tag);
+
+		return value;
+	}
+
 	public static String nextString(XmlPullParser parser, String tag) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, null, tag);
 

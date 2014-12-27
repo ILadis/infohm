@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cafeterias>
+	<cafeteria>
+		<createdAt>2014-12-27T12:52:33+01:00</createdAt>
+		<latitude>1.0</latitude>
+		<id>1</id>
+		<longitude>1.0</longitude>
+		<updatedAt>2014-12-27T12:52:33+01:00</updatedAt>
+		<name>test-cafeteria</name>
+	</cafeteria>
+	<cafet

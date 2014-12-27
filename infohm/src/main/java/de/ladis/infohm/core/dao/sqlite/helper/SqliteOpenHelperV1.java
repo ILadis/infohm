@@ -52,6 +52,15 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 				+ "anonymous INTEGER NOT NULL, "
 				+ "PRIMARY KEY (id))");
 
+		db.execSQL("CREATE TABLE cafeteria ("
+				+ "id INTEGER NOT NULL, "
+				+ "name TEXT NOT NULL, "
+				+ "longitude REAL NOT NULL, "
+				+ "latitude REAL NOT NULL, "
+				+ "created TEXT NOT NULL, "
+				+ "updated TEXT NOT NULL, "
+				+ "PRIMARY KEY (id))");
+
 		db.execSQL("CREATE TABLE sync ("
 				+ "id INTEGER NOT NULL, "
 				+ "account TEXT NOT NULL, "

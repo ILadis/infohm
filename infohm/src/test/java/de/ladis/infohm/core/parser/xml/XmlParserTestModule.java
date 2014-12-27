@@ -7,6 +7,7 @@ import dagger.Provides;
 import de.ladis.infohm.core.parser.domain.BookmarksParser;
 import de.ladis.infohm.core.parser.domain.CafeteriasParser;
 import de.ladis.infohm.core.parser.domain.EventsParser;
+import de.ladis.infohm.core.parser.domain.MenusParser;
 import de.ladis.infohm.core.parser.domain.PublishersParser;
 import de.ladis.infohm.core.parser.xml.bookmark.XmlBookmarksParser;
 import de.ladis.infohm.core.parser.xml.bookmark.XmlBookmarksParserTest;
@@ -14,6 +15,8 @@ import de.ladis.infohm.core.parser.xml.cafeteria.XmlCafeteriasParser;
 import de.ladis.infohm.core.parser.xml.cafeteria.XmlCafeteriasParserTest;
 import de.ladis.infohm.core.parser.xml.event.XmlEventsParser;
 import de.ladis.infohm.core.parser.xml.event.XmlEventsParserTest;
+import de.ladis.infohm.core.parser.xml.menu.XmlMenusParser;
+import de.ladis.infohm.core.parser.xml.menu.XmlMenusParserTest;
 import de.ladis.infohm.core.parser.xml.publisher.XmlPublishersParser;
 import de.ladis.infohm.core.parser.xml.publisher.XmlPublishersParserTest;
 
@@ -24,6 +27,7 @@ injects = {
 		XmlEventsParserTest.class,
 		XmlPublishersParserTest.class,
 		XmlCafeteriasParserTest.class,
+		XmlMenusParserTest.class,
 })
 public class XmlParserTestModule {
 
@@ -49,6 +53,12 @@ public class XmlParserTestModule {
 	@Singleton
 	public CafeteriasParser provideCafeteriasParser() {
 		return new XmlCafeteriasParser();
+	}
+
+	@Provides
+	@Singleton
+	public MenusParser porvideMenusParser() {
+		return new XmlMenusParser();
 	}
 
 }

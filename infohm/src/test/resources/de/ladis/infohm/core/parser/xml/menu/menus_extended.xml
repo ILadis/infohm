@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuEntities>
+	<menuEntity>
+		<day>2014-12-27T00:00:00+01:00</day>
+		<comment>do not eat this</comment>
+		<id>1</id>
+		<meals>
+			<createdAt>2014-12-27T13:44:13+01:00</createdAt>
+			<id>1</id>
+			<name>meal 1</name>
+			<priceEmployee>1,-</priceEmployee>
+			<price>1.200 $</price>
+			<meta>
+				<fields>
+					<name>meta name</name>
+					<value>meta value</value>
+				</fields>
+			</meta>
+			<priceStudent>1,50 $</priceStudent>
+			<updatedAt>2014-12-27T13:44:13+01:00</updatedAt>
+		</meals>
+		<meals>
+			<createdAt>2014-12-27T13:44:13+01:00</createdAt>
+			<id>3</id>
+			<name>meal 2</name>
+			<priceEmployee>1.60 €</priceEmployee>
+			<extensions>
+				<fields>
+					<name>extension name</name>
+					<value>extension value</value>
+				</fields>
+			</extensions>
+			<priceStudent>1,70</priceStudent>
+			<updatedAt>2014-12-27T13:44:13+01:00</updatedAt>
+		</meals>
+	</menuEntity>
+	<menuEntity>
+		<day>2014-12-28T00:00:00+01:00</day>
+		<extensions>
+			<fields>
+				<name>extension name</name>
+				<value>extension value</value>
+			</fields>
+		</extensions>
+		<id>2</id>
+		<meals>
+			<createdAt>2014-12-28T13:44:13+01:00</createdAt>
+			<name>meal 1</name>
+			<id>2</id>
+			<extensions>
+				<fields>
+					<name>extension name</name>
+					<value>extension value</value>
+				</fields>
+			</extensions>
+			<priceStudent>2,50</priceStudent>
+			<priceEmployee>-,99</priceEmployee>
+			<updatedAt>2014-12-28T13:44:13+01:00</updatedAt>
+		</meals>
+	</menuEntity>
+</menuEntities>

@@ -52,7 +52,9 @@ public class XmlParserUtil {
 		String value = null;
 
 		while (parser.next() != XmlPullParser.END_TAG) {
-			if (parser.getEventType() != XmlPullParser.TEXT) {
+			if (parser.getEventType() == XmlPullParser.END_DOCUMENT) {
+				throw new XmlPullParserException("reached unexpected end of document");
+			} else if (parser.getEventType() != XmlPullParser.TEXT) {
 				continue;
 			}
 			String text = parser.getText();
@@ -75,6 +77,8 @@ public class XmlParserUtil {
 		int depth = 1;
 		while (depth != 0) {
 			switch (parser.next()) {
+			case XmlPullParser.END_DOCUMENT:
+				throw new XmlPullParserException("reached unexpected end of document");
 			case XmlPullParser.END_TAG:
 				depth--;
 				break;

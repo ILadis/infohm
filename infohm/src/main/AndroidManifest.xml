@@ -80,8 +80,13 @@
 		</activity>
 
 		<provider
-			android:name="de.ladis.infohm.android.component.content.ContentProvider"
-			android:authorities="de.ladis.infohm.provider"
+			android:name="de.ladis.infohm.android.component.content.CacheProvider"
+			android:authorities="de.ladis.infohm.provider.CacheProvider"
+			android:exported="false" />
+
+		<provider
+			android:name="de.ladis.infohm.android.component.content.SuggestionProvider"
+			android:authorities="de.ladis.infohm.provider.SuggestionProvider"
 			android:exported="false" />
 
 		<service

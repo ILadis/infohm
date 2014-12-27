@@ -7,6 +7,8 @@ import android.app.Application;
 import android.app.NotificationManager;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SearchRecentSuggestionsProvider;
+import android.provider.SearchRecentSuggestions;
 import android.util.DisplayMetrics;
 import dagger.Module;
 import dagger.Provides;
@@ -55,6 +57,12 @@ public class AndroidModule {
 	@Singleton
 	public AccountAuthenticator provideAccountAuthenticator(Context context) {
 		return new AccountAuthenticator(context);
+	}
+
+	@Provides
+	@Singleton
+	public SearchRecentSuggestions provideSuggestionProvider(Context context) {
+		return new SearchRecentSuggestions(context, "de.ladis.infohm.provider.SuggestionProvider", SearchRecentSuggestionsProvider.DATABASE_MODE_QUERIES);
 	}
 
 }

@@ -42,6 +42,7 @@ public class SearchActivity extends BaseActivity implements SearchController {
 
 	@Override
 	public void onQuerySubmitted(String query) {
+		service.searchFor(query).doAsync();
 	}
 
 	@Override

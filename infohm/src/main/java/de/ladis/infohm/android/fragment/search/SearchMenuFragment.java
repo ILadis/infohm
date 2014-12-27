@@ -8,10 +8,13 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnCloseListener;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
+import android.support.v7.widget.SearchView.OnSuggestionListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +32,9 @@ public class SearchMenuFragment extends BaseFragment {
 
 	@Inject
 	protected SearchManager manager;
+
+	@Inject
+	protected SearchRecentSuggestions suggestions;
 
 	private MenuItem menuItem;
 
@@ -63,6 +69,7 @@ public class SearchMenuFragment extends BaseFragment {
 		searchView = (SearchView) getActionView(menuItem);
 		searchView.setSearchableInfo(manager.getSearchableInfo(new ComponentName(getActivity(), SearchActivity.class)));
 		searchView.setOnQueryTextListener(queryListener);
+		searchView.setOnSuggestionListener(suggestionListener);
 		searchView.setOnCloseListener(closeListener);
 
 		String query = obtainQuery();
@@ -84,12 +91,19 @@ public class SearchMenuFragment extends BaseFragment {
 		return null;
 	}
 
+	private String obtainSuggestion(int position) {
+		Cursor cursor = (Cursor) searchView.getSuggestionsAdapter().getItem(position);
+		String suggestion = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1));
+
+		return suggestion;
+	}
+
 	private void expandSearch(String query) {
+		expandActionView(menuItem);
+
 		searchView.setIconified(false);
 		searchView.setQuery(query, false);
 		searchView.clearFocus();
-
-		expandActionView(menuItem);
 	}
 
 	private void collapseSearch() {
@@ -98,6 +112,10 @@ public class SearchMenuFragment extends BaseFragment {
 		searchView.setIconified(true);
 
 		collapseActionView(menuItem);
+	}
+
+	private void saveSuggestion(String query) {
+		suggestions.saveRecentQuery(query, null);
 	}
 
 	private OnQueryTextListener queryListener = new OnQueryTextListener() {
@@ -120,9 +138,35 @@ public class SearchMenuFragment extends BaseFragment {
 			}
 
 			collapseSearch();
+			saveSuggestion(query);
+
 			return false;
 		}
 
+	};
+
+	private OnSuggestionListener suggestionListener = new OnSuggestionListener() {
+
+		@Override
+		public boolean onSuggestionClick(int position) {
+			if (controller != null) {
+				String query = obtainSuggestion(position);
+
+				searchView.setQuery(query, false);
+				controller.onQuerySubmitted(query);
+
+				return true;
+			}
+
+			collapseSearch();
+
+			return false;
+		}
+
+		@Override
+		public boolean onSuggestionSelect(int position) {
+			return false;
+		}
 	};
 
 	private OnCloseListener closeListener = new OnCloseListener() {

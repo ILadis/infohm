@@ -31,7 +31,7 @@ public class ContentDaoModule {
 	@Provides
 	@Singleton
 	public URI provideBaseUri() {
-		return URI.create("content://de.ladis.infohm.provider");
+		return URI.create("content://de.ladis.infohm.provider.CacheProvider");
 	}
 
 	@Provides

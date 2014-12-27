@@ -82,7 +82,7 @@ public class SynchronizeService {
 
 			@Override
 			public Void doSync() {
-				ContentResolver.setSyncAutomatically(account, "de.ladis.infohm.provider", enable);
+				ContentResolver.setSyncAutomatically(account, "de.ladis.infohm.provider.CacheProvider", enable);
 
 				return null;
 			}
@@ -95,7 +95,7 @@ public class SynchronizeService {
 
 			@Override
 			public Void doSync() {
-				ContentResolver.requestSync(account, "de.ladis.infohm.provider", Bundle.EMPTY);
+				ContentResolver.requestSync(account, "de.ladis.infohm.provider.CacheProvider", Bundle.EMPTY);
 
 				return null;
 			}

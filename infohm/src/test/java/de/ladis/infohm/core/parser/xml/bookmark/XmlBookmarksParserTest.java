@@ -24,7 +24,7 @@ import de.ladis.infohm.test.BaseTest;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class  XmlBookmarksParserTest extends BaseTest {
+public class XmlBookmarksParserTest extends BaseTest {
 
 	@Override
 	protected List<Object> getModules() {

@@ -76,13 +76,16 @@ public class EventsPagerAnimator extends BaseAnimator {
 	public void animateActionButton() {
 		int count = pagerView.getAdapter().getCount();
 
-		if (count > 1) {
-			RelativeLayout.LayoutParams params = (LayoutParams) actionView.getLayoutParams();
-			params.addRule(ALIGN_PARENT_BOTTOM);
+		RelativeLayout.LayoutParams params = (LayoutParams) actionView.getLayoutParams();
 
-			actionView.setLayoutParams(params);
-			actionView.requestLayout();
+		if (count > 1) {
+			params.addRule(ALIGN_PARENT_BOTTOM);
+		} else {
+			params.removeRule(ALIGN_PARENT_BOTTOM);
 		}
+
+		actionView.setLayoutParams(params);
+		actionView.requestLayout();
 
 		if (animateButton) {
 			animateButton = false;

@@ -3,10 +3,7 @@ package de.ladis.infohm.core.domain;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.joda.time.DateTime;
-
-import de.ladis.infohm.util.Strings;
 
 public class Menu implements Entity {
 
@@ -68,7 +65,22 @@ public class Menu implements Entity {
 
 	@Override
 	public String toString() {
-		return Strings.empty();
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("Speisen am ")
+				.append(getDate().toString("dd.MM.YYYY"))
+				.append(":\n");
+
+		for (Meal meal : getMeals()) {
+			builder.append(meal.toString())
+					.append('\n');
+		}
+
+		if (getMeals().size() > 0) {
+			builder.delete(builder.length() - 1, builder.length());
+		}
+
+		return builder.toString();
 	}
 
 }

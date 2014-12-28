@@ -1,7 +1,10 @@
 package de.ladis.infohm.core.domain;
 
+import static java.lang.String.*;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.joda.time.DateTime;
 
@@ -81,7 +84,29 @@ public class Meal implements Entity {
 
 	@Override
 	public String toString() {
-		return Strings.empty();
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(getName())
+				.append('\n');
+
+		for (Entry<Guest, Integer> price : getPrices().entrySet()) {
+			switch (price.getKey()) {
+			case EMPLOYEE:
+				builder.append("Angestellter: ");
+				break;
+			case STUDENT:
+				builder.append("Student: ");
+				break;
+			}
+			builder.append(format("%.2f", price.getValue() / 100f))
+					.append(" €, ");
+		}
+
+		if (getPrices().size() > 0) {
+			builder.delete(builder.length() - 2, builder.length());
+		}
+
+		return builder.toString();
 	}
 
 }

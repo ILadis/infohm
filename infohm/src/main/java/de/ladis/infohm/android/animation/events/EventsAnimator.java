@@ -45,7 +45,7 @@ public class EventsAnimator extends BaseAnimator {
 						ViewCompat.animate(child)
 								.translationY(0)
 								.alpha(1)
-								.setStartDelay(i * 120)
+								.setStartDelay(400 + i * 120)
 								.setDuration(300)
 								.start();
 					}

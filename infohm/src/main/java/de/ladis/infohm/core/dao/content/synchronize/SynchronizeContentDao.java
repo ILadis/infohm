@@ -2,6 +2,7 @@ package de.ladis.infohm.core.dao.content.synchronize;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
 
 import java.net.URI;
 import java.util.List;
@@ -89,7 +90,7 @@ public class SynchronizeContentDao extends ContentDao<Account, DateTime> impleme
 	}
 
 	private static DateTime fromCursor(Cursor cursor) {
-		DateTime when = DateTime.parse(cursor.getString(cursor.getColumnIndex("synced")));
+		DateTime when = getDateTime(cursor, "synced");
 
 		return when;
 	}

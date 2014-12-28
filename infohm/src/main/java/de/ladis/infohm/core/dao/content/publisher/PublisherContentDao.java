@@ -2,6 +2,7 @@ package de.ladis.infohm.core.dao.content.publisher;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 		);
 
 		if (cursor.moveToFirst()) {
-			return fromCursor(cursor);
+			return fromCursor(cursor, new Publisher());
 		} else {
 			return null;
 		}
@@ -67,7 +68,7 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 
 		if (cursor.moveToFirst()) {
 			do {
-				publishers.add(fromCursor(cursor));
+				publishers.add(fromCursor(cursor, new Publisher()));
 			} while (cursor.moveToNext());
 		}
 
@@ -162,14 +163,13 @@ public class PublisherContentDao extends ContentDao<Long, Publisher> implements 
 		);
 	}
 
-	private static Publisher fromCursor(Cursor cursor) {
-		Long id = cursor.getLong(cursor.getColumnIndex("id"));
-		String name = cursor.getString(cursor.getColumnIndex("name"));
-		String description = cursor.getString(cursor.getColumnIndex("description"));
-		DateTime created = DateTime.parse(cursor.getString(cursor.getColumnIndex("created")));
-		DateTime updated = DateTime.parse(cursor.getString(cursor.getColumnIndex("updated")));
+	private static Publisher fromCursor(Cursor cursor, Publisher publisher) {
+		Long id = getLong(cursor, "id");
+		String name = getString(cursor, "name");
+		String description = getString(cursor, "description");
+		DateTime created = getDateTime(cursor, "created");
+		DateTime updated = getDateTime(cursor, "updated");
 
-		Publisher publisher = new Publisher();
 		publisher.setId(id);
 		publisher.setName(name);
 		publisher.setDescription(description);

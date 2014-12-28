@@ -2,6 +2,7 @@ package de.ladis.infohm.core.dao.content.bookmark;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class BookmarkContentDao extends ContentDao<Long, Bookmark> implements Bo
 		);
 
 		if (cursor.moveToFirst()) {
-			return fromCursor(cursor);
+			return fromCursor(cursor, new Bookmark());
 		} else {
 			return null;
 		}
@@ -68,7 +69,7 @@ public class BookmarkContentDao extends ContentDao<Long, Bookmark> implements Bo
 
 		if (cursor.moveToFirst()) {
 			do {
-				bookmarks.add(fromCursor(cursor));
+				bookmarks.add(fromCursor(cursor, new Bookmark()));
 			} while (cursor.moveToNext());
 		}
 
@@ -111,15 +112,14 @@ public class BookmarkContentDao extends ContentDao<Long, Bookmark> implements Bo
 		);
 	}
 
-	private static Bookmark fromCursor(Cursor cursor) {
-		Long id = cursor.getLong(cursor.getColumnIndex("id"));
-		String title = cursor.getString(cursor.getColumnIndex("title"));
-		String description = cursor.getString(cursor.getColumnIndex("description"));
-		String url = cursor.getString(cursor.getColumnIndex("url"));
-		DateTime created = DateTime.parse(cursor.getString(cursor.getColumnIndex("created")));
-		DateTime updated = DateTime.parse(cursor.getString(cursor.getColumnIndex("updated")));
+	private static Bookmark fromCursor(Cursor cursor, Bookmark bookmark) {
+		Long id = getLong(cursor, "id");
+		String title = getString(cursor, "title");
+		String description = getString(cursor, "description");
+		String url = getString(cursor, "url");
+		DateTime created = getDateTime(cursor, "created");
+		DateTime updated = getDateTime(cursor, "updated");
 
-		Bookmark bookmark = new Bookmark();
 		bookmark.setId(id);
 		bookmark.setTitle(title);
 		bookmark.setDescription(description);

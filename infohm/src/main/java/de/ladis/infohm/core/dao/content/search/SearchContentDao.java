@@ -2,6 +2,7 @@ package de.ladis.infohm.core.dao.content.search;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -58,7 +59,7 @@ public class SearchContentDao extends ContentDao<Void, Search> implements Search
 
 		if (cursor.moveToFirst()) {
 			do {
-				searches.add(fromCursor(cursor));
+				searches.add(fromCursor(cursor, new Search()));
 			} while (cursor.moveToNext());
 		}
 
@@ -101,7 +102,7 @@ public class SearchContentDao extends ContentDao<Void, Search> implements Search
 
 		if (cursor.moveToFirst()) {
 			do {
-				searches.add(fromCursor(cursor));
+				searches.add(fromCursor(cursor, new Search()));
 			} while (cursor.moveToNext());
 		}
 
@@ -117,13 +118,12 @@ public class SearchContentDao extends ContentDao<Void, Search> implements Search
 		);
 	}
 
-	private static Search fromCursor(Cursor cursor) {
-		Long id = cursor.getLong(cursor.getColumnIndex("id"));
-		String type = cursor.getString(cursor.getColumnIndex("type"));
-		String content = cursor.getString(cursor.getColumnIndex("content"));
+	private static Search fromCursor(Cursor cursor, Search search) {
+		Long id = getLong(cursor, "id");
+		String type = getString(cursor, "type");
+		String content = getString(cursor, "content");
 		Double priority = priorityOf(cursor.getBlob(3));
 
-		Search search = new Search();
 		search.setId(id);
 		search.setType(type);
 		search.setContent(content);

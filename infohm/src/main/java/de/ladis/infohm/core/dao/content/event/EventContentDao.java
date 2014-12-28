@@ -2,6 +2,8 @@ package de.ladis.infohm.core.dao.content.event;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 		);
 
 		if (cursor.moveToFirst()) {
-			return fromCursor(cursor);
+			return fromCursor(cursor, new Event());
 		} else {
 			return null;
 		}
@@ -71,7 +73,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 		);
 
 		if (cursor.moveToFirst()) {
-			return fromCursor(cursor);
+			return fromCursor(cursor, new Event());
 		} else {
 			return null;
 		}
@@ -91,7 +93,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 
 		if (cursor.moveToFirst()) {
 			do {
-				events.add(fromCursor(cursor));
+				events.add(fromCursor(cursor, new Event()));
 			} while (cursor.moveToNext());
 		}
 
@@ -112,7 +114,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 
 		if (cursor.moveToFirst()) {
 			do {
-				events.add(fromCursor(cursor));
+				events.add(fromCursor(cursor, new Event()));
 			} while (cursor.moveToNext());
 		}
 
@@ -136,7 +138,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 
 		if (cursor.moveToFirst()) {
 			do {
-				events.add(fromCursor(cursor));
+				events.add(fromCursor(cursor, new Event()));
 			} while (cursor.moveToNext());
 		}
 
@@ -159,7 +161,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 
 		if (cursor.moveToFirst()) {
 			do {
-				events.add(fromCursor(cursor));
+				events.add(fromCursor(cursor, new Event()));
 			} while (cursor.moveToNext());
 		}
 
@@ -179,7 +181,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 		Event last = null;
 
 		if (cursor.moveToFirst()) {
-			last = fromCursor(cursor);
+			last = fromCursor(cursor, new Event());
 		}
 
 		return last;
@@ -199,7 +201,7 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 
 		if (cursor.moveToFirst()) {
 			do {
-				events.add(fromCursor(cursor));
+				events.add(fromCursor(cursor, new Event()));
 			} while (cursor.moveToNext());
 		}
 
@@ -247,14 +249,13 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 		);
 	}
 
-	private static Event fromCursor(Cursor cursor) {
-		Long id = cursor.getLong(cursor.getColumnIndex("id"));
-		String headline = cursor.getString(cursor.getColumnIndex("headline"));
-		String content = cursor.getString(cursor.getColumnIndex("content"));
-		DateTime created = DateTime.parse(cursor.getString(cursor.getColumnIndex("created")));
-		DateTime updated = DateTime.parse(cursor.getString(cursor.getColumnIndex("updated")));
+	private static Event fromCursor(Cursor cursor, Event event) {
+		Long id = getLong(cursor, "id");
+		String headline = getString(cursor, "headline");
+		String content = getString(cursor, "content");
+		DateTime created = getDateTime(cursor, "created");
+		DateTime updated = getDateTime(cursor, "updated");
 
-		Event event = new Event();
 		event.setId(id);
 		event.setHeadline(headline);
 		event.setContent(content);

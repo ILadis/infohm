@@ -2,6 +2,7 @@ package de.ladis.infohm.core.dao.content.feedback;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class FeedbackContentDao extends ContentDao<Long, Feedback> implements Fe
 		);
 
 		if (cursor.moveToFirst()) {
-			return fromCursor(cursor);
+			return fromCursor(cursor, new Feedback());
 		} else {
 			return null;
 		}
@@ -65,7 +66,7 @@ public class FeedbackContentDao extends ContentDao<Long, Feedback> implements Fe
 
 		if (cursor.moveToFirst()) {
 			do {
-				feedbacks.add(fromCursor(cursor));
+				feedbacks.add(fromCursor(cursor, new Feedback()));
 			} while (cursor.moveToNext());
 		}
 
@@ -108,13 +109,12 @@ public class FeedbackContentDao extends ContentDao<Long, Feedback> implements Fe
 		);
 	}
 
-	private static Feedback fromCursor(Cursor cursor) {
-		Long id = cursor.getLong(cursor.getColumnIndex("id"));
-		String subject = cursor.getString(cursor.getColumnIndex("subject"));
-		String message = cursor.getString(cursor.getColumnIndex("message"));
-		Boolean anonymous = cursor.getInt(cursor.getColumnIndex("anonymous")) != 0;
+	private static Feedback fromCursor(Cursor cursor, Feedback feedback) {
+		Long id = getLong(cursor, "id");
+		String subject = getString(cursor, "subject");
+		String message = getString(cursor, "message");
+		Boolean anonymous = getBoolean(cursor, "anonymous");
 
-		Feedback feedback = new Feedback();
 		feedback.setId(id);
 		feedback.setSubject(subject);
 		feedback.setMessage(message);

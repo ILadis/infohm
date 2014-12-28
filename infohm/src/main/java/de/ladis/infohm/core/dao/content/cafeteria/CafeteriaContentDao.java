@@ -2,6 +2,7 @@ package de.ladis.infohm.core.dao.content.cafeteria;
 
 import static android.net.Uri.*;
 import static de.ladis.infohm.util.Arrays.*;
+import static de.ladis.infohm.util.SqliteUtil.*;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class CafeteriaContentDao extends ContentDao<Long, Cafeteria> implements 
 		);
 
 		if (cursor.moveToFirst()) {
-			return fromCursor(cursor);
+			return fromCursor(cursor, new Cafeteria());
 		} else {
 			return null;
 		}
@@ -67,7 +68,7 @@ public class CafeteriaContentDao extends ContentDao<Long, Cafeteria> implements 
 
 		if (cursor.moveToFirst()) {
 			do {
-				cafeterias.add(fromCursor(cursor));
+				cafeterias.add(fromCursor(cursor, new Cafeteria()));
 			} while (cursor.moveToNext());
 		}
 
@@ -110,15 +111,14 @@ public class CafeteriaContentDao extends ContentDao<Long, Cafeteria> implements 
 		);
 	}
 
-	private static Cafeteria fromCursor(Cursor cursor) {
-		Long id = cursor.getLong(cursor.getColumnIndex("id"));
-		String name = cursor.getString(cursor.getColumnIndex("name"));
-		Double longitude = cursor.getDouble(cursor.getColumnIndex("longitude"));
-		Double latitude = cursor.getDouble(cursor.getColumnIndex("latitude"));
-		DateTime created = DateTime.parse(cursor.getString(cursor.getColumnIndex("created")));
-		DateTime updated = DateTime.parse(cursor.getString(cursor.getColumnIndex("updated")));
+	private static Cafeteria fromCursor(Cursor cursor, Cafeteria cafeteria) {
+		Long id = getLong(cursor, "id");
+		String name = getString(cursor, "name");
+		Double longitude = getDouble(cursor, "longitude");
+		Double latitude = getDouble(cursor, "latitude");
+		DateTime created = getDateTime(cursor, "created");
+		DateTime updated = getDateTime(cursor, "updated");
 
-		Cafeteria cafeteria = new Cafeteria();
 		cafeteria.setId(id);
 		cafeteria.setName(name);
 		cafeteria.setLongitude(longitude);

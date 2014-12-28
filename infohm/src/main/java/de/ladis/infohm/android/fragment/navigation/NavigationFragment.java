@@ -61,7 +61,7 @@ public class NavigationFragment extends BaseFragment {
 	@OnClick({
 			R.id.fragment_navigation_newsfeed,
 			R.id.fragment_navigation_bookmarks,
-			R.id.fragment_navigation_cafeterian,
+			R.id.fragment_navigation_cafeteria,
 			R.id.fragment_navigation_feedback,
 			R.id.fragment_navigation_settings,
 	})

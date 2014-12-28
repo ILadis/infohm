@@ -31,7 +31,7 @@
 	<string name="fragment_events_no_content">noch keine Inhalte verfügbar</string>
 
 	<string name="fragment_navigation_newsfeed">Neuigkeiten</string>
-	<string name="fragment_navigation_cafeterian">Speisepläne</string>
+	<string name="fragment_navigation_cafeteria">Speisepläne</string>
 	<string name="fragment_navigation_bookmarks">Lesezeichen</string>
 	<string name="fragment_navigation_settings">Einstellungen</string>
 	<string name="fragment_navigation_feedback">Feedback</string>

@@ -44,7 +44,7 @@
 		</RelativeLayout>
 
 		<RelativeLayout
-			android:id="@+id/fragment_navigation_cafeterian"
+			android:id="@+id/fragment_navigation_cafeteria"
 			style="?attr/drawerItemStyle">
 
 			<ImageView
@@ -52,14 +52,14 @@
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceBorder"
-				android:src="@drawable/navigation_cafeterian" />
+				android:src="@drawable/navigation_cafeteria" />
 
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_centerVertical="true"
 				android:layout_marginLeft="?attr/horizontalSpaceKeyline"
-				android:text="@string/fragment_navigation_cafeterian" />
+				android:text="@string/fragment_navigation_cafeteria" />
 
 		</RelativeLayout>
 

@@ -2,7 +2,6 @@ package de.ladis.infohm.android.activity.main;
 
 import static android.support.v4.widget.DrawerLayout.*;
 import static android.support.v4.view.GravityCompat.*;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import de.ladis.infohm.android.activity.feedback.FeedbackActivity;
 import de.ladis.infohm.android.controller.NavigationController;
 import de.ladis.infohm.android.controller.StartupController;
 import de.ladis.infohm.android.fragment.bookmarks.BookmarksFragment;
+import de.ladis.infohm.android.fragment.cafeteria.CafeteriasPagerFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
 import de.ladis.infohm.android.fragment.startup.StartupFragment;
 
@@ -56,6 +56,9 @@ public class MainActivity extends BaseDrawerActivity implements StartupControlle
 		switch (item) {
 		case R.id.fragment_navigation_newsfeed:
 			switchFragment(EventsPagerFragment.class);
+			break;
+		case R.id.fragment_navigation_cafeteria:
+			switchFragment(CafeteriasPagerFragment.class);
 			break;
 		case R.id.fragment_navigation_bookmarks:
 			switchFragment(BookmarksFragment.class);

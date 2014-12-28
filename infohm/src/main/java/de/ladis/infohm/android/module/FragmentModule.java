@@ -3,10 +3,12 @@ package de.ladis.infohm.android.module;
 import dagger.Module;
 import de.ladis.infohm.android.fragment.authentication.AuthenticationFragment;
 import de.ladis.infohm.android.fragment.bookmarks.BookmarksFragment;
+import de.ladis.infohm.android.fragment.cafeteria.CafeteriasPagerFragment;
 import de.ladis.infohm.android.fragment.events.EventsFragment;
 import de.ladis.infohm.android.fragment.events.EventsHighlightFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
 import de.ladis.infohm.android.fragment.feedback.FeedbackFragment;
+import de.ladis.infohm.android.fragment.meal.DailyMealsFragment;
 import de.ladis.infohm.android.fragment.navigation.NavigationFragment;
 import de.ladis.infohm.android.fragment.publisher.StarPublisherFragment;
 import de.ladis.infohm.android.fragment.search.SearchFragment;
@@ -30,6 +32,8 @@ injects = {
 		FeedbackFragment.class,
 		StartupFragment.class,
 		SearchFragment.class,
+		CafeteriasPagerFragment.class,
+		DailyMealsFragment.class,
 })
 public class FragmentModule {
 }

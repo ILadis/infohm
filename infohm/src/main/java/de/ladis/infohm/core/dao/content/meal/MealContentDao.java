@@ -127,8 +127,8 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 		Cursor cursor = content().query(
 				parse(base + "/menu"),
 				from("id", "date"),
-				"cid = ? AND date BETWEEN ? AND ?",
-				from(entity.getId().toString(), start.toString(), end.toString()),
+				"cid = ? AND date(date) BETWEEN ? AND ?",
+				from(entity.getId().toString(), start.toString("YYYY-MM-dd"), end.toString("YYYY-MM-dd")),
 				"datetime(date) DESC"
 		);
 
@@ -171,7 +171,7 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 		DateTime now = DateTime.now();
 
 		DateTime startOfWeek = now.weekOfWeekyear().roundFloorCopy();
-		DateTime endOfWeek = now.weekOfWeekyear().roundCeilingCopy();
+		DateTime endOfWeek = now.weekOfWeekyear().roundCeilingCopy().minusDays(1);
 
 		return list(entity, startOfWeek, endOfWeek);
 	}
@@ -181,7 +181,7 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 		DateTime now = DateTime.now();
 
 		DateTime startOfNextWeek = now.weekOfWeekyear().roundFloorCopy().plusDays(7);
-		DateTime endOfNextWeek = now.weekOfWeekyear().roundCeilingCopy().plusDays(7);
+		DateTime endOfNextWeek = now.weekOfWeekyear().roundCeilingCopy().plusDays(6);
 
 		return list(entity, startOfNextWeek, endOfNextWeek);
 	}
@@ -282,7 +282,7 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 		ContentValues values = new ContentValues();
 
 		values.put("id", entity.getId());
-		values.put("date", entity.getDate().toString());
+		values.put("date", entity.getDate().toString("YYYY-MM-dd"));
 
 		return values;
 	}

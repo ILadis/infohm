@@ -84,13 +84,13 @@ public class MealService {
 	}
 
 	public Call<List<Menu>> getForCurrentWeek(final Cafeteria cafeteria) {
-		return new AbstractCall<List<Menu>>(executor.forRemote()) {
+		return new AbstractCall<List<Menu>>(executor.forLocal()) {
 
 			@Override
 			public List<Menu> doSync() {
 				List<Menu> menus = cache.currentWeekOf(cafeteria);
 
-				handler.callback().onNextWeek(cafeteria, menus);
+				handler.callback().onCurrentWeek(cafeteria, menus);
 
 				return menus;
 			}
@@ -99,7 +99,7 @@ public class MealService {
 	}
 
 	public Call<List<Menu>> getForNextWeek(final Cafeteria cafeteria) {
-		return new AbstractCall<List<Menu>>(executor.forRemote()) {
+		return new AbstractCall<List<Menu>>(executor.forLocal()) {
 
 			@Override
 			public List<Menu> doSync() {

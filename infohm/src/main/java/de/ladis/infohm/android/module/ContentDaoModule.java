@@ -12,6 +12,7 @@ import de.ladis.infohm.core.dao.content.bookmark.BookmarkContentDao;
 import de.ladis.infohm.core.dao.content.cafeteria.CafeteriaContentDao;
 import de.ladis.infohm.core.dao.content.event.EventContentDao;
 import de.ladis.infohm.core.dao.content.feedback.FeedbackContentDao;
+import de.ladis.infohm.core.dao.content.meal.MealContentDao;
 import de.ladis.infohm.core.dao.content.publisher.PublisherContentDao;
 import de.ladis.infohm.core.dao.content.search.SearchContentDao;
 import de.ladis.infohm.core.dao.content.synchronize.SynchronizeContentDao;
@@ -75,6 +76,12 @@ public class ContentDaoModule {
 	@Singleton
 	public CafeteriaContentDao provideCafeteriaDao(ContentResolver resolver, URI base) {
 		return new CafeteriaContentDao(resolver, base);
+	}
+
+	@Provides
+	@Singleton
+	public MealContentDao provideMealDao(ContentResolver resolver, URI base) {
+		return new MealContentDao(resolver, base);
 	}
 
 }

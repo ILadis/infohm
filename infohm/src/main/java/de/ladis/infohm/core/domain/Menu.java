@@ -1,6 +1,7 @@
 package de.ladis.infohm.core.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -37,6 +38,12 @@ public class Menu implements Entity {
 
 	public void addMeal(Meal meal) {
 		this.meals.add(meal);
+	}
+
+	public void addMeals(Collection<Meal> meals) {
+		for (Meal meal : meals) {
+			this.meals.add(meal);
+		}
 	}
 
 	public List<Meal> getMeals() {

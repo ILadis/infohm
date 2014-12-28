@@ -18,12 +18,14 @@ import de.ladis.infohm.core.domain.Bookmark;
 import de.ladis.infohm.core.domain.Cafeteria;
 import de.ladis.infohm.core.domain.Event;
 import de.ladis.infohm.core.domain.Feedback;
+import de.ladis.infohm.core.domain.Menu;
 import de.ladis.infohm.core.domain.Publisher;
 import de.ladis.infohm.core.service.AuthenticationService;
 import de.ladis.infohm.core.service.BookmarkService;
 import de.ladis.infohm.core.service.CafeteriaService;
 import de.ladis.infohm.core.service.EventService;
 import de.ladis.infohm.core.service.FeedbackService;
+import de.ladis.infohm.core.service.MealService;
 import de.ladis.infohm.core.service.PublisherService;
 import de.ladis.infohm.core.service.SynchronizeService;
 
@@ -63,6 +65,9 @@ public class SyncAdapter extends BaseSyncAdapter {
 	protected CafeteriaService cafeService;
 
 	@Inject
+	protected MealService mealService;
+
+	@Inject
 	protected FeedbackService feedbackService;
 
 	@Inject
@@ -79,6 +84,8 @@ public class SyncAdapter extends BaseSyncAdapter {
 	@Override
 	public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
 		try {
+			android.os.Debug.waitForDebugger();
+
 			if (!authService.signIn(account).doSync()) {
 				syncResult.stats.numAuthExceptions++;
 			} else {
@@ -121,7 +128,13 @@ public class SyncAdapter extends BaseSyncAdapter {
 	private void performCafeteriaSync(SyncResult syncResult) {
 		List<Cafeteria> cafeterias = cafeService.updateAll().doSync();
 
-		writeToSyncStats(syncResult, cafeterias);
+		if (writeToSyncStats(syncResult, cafeterias)) {
+			for (Cafeteria cafeteria : cafeterias) {
+				List<Menu> menus = mealService.updateAll(cafeteria).doSync();
+
+				writeToSyncStats(syncResult, menus);
+			}
+		}
 	}
 
 	private boolean writeToSyncStats(SyncResult sync, List<?> result) {

@@ -21,6 +21,7 @@ import de.ladis.infohm.core.dao.http.cafeteria.CafeteriaHttpDao;
 import de.ladis.infohm.core.dao.http.event.EventHttpDao;
 import de.ladis.infohm.core.dao.http.factory.HttpDaoRequestFactory;
 import de.ladis.infohm.core.dao.http.feedback.FeedbackHttpDao;
+import de.ladis.infohm.core.dao.http.meal.MealHttpDao;
 import de.ladis.infohm.core.dao.http.publisher.PublisherHttpDao;
 
 @Module(
@@ -101,6 +102,12 @@ public class HttpDaoModule {
 	@Singleton
 	public CafeteriaHttpDao provideCafeteriaDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
 		return new CafeteriaHttpDao(client, host, context, factory);
+	}
+
+	@Provides
+	@Singleton
+	public MealHttpDao provideMealDao(HttpClient client, HttpHost host, HttpContext context, HttpRequestFactory factory) {
+		return new MealHttpDao(client, host, context, factory);
 	}
 
 }

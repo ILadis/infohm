@@ -69,4 +69,5 @@ public class FeedbackHttpDao extends HttpDao<Long, Feedback> implements Feedback
 	public void delete(Feedback entity) throws DaoException {
 		throw new DaoException(this, new UnsupportedOperationException());
 	}
+
 }

@@ -13,6 +13,8 @@ import org.joda.time.Days;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +32,7 @@ import de.ladis.infohm.core.listener.MealListener;
 import de.ladis.infohm.core.listener.SimpleMealListener;
 import de.ladis.infohm.core.service.MealService;
 
-public class DailyMealsFragment extends BaseFragment {
+public class DailyMealsFragment extends BaseFragment implements OnRefreshListener {
 
 	public static DailyMealsFragment newInstance(Cafeteria cafeteria) {
 		DailyMealsFragment fragment = new DailyMealsFragment();
@@ -45,6 +47,9 @@ public class DailyMealsFragment extends BaseFragment {
 
 	@Inject
 	protected MealService service;
+
+	@InjectView(R.id.fragment_daily_meals_refresh)
+	protected SwipeRefreshLayout refreshView;
 
 	@InjectView(R.id.fragment_daily_meals_headline)
 	protected TimestampView headlineView;
@@ -79,6 +84,17 @@ public class DailyMealsFragment extends BaseFragment {
 
 		animator = new DailyMealsAnimator(this);
 		animator.animateOneShots(savedInstanceState == null);
+
+		refreshView.setOnRefreshListener(this);
+		refreshView.setColorSchemeResources(R.color.actionbar_primary_color, R.color.actionbar_secondary_color);
+		refreshView.setEnabled(false);
+		refreshView.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				refreshView.setEnabled(true);
+				refreshView.setRefreshing(service.isUpdating(cafeteria).doSync());
+			}
+		}, 1000);
 	}
 
 	@Override
@@ -89,7 +105,23 @@ public class DailyMealsFragment extends BaseFragment {
 		service.getForCurrentWeek(cafeteria).doAsync();
 	}
 
+	@Override
+	public void onRefresh() {
+		service.updateAll(cafeteria).doAsync();
+	}
+
 	private MealListener listener = new SimpleMealListener() {
+
+		@Override
+		public void onUpdated(Cafeteria target, List<Menu> menus) {
+			if (cafeteria.equals(target)) {
+				refreshView.setRefreshing(false);
+
+				if (menus != null) {
+					service.getForCurrentWeek(cafeteria).doAsync();
+				}
+			}
+		}
 
 		@Override
 		public void onCurrentWeek(Cafeteria cafeteria, List<Menu> menus) {

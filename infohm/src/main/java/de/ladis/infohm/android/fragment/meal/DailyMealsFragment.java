@@ -124,23 +124,25 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 		}
 
 		@Override
-		public void onCurrentWeek(Cafeteria cafeteria, List<Menu> menus) {
-			if (menus != null) {
+		public void onCurrentWeek(Cafeteria target, List<Menu> menus) {
+			if (cafeteria.equals(target)) {
 				Menu menu = findDailyMeals(menus);
 
 				if (menu != null && menu.getMeals().size() > 0) {
 					offerDailyMeals(menu);
 
 					animator.animateOffersAppearance();
+					animator.animateNoContents(false);
+				} else {
+					animator.animateNoContents(true);
 				}
-				// TODO handle else case
 			}
 		}
 
 	};
 
 	private Menu findDailyMeals(List<Menu> menus) {
-		if (menus.size() > 0) {
+		if (menus != null && menus.size() > 0) {
 			DateTime now = DateTime.now();
 			Menu daily = menus.get(0);
 
@@ -176,15 +178,17 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 		headlineView.setTimestamp(date);
 
 		if (days.getDays() == 0) {
-			headlineView.setText(getString(R.string.fragment_daily_meals_headline_today));
+			headlineView.setText(R.string.fragment_daily_meals_headline_today);
 		} else {
-			headlineView.setText(getString(R.string.fragment_daily_meals_headline_upcoming));
+			headlineView.setText(R.string.fragment_daily_meals_headline_upcoming);
 		}
 
 		dateView.setText(getString(R.string.fragment_daily_meals_date,
 				String.format("%04d", date.getYear()),
 				String.format("%02d", date.getMonthOfYear()),
 				String.format("%02d", date.getDayOfMonth())));
+
+		offersView.removeAllViews();
 
 		for (Meal meal : menu.getMeals()) {
 			View view = View.inflate(context, R.layout.fragment_daily_meals_offer, null);

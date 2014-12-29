@@ -22,23 +22,24 @@
 		android:layout_height="match_parent"
 		android:visibility="gone">
 
+		<TextView
+			android:id="@+id/fragment_events_no_content_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:text="@string/fragment_events_no_content"
+			android:textAppearance="?attr/textAppearanceTitle"
+			android:textColor="#ffcccccc"
+			android:gravity="center" />
+
 		<ImageView
-			android:id="@+id/fragment_events_no_content_image"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:src="@drawable/no_content"
-			android:contentDescription="@string/fragment_events_no_content"
-			android:layout_centerInParent="true" />
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="12dp"
-			android:layout_below="@id/fragment_events_no_content_image"
+			android:layout_marginBottom="12dp"
+			android:layout_above="@id/fragment_events_no_content_text"
 			android:layout_centerHorizontal="true"
-			android:text="@string/fragment_events_no_content"
-			android:textAppearance="?attr/textAppearanceTitle"
-			android:textColor="#ffcccccc" />
+			android:contentDescription="@string/fragment_events_no_content" />
 
 	</RelativeLayout>
 

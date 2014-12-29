@@ -73,9 +73,9 @@
 
 	<style name="Widget.Button.Flat">
 		<item name="android:paddingTop">12dp</item>
-		<item name="android:paddingRight">6dp</item>
+		<item name="android:paddingRight">16dp</item>
 		<item name="android:paddingBottom">12dp</item>
-		<item name="android:paddingLeft">6dp</item>
+		<item name="android:paddingLeft">16dp</item>
 		<item name="android:textColor">@color/button_flat_color_selector</item>
 		<item name="android:background">@drawable/button_flat_selector</item>
 	</style>

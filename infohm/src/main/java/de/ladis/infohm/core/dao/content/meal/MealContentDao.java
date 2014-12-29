@@ -129,7 +129,7 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 				from("id", "date"),
 				"cid = ? AND date(date) BETWEEN ? AND ?",
 				from(entity.getId().toString(), start.toString("YYYY-MM-dd"), end.toString("YYYY-MM-dd")),
-				"datetime(date) DESC"
+				"datetime(date) ASC"
 		);
 
 		List<Menu> menus = new ArrayList<Menu>(cursor.getCount());
@@ -152,7 +152,7 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 				from("id", "name", "employee", "student", "created", "updated"),
 				"mid = ?",
 				from(menu.getId().toString()),
-				"datetime(created) DESC"
+				"datetime(created) ASC"
 		);
 
 		List<Meal> meals = new ArrayList<Meal>(cursor.getCount());

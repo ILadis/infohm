@@ -57,5 +57,12 @@
 		<item quantity="other">vor %1$d Sekunden</item>
 	</plurals>
 	<string name="view_timestamp_just_now">gerade eben</string>
+	<string name="view_timestamp_monday">Montag</string>
+	<string name="view_timestamp_tuesday">Dienstag</string>
+	<string name="view_timestamp_wednesday">Mittwoch</string>
+	<string name="view_timestamp_thursday">Donnerstag</string>
+	<string name="view_timestamp_friday">Freitag</string>
+	<string name="view_timestamp_saturday">Samstag</string>
+	<string name="view_timestamp_sunday">Sonntag</string>
 
 </resources>

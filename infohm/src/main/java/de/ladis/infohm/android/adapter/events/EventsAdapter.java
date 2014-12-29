@@ -110,7 +110,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 		Event event = getItem(position);
 
 		holder.headlineView.setText(event.getHeadline());
-		holder.timestampView.setText(event.getCreatedAt());
+		holder.timestampView.setTimestamp(event.getCreatedAt());
+		holder.timestampView.setText("T");
 		holder.contentView.setText(event.getContent());
 	}
 

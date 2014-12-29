@@ -51,6 +51,24 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 		return cursor.moveToFirst();
 	}
 
+	private boolean contains(Meal entitiy) throws DaoException {
+		Long key = entitiy.getId();
+
+		if (key == null || key <= 0) {
+			return false;
+		}
+
+		Cursor cursor = content().query(
+				parse(base + "/meal"),
+				from("id"),
+				"id = ?",
+				from(key.toString()),
+				null
+		);
+
+		return cursor.moveToFirst();
+	}
+
 	@Override
 	public Menu find(Long key) throws DaoException {
 		if (key == null || key <= 0) {
@@ -205,8 +223,8 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 				Long id = Long.decode(uri.getLastPathSegment());
 				entity.setId(id);
 
-				for (Meal meal : entity.getMeals()) {
-					insert(entity, meal);
+				for (Meal item : entity.getMeals()) {
+					insert(entity, item);
 				}
 			}
 		}
@@ -226,7 +244,55 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 
 	@Override
 	public void update(Menu entity) throws DaoException {
-		// TODO finish update implementation (do we need a cafeteria instance?)
+		Integer count = content().update(
+				parse(base + "/menu"),
+				toValues(entity),
+				"id = ?",
+				from(entity.getId().toString())
+		);
+
+		if (count == 1) {
+			Cursor cursor = content().query(
+					parse(base + "/meal"),
+					from("id"),
+					"mid = ?",
+					from(entity.getId().toString()),
+					null
+			);
+
+			List<Long> ids = new ArrayList<Long>(cursor.getCount());
+
+			if (cursor.moveToFirst()) {
+				do {
+					ids.add(cursor.getLong(0));
+				} while (cursor.moveToNext());
+			}
+
+			for (Meal item : entity.getMeals()) {
+				if (ids.remove(item.getId()) || contains(item)) {
+					update(entity, item);
+				} else {
+					insert(entity, item);
+				}
+			}
+
+			for (Long id : ids) {
+				content().delete(
+						parse(base + "/meal"),
+						"id = ?",
+						from(id.toString())
+				);
+			}
+		}
+	}
+
+	private void update(Menu key, Meal entity) throws DaoException {
+		content().update(
+				parse(base + "/meal"),
+				toValues(key, entity),
+				"id = ?",
+				from(entity.getId().toString())
+		);
 	}
 
 	@Override

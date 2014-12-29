@@ -56,12 +56,15 @@ public class MainActivity extends BaseDrawerActivity implements StartupControlle
 		switch (item) {
 		case R.id.fragment_navigation_newsfeed:
 			switchFragment(EventsPagerFragment.class);
+			setTitle(R.string.fragment_navigation_newsfeed);
 			break;
 		case R.id.fragment_navigation_cafeteria:
 			switchFragment(CafeteriasPagerFragment.class);
+			setTitle(R.string.fragment_navigation_cafeteria);
 			break;
 		case R.id.fragment_navigation_bookmarks:
 			switchFragment(BookmarksFragment.class);
+			setTitle(R.string.fragment_navigation_bookmarks);
 			break;
 		case R.id.fragment_navigation_feedback:
 			switchActivity(FeedbackActivity.class);

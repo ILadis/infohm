@@ -152,7 +152,7 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 				from("id", "name", "employee", "student", "created", "updated"),
 				"mid = ?",
 				from(menu.getId().toString()),
-				"datetime(created) ASC"
+				"id ASC"
 		);
 
 		List<Meal> meals = new ArrayList<Meal>(cursor.getCount());

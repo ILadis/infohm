@@ -1,5 +1,8 @@
 package de.ladis.infohm.util;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 public class Arrays {
 
 	public static <T> T[] from(T... values) {
@@ -11,6 +14,21 @@ public class Arrays {
 
 		for (T value : values) {
 			builder.append(value);
+		}
+
+		return builder.toString();
+	}
+
+	public static <T> String glue(Collection<T> values, String separator) {
+		StringBuilder builder = new StringBuilder();
+
+		Iterator<T> iterator = values.iterator();
+
+		while (iterator.hasNext()) {
+			builder.append(iterator.next().toString());
+			if (iterator.hasNext()) {
+				builder.append(separator);
+			}
 		}
 
 		return builder.toString();

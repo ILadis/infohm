@@ -1,8 +1,11 @@
 package de.ladis.infohm.core.domain;
 
+import static de.ladis.infohm.util.Arrays.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.joda.time.DateTime;
 
 public class Menu implements Entity {
@@ -71,14 +74,7 @@ public class Menu implements Entity {
 				.append(getDate().toString("dd.MM.YYYY"))
 				.append(":\n");
 
-		for (Meal meal : getMeals()) {
-			builder.append(meal.toString())
-					.append('\n');
-		}
-
-		if (getMeals().size() > 0) {
-			builder.delete(builder.length() - 1, builder.length());
-		}
+		builder.append(glue(getMeals(), "\n"));
 
 		return builder.toString();
 	}

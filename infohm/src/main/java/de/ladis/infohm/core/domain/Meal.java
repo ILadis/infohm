@@ -3,9 +3,8 @@ package de.ladis.infohm.core.domain;
 import static java.lang.String.*;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import org.joda.time.DateTime;
 
 import de.ladis.infohm.util.Strings;
@@ -21,7 +20,32 @@ public class Meal implements Entity {
 	public Meal() {
 		this.id = null;
 		this.name = Strings.empty();
-		this.prices = new HashMap<Guest, Integer>();
+		this.prices = new HashMap<Guest, Integer>() {
+
+			private static final long serialVersionUID = -1753014284150234619L;
+
+			@Override
+			public String toString() {
+				StringBuilder builder = new StringBuilder();
+				Iterator<Entry<Guest, Integer>> iterator = entrySet().iterator();
+
+				while (iterator.hasNext()) {
+					Entry<Guest, Integer> price = iterator.next();
+
+					builder.append(price.getKey().toString())
+							.append(": ")
+							.append(format("%.2f", price.getValue() / 100f))
+							.append(" €");
+
+					if (iterator.hasNext()) {
+						builder.append(", ");
+					}
+				}
+
+				return builder.toString();
+			}
+
+		};
 		this.created = DateTime.now();
 		this.updated = DateTime.now();
 	}
@@ -87,24 +111,8 @@ public class Meal implements Entity {
 		StringBuilder builder = new StringBuilder();
 
 		builder.append(getName())
-				.append('\n');
-
-		for (Entry<Guest, Integer> price : getPrices().entrySet()) {
-			switch (price.getKey()) {
-			case EMPLOYEE:
-				builder.append("Angestellter: ");
-				break;
-			case STUDENT:
-				builder.append("Student: ");
-				break;
-			}
-			builder.append(format("%.2f", price.getValue() / 100f))
-					.append(" €, ");
-		}
-
-		if (getPrices().size() > 0) {
-			builder.delete(builder.length() - 2, builder.length());
-		}
+				.append('\n')
+				.append(getPrices().toString());
 
 		return builder.toString();
 	}

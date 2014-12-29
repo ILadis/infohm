@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import butterknife.InjectView;
 import de.ladis.infohm.R;
 import de.ladis.infohm.android.adapter.cafeteria.CafeteriasPagerAdapter;
+import de.ladis.infohm.android.animation.cafeteria.CafeteriaPagerAnimator;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.widget.SlidingTabLayout;
 import de.ladis.infohm.core.domain.Cafeteria;
@@ -31,6 +32,7 @@ public class CafeteriasPagerFragment extends BaseFragment {
 	protected ViewPager pagerView;
 
 	private CafeteriasPagerAdapter adapter;
+	private CafeteriaPagerAnimator animator;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +42,9 @@ public class CafeteriasPagerFragment extends BaseFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		animator = new CafeteriaPagerAnimator(this);
+		animator.animateOneShots(savedInstanceState == null);
 
 		adapter = new CafeteriasPagerAdapter(getChildFragmentManager());
 
@@ -63,6 +68,8 @@ public class CafeteriasPagerFragment extends BaseFragment {
 		public void onGathered(List<Cafeteria> cafeterias) {
 			if (cafeterias != null) {
 				adapter.addItems(cafeterias);
+
+				animator.animateTabAppearance();
 			}
 		}
 

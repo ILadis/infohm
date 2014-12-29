@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.InjectView;
 import de.ladis.infohm.R;
+import de.ladis.infohm.android.animation.meal.DailyMealsAnimator;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.parcel.cafeteria.CafeteriaParcelHolder;
 import de.ladis.infohm.android.widget.TimestampView;
@@ -55,6 +56,7 @@ public class DailyMealsFragment extends BaseFragment {
 	protected ViewGroup offersView;
 
 	private Cafeteria cafeteria;
+	private DailyMealsAnimator animator;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,14 @@ public class DailyMealsFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_daily_meals, container, false);
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		animator = new DailyMealsAnimator(this);
+		animator.animateOneShots(savedInstanceState == null);
 	}
 
 	@Override
@@ -88,6 +98,8 @@ public class DailyMealsFragment extends BaseFragment {
 
 				if (menu != null && menu.getMeals().size() > 0) {
 					offerDailyMeals(menu);
+
+					animator.animateOffersAppearance();
 				}
 				// TODO handle else case
 			}

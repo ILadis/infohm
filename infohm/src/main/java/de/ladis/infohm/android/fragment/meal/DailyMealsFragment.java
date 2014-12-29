@@ -1,6 +1,8 @@
 package de.ladis.infohm.android.fragment.meal;
 
+import static java.lang.Math.*;
 import static org.joda.time.Days.*;
+import static org.joda.time.Minutes.*;
 
 import java.util.List;
 
@@ -9,12 +11,17 @@ import javax.inject.Inject;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import butterknife.InjectView;
+import de.ladis.infohm.R;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.parcel.cafeteria.CafeteriaParcelHolder;
+import de.ladis.infohm.android.widget.TimestampView;
 import de.ladis.infohm.core.domain.Cafeteria;
 import de.ladis.infohm.core.domain.Meal;
 import de.ladis.infohm.core.domain.Menu;
@@ -38,6 +45,15 @@ public class DailyMealsFragment extends BaseFragment {
 	@Inject
 	protected MealService service;
 
+	@InjectView(R.id.fragment_daily_meals_headline)
+	protected TimestampView headlineView;
+
+	@InjectView(R.id.fragment_daily_meals_date)
+	protected TextView dateView;
+
+	@InjectView(R.id.fragment_daily_meals_offers)
+	protected ViewGroup offersView;
+
 	private Cafeteria cafeteria;
 
 	@Override
@@ -52,7 +68,7 @@ public class DailyMealsFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return new View(inflater.getContext());
+		return inflater.inflate(R.layout.fragment_daily_meals, container, false);
 	}
 
 	@Override
@@ -68,30 +84,75 @@ public class DailyMealsFragment extends BaseFragment {
 		@Override
 		public void onCurrentWeek(Cafeteria cafeteria, List<Menu> menus) {
 			if (menus != null) {
-				findDailyMeals(menus);
+				Menu menu = findDailyMeals(menus);
+
+				if (menu != null && menu.getMeals().size() > 0) {
+					offerDailyMeals(menu);
+				}
+				// TODO handle else case
 			}
 		}
 
 	};
 
-	private List<Meal> findDailyMeals(List<Menu> menus) {
+	private Menu findDailyMeals(List<Menu> menus) {
 		if (menus.size() > 0) {
 			DateTime now = DateTime.now();
 			Menu daily = menus.get(0);
 
 			for (Menu menu : menus) {
-				Days daysBetweenDailyAndNow = daysBetween(now, daily.getDate());
-				Days daysBetweenMenuAndNow = daysBetween(now, menu.getDate());
+				int minutesBetweenDailyAndNow = minutesBetween(now, daily.getDate()).getMinutes();
+				int minutesBetweenMenuAndNow = minutesBetween(now, menu.getDate()).getMinutes();
 
-				if (daysBetweenMenuAndNow.isLessThan(daysBetweenDailyAndNow) && daysBetweenMenuAndNow.getDays() <= 0) {
-					daily = menu;
+				if (abs(minutesBetweenMenuAndNow) < abs(minutesBetweenDailyAndNow)) {
+					if (minutesBetweenMenuAndNow > 0) {
+						if (minutesBetweenMenuAndNow <= 2 * 60) {
+							daily = menu;
+						}
+					} else {
+						daily = menu;
+					}
 				}
 			}
 
-			return daily.getMeals();
+			return daily;
 		}
 
 		return null;
+	}
+
+	private void offerDailyMeals(Menu menu) {
+		Context context = headlineView.getContext();
+
+		DateTime now = DateTime.now();
+		DateTime date = menu.getDate();
+
+		Days days = daysBetween(now, date);
+
+		headlineView.setTimestamp(date);
+
+		if (days.getDays() == 0) {
+			headlineView.setText(getString(R.string.fragment_daily_meals_headline_today));
+		} else {
+			headlineView.setText(getString(R.string.fragment_daily_meals_headline_upcoming));
+		}
+
+		dateView.setText(getString(R.string.fragment_daily_meals_date,
+				String.format("%04d", date.getYear()),
+				String.format("%02d", date.getMonthOfYear()),
+				String.format("%02d", date.getDayOfMonth())));
+
+		for (Meal meal : menu.getMeals()) {
+			View view = View.inflate(context, R.layout.fragment_daily_meals_offer, null);
+
+			TextView nameView = (TextView) view.findViewById(R.id.fragment_daily_meals_offer_name);
+			TextView pricesView = (TextView) view.findViewById(R.id.fragment_daily_meals_offer_prices);
+
+			nameView.setText(meal.getName());
+			pricesView.setText(meal.getPrices().toString());
+
+			offersView.addView(view);
+		}
 	}
 
 	@Override

@@ -30,6 +30,11 @@
 
 	<string name="fragment_events_no_content">noch keine Inhalte verfügbar</string>
 
+	<string name="fragment_daily_meals_headline_today">Heutige Menüs</string>
+	<string name="fragment_daily_meals_headline_upcoming">Menüs am D</string>
+	<string name="fragment_daily_meals_date">am %3$s.%2$s.%1$s</string>
+	<string name="fragment_daily_meals_more">alle Tage</string>
+
 	<string name="fragment_navigation_newsfeed">Neuigkeiten</string>
 	<string name="fragment_navigation_cafeteria">Speisepläne</string>
 	<string name="fragment_navigation_bookmarks">Lesezeichen</string>

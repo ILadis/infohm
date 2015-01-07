@@ -9,6 +9,8 @@ import de.ladis.infohm.android.fragment.events.EventsHighlightFragment;
 import de.ladis.infohm.android.fragment.events.EventsPagerFragment;
 import de.ladis.infohm.android.fragment.feedback.FeedbackFragment;
 import de.ladis.infohm.android.fragment.meal.DailyMealsFragment;
+import de.ladis.infohm.android.fragment.meal.MealsFragment;
+import de.ladis.infohm.android.fragment.meal.MealsPagerFragment;
 import de.ladis.infohm.android.fragment.navigation.NavigationFragment;
 import de.ladis.infohm.android.fragment.publisher.StarPublisherFragment;
 import de.ladis.infohm.android.fragment.search.SearchFragment;
@@ -34,6 +36,8 @@ injects = {
 		SearchFragment.class,
 		CafeteriasPagerFragment.class,
 		DailyMealsFragment.class,
+		MealsPagerFragment.class,
+		MealsFragment.class,
 })
 public class FragmentModule {
 }

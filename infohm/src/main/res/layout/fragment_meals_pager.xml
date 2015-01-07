@@ -5,15 +5,15 @@
 	android:orientation="vertical">
 
 	<de.ladis.infohm.android.widget.SlidingTabLayout
-		android:id="@+id/fragment_cafeterias_pager_tabs"
+		android:id="@+id/fragment_meals_pager_tabs"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/colorPrimary" />
 
 	<android.support.v4.view.ViewPager
-		android:id="@+id/fragment_cafeterias_pager"
+		android:id="@+id/fragment_meals_pager"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_below="@id/fragment_cafeterias_pager_tabs" />
+		android:layout_below="@id/fragment_meals_pager_tabs" />
 
 </RelativeLayout>

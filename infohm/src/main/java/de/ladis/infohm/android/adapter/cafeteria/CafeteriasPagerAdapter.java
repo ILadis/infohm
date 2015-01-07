@@ -52,10 +52,6 @@ public class CafeteriasPagerAdapter extends FragmentStatePagerAdapter {
 		return items.get(position).getName().toUpperCase(Locale.US);
 	}
 
-	public Collection<Cafeteria> getItems() {
-		return items;
-	}
-
 	@Override
 	public Fragment getItem(int position) {
 		return DailyMealsFragment.newInstance(items.get(position));

@@ -12,7 +12,9 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
@@ -20,7 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.ladis.infohm.R;
+import de.ladis.infohm.android.activity.meal.MealsActivity;
 import de.ladis.infohm.android.animation.meal.DailyMealsAnimator;
 import de.ladis.infohm.android.fragment.BaseFragment;
 import de.ladis.infohm.android.parcel.cafeteria.CafeteriaParcelHolder;
@@ -201,6 +205,17 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 
 			offersView.addView(view);
 		}
+	}
+
+	@OnClick(R.id.fragment_daily_meals_more)
+	protected void moreMeals(View view) {
+		Context context = view.getContext();
+		Parcelable cafeteria = getArguments().getParcelable("cafeteria");
+
+		Intent intent = new Intent(context, MealsActivity.class);
+		intent.putExtra("cafeteria", cafeteria);
+
+		startActivity(intent);
 	}
 
 	@Override

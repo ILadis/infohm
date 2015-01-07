@@ -36,7 +36,8 @@
 	<string name="fragment_daily_meals_more">alle Tage</string>
 	<string name="fragment_daily_meals_no_content">in den kommenden Tagen ist kein Speiseplan verfügbar</string>
 
-	<string name="fragment_meals_pager_title">%D (%2$s.%1$s)</string>
+	<string name="fragment_meals_pager_title">%%D (%2$s.%1$s)</string>
+	<string name="fragment_meals_index">Menü %1$d</string>
 
 	<string name="fragment_navigation_newsfeed">Neuigkeiten</string>
 	<string name="fragment_navigation_cafeteria">Speisepläne</string>

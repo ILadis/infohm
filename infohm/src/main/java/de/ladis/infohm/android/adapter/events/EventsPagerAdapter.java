@@ -57,10 +57,6 @@ public class EventsPagerAdapter extends FragmentStatePagerAdapter {
 		}
 	}
 
-	public Collection<Publisher> getItems() {
-		return items;
-	}
-
 	@Override
 	public Fragment getItem(int position) {
 		if (position == 0) {

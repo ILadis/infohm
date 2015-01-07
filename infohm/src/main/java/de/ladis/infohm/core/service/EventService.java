@@ -84,6 +84,7 @@ public class EventService {
 					if (events != null) {
 						for (Event event : events) {
 							cache.insert(publisher, event);
+							search.insert(Search.with(event));
 						}
 
 						updated.addAll(events);

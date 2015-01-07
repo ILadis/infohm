@@ -44,6 +44,8 @@ public class MainActivity extends BaseDrawerActivity implements StartupControlle
 			return R.id.fragment_navigation_newsfeed;
 		} else if (BookmarksFragment.class.isInstance(current)) {
 			return R.id.fragment_navigation_bookmarks;
+		} else if (CafeteriasPagerFragment.class.isInstance(current)) {
+			return R.id.fragment_navigation_cafeteria;
 		} else {
 			return R.id.fragment_navigation_newsfeed;
 		}

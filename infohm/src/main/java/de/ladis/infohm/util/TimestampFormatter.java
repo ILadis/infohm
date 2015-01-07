@@ -36,22 +36,22 @@ public class TimestampFormatter {
 		String text;
 
 		if (period.getWeeks() > 0 || period.getMonths() > 0 || period.getYears() > 0) {
-			text = resources.getString(R.string.view_timestamp_at,
+			text = resources.getString(R.string.timestamp_at,
 					String.format("%04d", timestamp.getYear()),
 					String.format("%02d", timestamp.getMonthOfYear()),
 					String.format("%02d", timestamp.getDayOfMonth()),
 					String.format("%02d", timestamp.getHourOfDay()),
 					String.format("%02d", timestamp.getMinuteOfHour()));
 		} else if (period.getDays() > 0) {
-			text = resources.getQuantityString(R.plurals.view_timestamp_days_ago, period.getDays(), period.getDays());
+			text = resources.getQuantityString(R.plurals.timestamp_days_ago, period.getDays(), period.getDays());
 		} else if (period.getHours() > 0) {
-			text = resources.getQuantityString(R.plurals.view_timestamp_hours_ago, period.getHours(), period.getHours());
+			text = resources.getQuantityString(R.plurals.timestamp_hours_ago, period.getHours(), period.getHours());
 		} else if (period.getMinutes() > 0) {
-			text = resources.getQuantityString(R.plurals.view_timestamp_minutes_ago, period.getMinutes(), period.getMinutes());
+			text = resources.getQuantityString(R.plurals.timestamp_minutes_ago, period.getMinutes(), period.getMinutes());
 		} else if (period.getSeconds() >= 15) {
-			text = resources.getQuantityString(R.plurals.view_timestamp_seconds_ago, period.getSeconds(), period.getSeconds());
+			text = resources.getQuantityString(R.plurals.timestamp_seconds_ago, period.getSeconds(), period.getSeconds());
 		} else {
-			text = resources.getString(R.string.view_timestamp_just_now);
+			text = resources.getString(R.string.timestamp_just_now);
 		}
 
 		return text;
@@ -64,25 +64,25 @@ public class TimestampFormatter {
 
 		switch (day) {
 		case MONDAY:
-			text = resources.getString(R.string.view_timestamp_monday);
+			text = resources.getString(R.string.timestamp_monday);
 			break;
 		case TUESDAY:
-			text = resources.getString(R.string.view_timestamp_monday);
+			text = resources.getString(R.string.timestamp_monday);
 			break;
 		case WEDNESDAY:
-			text = resources.getString(R.string.view_timestamp_wednesday);
+			text = resources.getString(R.string.timestamp_wednesday);
 			break;
 		case THURSDAY:
-			text = resources.getString(R.string.view_timestamp_thursday);
+			text = resources.getString(R.string.timestamp_thursday);
 			break;
 		case FRIDAY:
-			text = resources.getString(R.string.view_timestamp_friday);
+			text = resources.getString(R.string.timestamp_friday);
 			break;
 		case SATURDAY:
-			text = resources.getString(R.string.view_timestamp_saturday);
+			text = resources.getString(R.string.timestamp_saturday);
 			break;
 		case SUNDAY:
-			text = resources.getString(R.string.view_timestamp_sunday);
+			text = resources.getString(R.string.timestamp_sunday);
 			break;
 		default:
 			text = "";

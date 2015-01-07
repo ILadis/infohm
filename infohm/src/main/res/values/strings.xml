@@ -36,6 +36,8 @@
 	<string name="fragment_daily_meals_more">alle Tage</string>
 	<string name="fragment_daily_meals_no_content">in den kommenden Tagen ist kein Speiseplan verfügbar</string>
 
+	<string name="fragment_meals_pager_title">%D (%2$s.%1$s)</string>
+
 	<string name="fragment_navigation_newsfeed">Neuigkeiten</string>
 	<string name="fragment_navigation_cafeteria">Speisepläne</string>
 	<string name="fragment_navigation_bookmarks">Lesezeichen</string>
@@ -45,30 +47,30 @@
 	<string name="fragment_search_menu_title">Suchen</string>
 	<string name="fragment_search_no_content">keine Inhalte gefunden</string>
 
-	<string name="view_timestamp_at">am %3$s.%2$s.%1$s um %4$s:%5$s Uhr</string>
-	<plurals name="view_timestamp_days_ago">
+	<string name="timestamp_at">am %3$s.%2$s.%1$s um %4$s:%5$s Uhr</string>
+	<plurals name="timestamp_days_ago">
 		<item quantity="one">vor einem Tag</item>
 		<item quantity="other">vor %1$d Tagen</item>
 	</plurals>
-	<plurals name="view_timestamp_hours_ago">
+	<plurals name="timestamp_hours_ago">
 		<item quantity="one">vor einer Stunde</item>
 		<item quantity="other">vor %1$d Stunden</item>
 	</plurals>
-	<plurals name="view_timestamp_minutes_ago">
+	<plurals name="timestamp_minutes_ago">
 		<item quantity="one">vor einer Minute</item>
 		<item quantity="other">vor %1$d Minuten</item>
 	</plurals>
-	<plurals name="view_timestamp_seconds_ago">
+	<plurals name="timestamp_seconds_ago">
 		<item quantity="one">vor einer Sekunde</item>
 		<item quantity="other">vor %1$d Sekunden</item>
 	</plurals>
-	<string name="view_timestamp_just_now">gerade eben</string>
-	<string name="view_timestamp_monday">Montag</string>
-	<string name="view_timestamp_tuesday">Dienstag</string>
-	<string name="view_timestamp_wednesday">Mittwoch</string>
-	<string name="view_timestamp_thursday">Donnerstag</string>
-	<string name="view_timestamp_friday">Freitag</string>
-	<string name="view_timestamp_saturday">Samstag</string>
-	<string name="view_timestamp_sunday">Sonntag</string>
+	<string name="timestamp_just_now">gerade eben</string>
+	<string name="timestamp_monday">Montag</string>
+	<string name="timestamp_tuesday">Dienstag</string>
+	<string name="timestamp_wednesday">Mittwoch</string>
+	<string name="timestamp_thursday">Donnerstag</string>
+	<string name="timestamp_friday">Freitag</string>
+	<string name="timestamp_saturday">Samstag</string>
+	<string name="timestamp_sunday">Sonntag</string>
 
 </resources>

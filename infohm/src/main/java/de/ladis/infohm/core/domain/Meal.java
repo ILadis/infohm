@@ -1,10 +1,7 @@
 package de.ladis.infohm.core.domain;
 
-import static java.lang.String.*;
-
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
+
 import org.joda.time.DateTime;
 
 import de.ladis.infohm.util.Strings;
@@ -20,32 +17,7 @@ public class Meal implements Entity {
 	public Meal() {
 		this.id = null;
 		this.name = Strings.empty();
-		this.prices = new HashMap<Guest, Integer>() {
-
-			private static final long serialVersionUID = -1753014284150234619L;
-
-			@Override
-			public String toString() {
-				StringBuilder builder = new StringBuilder();
-				Iterator<Entry<Guest, Integer>> iterator = entrySet().iterator();
-
-				while (iterator.hasNext()) {
-					Entry<Guest, Integer> price = iterator.next();
-
-					builder.append(price.getKey().toString())
-							.append(": ")
-							.append(format("%.2f", price.getValue() / 100f))
-							.append(" €");
-
-					if (iterator.hasNext()) {
-						builder.append(", ");
-					}
-				}
-
-				return builder.toString();
-			}
-
-		};
+		this.prices = new Prices();
 		this.created = DateTime.now();
 		this.updated = DateTime.now();
 	}

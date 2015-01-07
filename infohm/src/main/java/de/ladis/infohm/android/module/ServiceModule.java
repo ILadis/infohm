@@ -98,7 +98,7 @@ public class ServiceModule {
 	@Provides
 	@Singleton
 	public SynchronizeService provideSynchronizeService(Context context, SynchronizeContentDao dao, ExecutorFactory factory) {
-		return new SynchronizeService(context, dao, factory);
+		return new SynchronizeService(context, dao, factory, "de.ladis.infohm.provider.CacheProvider");
 	}
 
 	@Provides

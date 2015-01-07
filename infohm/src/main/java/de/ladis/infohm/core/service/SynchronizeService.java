@@ -132,6 +132,8 @@ public class SynchronizeService {
 
 				adapter.onPerformSync(account, Bundle.EMPTY, authority, provider, result);
 
+				provider.release();
+
 				return result;
 			}
 

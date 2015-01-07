@@ -5,21 +5,20 @@ import org.joda.time.DateTime;
 import android.os.Parcel;
 import android.os.Parcelable;
 import de.ladis.infohm.android.parcel.ParcelHolder;
-import de.ladis.infohm.android.parcel.publisher.PublisherParcelHolder;
 import de.ladis.infohm.core.domain.Cafeteria;
 
 public class CafeteriaParcelHolder extends ParcelHolder<Cafeteria> {
 
-	public static final Parcelable.Creator<PublisherParcelHolder> CREATOR = new Parcelable.Creator<PublisherParcelHolder>() {
+	public static final Parcelable.Creator<CafeteriaParcelHolder> CREATOR = new Parcelable.Creator<CafeteriaParcelHolder>() {
 
 		@Override
-		public PublisherParcelHolder createFromParcel(Parcel parcel) {
-			return new PublisherParcelHolder(parcel);
+		public CafeteriaParcelHolder createFromParcel(Parcel parcel) {
+			return new CafeteriaParcelHolder(parcel);
 		}
 
 		@Override
-		public PublisherParcelHolder[] newArray(int size) {
-			return new PublisherParcelHolder[size];
+		public CafeteriaParcelHolder[] newArray(int size) {
+			return new CafeteriaParcelHolder[size];
 		}
 
 	};

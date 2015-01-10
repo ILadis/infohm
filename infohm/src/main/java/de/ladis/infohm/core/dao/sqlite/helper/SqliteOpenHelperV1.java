@@ -65,7 +65,7 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 				+ "id INTEGER NOT NULL, "
 				+ "cid INTEGER NOT NULL, "
 				+ "date TEXT NOT NULL, "
-				+ "PRIMARY KEY (id),"
+				+ "PRIMARY KEY (id, cid),"
 				+ "FOREIGN KEY (cid) REFERENCES cafeteria(id))");
 
 		db.execSQL("CREATE TABLE meal ("

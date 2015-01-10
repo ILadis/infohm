@@ -86,6 +86,11 @@ public class MealHttpDao extends HttpDao<Long, Menu> implements MealDao {
 	}
 
 	@Override
+	public void update(Cafeteria key, Menu entity) throws DaoException {
+		throw new DaoException(this, new UnsupportedOperationException());
+	}
+
+	@Override
 	public void delete(Menu entity) throws DaoException {
 		throw new DaoException(this, new UnsupportedOperationException());
 	}

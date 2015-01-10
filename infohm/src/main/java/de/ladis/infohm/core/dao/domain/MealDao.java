@@ -17,4 +17,6 @@ public interface MealDao extends Dao<Long, Menu> {
 
 	public void insert(Cafeteria key, Menu entity) throws DaoException;
 
+	public void update(Cafeteria key, Menu entity) throws DaoException;
+
 }

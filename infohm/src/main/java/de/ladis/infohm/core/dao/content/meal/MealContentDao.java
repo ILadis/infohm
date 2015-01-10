@@ -33,18 +33,19 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 		this.base = base;
 	}
 
-	private boolean contains(Menu entitiy) throws DaoException {
-		Long key = entitiy.getId();
+	private boolean contains(Cafeteria key, Menu entitiy) throws DaoException {
+		Long ckey = key.getId();
+		Long mkey = entitiy.getId();
 
-		if (key == null || key <= 0) {
+		if (ckey == null || ckey <= 0 || mkey == null || mkey <= 0) {
 			return false;
 		}
 
 		Cursor cursor = content().query(
 				parse(base + "/menu"),
 				from("id"),
-				"id = ?",
-				from(key.toString()),
+				"id = ? AND cid = ?",
+				from(mkey.toString(), ckey.toString()),
 				null
 		);
 
@@ -211,8 +212,8 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 
 	@Override
 	public void insert(Cafeteria key, Menu entity) throws DaoException {
-		if (contains(entity)) {
-			update(entity);
+		if (contains(key, entity)) {
+			update(key, entity);
 		} else {
 			Uri uri = content().insert(
 					parse(base + "/menu"),
@@ -244,45 +245,41 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 
 	@Override
 	public void update(Menu entity) throws DaoException {
-		Integer count = content().update(
-				parse(base + "/menu"),
-				toValues(entity),
-				"id = ?",
-				from(entity.getId().toString())
+		throw new DaoException(this, new UnsupportedOperationException());
+	}
+
+	@Override
+	public void update(Cafeteria key, Menu entity) throws DaoException {
+		Cursor cursor = content().query(
+				parse(base + "/meal"),
+				from("id"),
+				"mid = ?",
+				from(entity.getId().toString()),
+				null
 		);
 
-		if (count == 1) {
-			Cursor cursor = content().query(
+		List<Long> ids = new ArrayList<Long>(cursor.getCount());
+
+		if (cursor.moveToFirst()) {
+			do {
+				ids.add(cursor.getLong(0));
+			} while (cursor.moveToNext());
+		}
+
+		for (Meal item : entity.getMeals()) {
+			if (ids.remove(item.getId()) || contains(item)) {
+				update(entity, item);
+			} else {
+				insert(entity, item);
+			}
+		}
+
+		for (Long id : ids) {
+			content().delete(
 					parse(base + "/meal"),
-					from("id"),
-					"mid = ?",
-					from(entity.getId().toString()),
-					null
+					"id = ?",
+					from(id.toString())
 			);
-
-			List<Long> ids = new ArrayList<Long>(cursor.getCount());
-
-			if (cursor.moveToFirst()) {
-				do {
-					ids.add(cursor.getLong(0));
-				} while (cursor.moveToNext());
-			}
-
-			for (Meal item : entity.getMeals()) {
-				if (ids.remove(item.getId()) || contains(item)) {
-					update(entity, item);
-				} else {
-					insert(entity, item);
-				}
-			}
-
-			for (Long id : ids) {
-				content().delete(
-						parse(base + "/meal"),
-						"id = ?",
-						from(id.toString())
-				);
-			}
 		}
 	}
 

@@ -95,7 +95,7 @@ public class SearchContentDao extends ContentDao<Void, Search> implements Search
 				from("id", "type", "content", "matchinfo(search,'pnalx')"),
 				"content MATCH ?",
 				from(query),
-				"id ASC"
+				"id DESC"
 		);
 
 		List<Search> searches = new ArrayList<Search>(cursor.getCount());

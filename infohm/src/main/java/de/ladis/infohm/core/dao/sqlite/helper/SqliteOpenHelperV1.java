@@ -89,7 +89,7 @@ public class SqliteOpenHelperV1 extends SQLiteOpenHelper {
 				+ "id INTEGER NOT NULL, "
 				+ "type TEXT NOT NULL, "
 				+ "content TEXT NOT NULL, "
-				+ "PRIMARY KEY (pid, type))");
+				+ "PRIMARY KEY (id, type))");
 	}
 
 	@Override

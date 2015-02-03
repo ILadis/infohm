@@ -19,7 +19,7 @@
 	<string name="fragment_authentication_username_hint">Benutzername</string>
 	<string name="fragment_authentication_username_invalid">Dieser Benutzername ist ungültig.</string>
 	<string name="fragment_authentication_password_hint">Passwort</string>
-	<string name="fragment_authentication_password_invalid">Dieses Password ist ungültig.</string>
+	<string name="fragment_authentication_password_invalid">Dieses Passwort ist ungültig.</string>
 	<string name="fragment_authentication_submit">ANMELDEN</string>
 
 	<string name="fragment_feedback_subject_default">&lt;kein Betreff angegeben&gt;</string>

@@ -68,7 +68,7 @@ public class MealService {
 						cache.insert(cafeteria, menu);
 					}
 
-					updated.addAll(currentWeek);
+					updated.addAll(nextWeek);
 				}
 
 				synchronized (updating) {

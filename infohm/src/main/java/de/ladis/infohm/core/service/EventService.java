@@ -79,7 +79,8 @@ public class EventService {
 						}
 					} while (events != null && events.size() > 0);
 				} else {
-					events = remote.since(publisher, last);
+//					events = remote.since(publisher, last);
+					events = remote.list(publisher);
 
 					if (events != null) {
 						for (Event event : events) {

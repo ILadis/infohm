@@ -84,9 +84,6 @@ public class SyncAdapter extends BaseSyncAdapter {
 	@Override
 	public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
 		try {
-			// TODO remove for release code
-			android.os.Debug.waitForDebugger();
-
 			if (!authService.signIn(account).doSync()) {
 				syncResult.stats.numAuthExceptions++;
 			} else {

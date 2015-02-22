@@ -1,7 +1,6 @@
 package de.ladis.infohm.android.fragment.meal;
 
 import static java.lang.Math.*;
-import static org.joda.time.Days.*;
 import static org.joda.time.Minutes.*;
 
 import java.util.List;
@@ -9,8 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.joda.time.DateTime;
-import org.joda.time.Days;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -65,6 +62,7 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 	protected ViewGroup offersView;
 
 	private Cafeteria cafeteria;
+	private Menu menu;
 	private DailyMealsAnimator animator;
 
 	@Override
@@ -130,7 +128,23 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 		@Override
 		public void onCurrentWeek(Cafeteria target, List<Menu> menus) {
 			if (cafeteria.equals(target)) {
-				Menu menu = findDailyMeals(menus);
+				menu = findDailyMeals(menus);
+
+				if (menu != null && menu.getMeals().size() > 0) {
+					offerDailyMeals(menu);
+
+					animator.animateOffersAppearance();
+					animator.animateNoContents(false);
+				} else {
+					service.getForNextWeek(cafeteria).doAsync();
+				}
+			}
+		}
+
+		@Override
+		public void onNextWeek(Cafeteria target, List<Menu> menus) {
+			if (cafeteria.equals(target) && menu == null) {
+				menu = findDailyMeals(menus);
 
 				if (menu != null && menu.getMeals().size() > 0) {
 					offerDailyMeals(menu);
@@ -174,14 +188,11 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 	private void offerDailyMeals(Menu menu) {
 		Context context = headlineView.getContext();
 
-		DateTime now = DateTime.now();
 		DateTime date = menu.getDate();
-
-		Days days = daysBetween(now, date);
 
 		headlineView.setTimestamp(date);
 
-		if (days.getDays() == 0) {
+		if (isToday(menu)) {
 			headlineView.setText(R.string.fragment_daily_meals_headline_today);
 		} else {
 			headlineView.setText(R.string.fragment_daily_meals_headline_upcoming);
@@ -207,6 +218,20 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 		}
 	}
 
+	private boolean isCurrentWeek(Menu menu) {
+		int now = DateTime.now().getWeekOfWeekyear();
+		int actual = menu.getDate().getWeekOfWeekyear();
+
+		return now - actual == 0;
+	}
+
+	private boolean isToday(Menu menu) {
+		DateTime now = DateTime.now();
+		DateTime date = menu.getDate();
+
+		return now.withTimeAtStartOfDay().isEqual(date.withTimeAtStartOfDay());
+	}
+
 	@OnClick(R.id.fragment_daily_meals_more)
 	protected void moreMeals(View view) {
 		Context context = view.getContext();
@@ -214,6 +239,7 @@ public class DailyMealsFragment extends BaseFragment implements OnRefreshListene
 
 		Intent intent = new Intent(context, MealsActivity.class);
 		intent.putExtra("cafeteria", cafeteria);
+		intent.putExtra("week", isCurrentWeek(menu));
 
 		startActivity(intent);
 	}

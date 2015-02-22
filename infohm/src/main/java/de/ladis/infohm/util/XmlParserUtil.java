@@ -66,7 +66,7 @@ public class XmlParserUtil {
 	}
 
 	private static String textOf(String text) {
-		return text.trim().replace("\t", "").replace('\n', ' ');
+		return text.trim().replace("\r", "");
 	}
 
 	public static void skipTag(XmlPullParser parser) throws XmlPullParserException, IOException {

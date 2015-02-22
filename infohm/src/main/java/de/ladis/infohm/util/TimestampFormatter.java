@@ -67,7 +67,7 @@ public class TimestampFormatter {
 			text = resources.getString(R.string.timestamp_monday);
 			break;
 		case TUESDAY:
-			text = resources.getString(R.string.timestamp_monday);
+			text = resources.getString(R.string.timestamp_tuesday);
 			break;
 		case WEDNESDAY:
 			text = resources.getString(R.string.timestamp_wednesday);

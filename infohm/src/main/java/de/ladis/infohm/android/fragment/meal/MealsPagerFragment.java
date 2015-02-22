@@ -23,11 +23,12 @@ import de.ladis.infohm.core.service.MealService;
 
 public class MealsPagerFragment extends BaseFragment {
 
-	public static MealsPagerFragment newInstance(Cafeteria cafeteria) {
+	public static MealsPagerFragment newInstance(Cafeteria cafeteria, Boolean week) {
 		MealsPagerFragment fragment = new MealsPagerFragment();
 
 		Bundle arguments = new Bundle();
 		arguments.putParcelable("cafeteria", new CafeteriaParcelHolder(cafeteria));
+		arguments.putBoolean("week", week);
 
 		fragment.setArguments(arguments);
 
@@ -44,6 +45,7 @@ public class MealsPagerFragment extends BaseFragment {
 	protected ViewPager pagerView;
 
 	private Cafeteria cafeteria;
+	private Boolean week;
 	private MealsPagerAdapter adapter;
 
 	@Override
@@ -53,7 +55,9 @@ public class MealsPagerFragment extends BaseFragment {
 		Bundle arguments = getArguments();
 
 		CafeteriaParcelHolder holder = arguments.getParcelable("cafeteria");
+
 		cafeteria = holder.get();
+		week = arguments.getBoolean("week");
 	}
 
 	@Override
@@ -78,14 +82,26 @@ public class MealsPagerFragment extends BaseFragment {
 		adapter.clearItems();
 
 		service.registerListener(listener);
-		service.getForCurrentWeek(cafeteria).doAsync();
+
+		if (week.booleanValue()) {
+			service.getForCurrentWeek(cafeteria).doAsync();
+		} else {
+			service.getForNextWeek(cafeteria).doAsync();
+		}
 	}
 
 	private final MealListener listener = new SimpleMealListener() {
 
 		@Override
 		public void onCurrentWeek(Cafeteria target, List<Menu> menus) {
-			if (cafeteria.equals(target) && menus != null) {
+			if (cafeteria.equals(target) && menus != null && week) {
+				adapter.addItems(menus);
+			}
+		}
+
+		@Override
+		public void onNextWeek(Cafeteria target, List<Menu> menus) {
+			if (cafeteria.equals(target) && menus != null && !week) {
 				adapter.addItems(menus);
 			}
 		}

@@ -30,8 +30,9 @@ public class MealsActivity extends BaseActivity {
 		} else if (manager.findFragmentById(R.id.activity_meals_fragment) == null) {
 			CafeteriaParcelHolder holder = intent.getParcelableExtra("cafeteria");
 			Cafeteria cafeteria = holder.get();
+			Boolean week = intent.getBooleanExtra("week", true);
 
-			Fragment fragment = MealsPagerFragment.newInstance(cafeteria);
+			Fragment fragment = MealsPagerFragment.newInstance(cafeteria, week);
 
 			manager.beginTransaction()
 					.replace(R.id.activity_meals_fragment, fragment)

@@ -1,5 +1,6 @@
 package de.ladis.infohm.android.fragment.feedback;
 
+import static android.support.v4.view.MenuItemCompat.*;
 import butterknife.InjectView;
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import de.ladis.infohm.R;
@@ -18,7 +20,7 @@ import de.ladis.infohm.android.validation.ViewValidator;
 import de.ladis.infohm.android.widget.EditText;
 import de.ladis.infohm.core.validation.Validator;
 
-public class FeedbackFragment extends BaseFragment {
+public class FeedbackFragment extends BaseFragment implements OnClickListener {
 
 	private FeedbackController controller;
 
@@ -67,17 +69,16 @@ public class FeedbackFragment extends BaseFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.fragment_feedback, menu);
+
+		MenuItem menuItem = menu.findItem(R.id.fragment_feedback_menu_submit);
+
+		View view = getActionView(menuItem);
+		view.setOnClickListener(this);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.fragment_feedback_menu_submit:
-			submitFeedback();
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
+	public void onClick(View v) {
+		submitFeedback();
 	}
 
 	private boolean validateForm() {

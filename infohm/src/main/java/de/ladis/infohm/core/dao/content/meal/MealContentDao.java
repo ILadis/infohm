@@ -14,7 +14,6 @@ import org.joda.time.DateTime;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.net.Uri;
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.content.ContentDao;
 import de.ladis.infohm.core.dao.domain.MealDao;
@@ -215,32 +214,22 @@ public class MealContentDao extends ContentDao<Long, Menu> implements MealDao {
 		if (contains(key, entity)) {
 			update(key, entity);
 		} else {
-			Uri uri = content().insert(
+			content().insert(
 					parse(base + "/menu"),
 					toValues(key, entity)
 			);
 
-			if (uri != null) {
-				Long id = Long.decode(uri.getLastPathSegment());
-				entity.setId(id);
-
-				for (Meal item : entity.getMeals()) {
-					insert(entity, item);
-				}
+			for (Meal item : entity.getMeals()) {
+				insert(entity, item);
 			}
 		}
 	}
 
 	private void insert(Menu key, Meal entity) {
-		Uri uri = content().insert(
+		content().insert(
 				parse(base + "/meal"),
 				toValues(key, entity)
 		);
-
-		if (uri != null) {
-			Long id = Long.decode(uri.getLastPathSegment());
-			entity.setId(id);
-		}
 	}
 
 	@Override

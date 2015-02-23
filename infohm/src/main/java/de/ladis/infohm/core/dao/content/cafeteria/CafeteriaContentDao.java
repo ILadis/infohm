@@ -13,7 +13,6 @@ import org.joda.time.DateTime;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.net.Uri;
 import de.ladis.infohm.core.dao.DaoException;
 import de.ladis.infohm.core.dao.content.ContentDao;
 import de.ladis.infohm.core.dao.domain.CafeteriaDao;
@@ -80,15 +79,10 @@ public class CafeteriaContentDao extends ContentDao<Long, Cafeteria> implements 
 		if (contains(entity)) {
 			update(entity);
 		} else {
-			Uri uri = content().insert(
+			content().insert(
 					parse(base + "/cafeteria"),
 					toValues(entity)
 			);
-
-			if (uri != null) {
-				Long id = Long.decode(uri.getLastPathSegment());
-				entity.setId(id);
-			}
 		}
 	}
 

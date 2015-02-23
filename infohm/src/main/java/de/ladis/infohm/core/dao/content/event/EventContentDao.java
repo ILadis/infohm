@@ -13,7 +13,6 @@ import org.joda.time.DateTime;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.net.Uri;
 
 import com.google.common.collect.Range;
 
@@ -218,15 +217,10 @@ public class EventContentDao extends ContentDao<Long, Event> implements EventDao
 		if (contains(entity)) {
 			update(entity);
 		} else {
-			Uri uri = content().insert(
+			content().insert(
 					parse(base + "/event"),
 					toValues(key, entity)
 			);
-
-			if (uri != null) {
-				Long id = Long.decode(uri.getLastPathSegment());
-				entity.setId(id);
-			}
 		}
 	}
 

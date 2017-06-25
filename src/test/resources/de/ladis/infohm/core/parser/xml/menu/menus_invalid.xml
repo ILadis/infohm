@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuEntities>
+	<menuEntity>
+		<day>2014-12-27T00:00:00+01:00</day>
+		<id>1</id>
+		<meals>
+			<createdAt>2014-12-27T13:44:13+01:00</createdAt>
+			<id>1</id>
+			<name>meal

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<publishers>
+	<publisher>
+		<createdAt>2014-11-06T18:22:00+01:00</createdAt>
+		<name>test</name>
+		<description>a publisher for testing purposes</description>
+		<updatedAt>2014-11-06T18:22:00+01:00</updatedAt>
+		<id>1</id>
+	</publisher>
+	<publisher>
+		<createdAt>2014-12-01T11:47:00+01:00</createdAt>
+		<updatedAt>2014-12-01T11:47:00+01:00</updatedAt>
+		<id>2</id>
+		<name>yap</name>
+		<description>yet another publisher for testing purposes</description>
+	</publisher>
+</publishers>

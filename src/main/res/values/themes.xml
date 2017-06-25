@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Application theme. -->
+	<style name="Theme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
+		<!-- Window styles. -->
+		<item name="android:windowBackground">@drawable/activity_background</item>
+		<item name="android:windowTranslucentStatus">true</item>
+		<item name="android:windowContentTransitions">true</item>
+
+		<!-- Color palette. -->
+		<item name="colorPrimary">@color/actionbar_primary_color</item>
+		<item name="colorPrimaryDark">@color/actionbar_secondary_color</item>
+		<item name="colorAccent">@color/actionbar_accent_color</item>
+		<item name="slidingTabIndicatorColor">@android:color/white</item>
+
+		<!-- Dimension values. -->
+		<item name="statusBarSize">25dp</item>
+		<item name="horizontalPadding">8dp</item>
+		<item name="horizontalSpaceBorder">16dp</item>
+		<item name="horizontalSpaceKeyline">72dp</item>
+		<item name="verticalPadding">8dp</item>
+		<item name="verticalSpaceBorder">48dp</item>
+		<item name="cardViewGuttersPadding">8dp</item>
+		<item name="cardViewContentPadding">16dp</item>
+		<item name="listViewContentPadding">8dp</item>
+		<item name="slidingTabIndicatorHeight">3dp</item>
+
+		<!-- Text appearances. -->
+		<item name="textAppearanceDisplay">@style/TextAppearance.Display</item>
+		<item name="textAppearanceHeadline">@style/TextAppearance.Headline</item>
+		<item name="textAppearanceTitle">@style/TextAppearance.Title</item>
+		<item name="textAppearanceBody">@style/TextAppearance.Body</item>
+		<item name="textAppearanceSubheader">@style/TextAppearance.Subheader</item>
+		<item name="textAppearanceCaption">@style/TextAppearance.Caption</item>
+
+		<!-- Widget styles. -->
+		<item name="textViewStyle">@style/Widget.TextView</item>
+		<item name="textViewSecondaryStyle">@style/Widget.TextView.Secondary</item>
+		<item name="textViewErrorStyle">@style/Widget.TextView.Error</item>
+		<item name="editTextStyle">@style/Widget.EditText</item>
+		<item name="buttonStyle">@style/Widget.Button</item>
+		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
+		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
+		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+		<item name="buttonFloatStyle">@style/Widget.Button.Float</item>
+		<item name="slidingTabTextViewStyle">@style/Widget.SlidingTab</item>
+		<item name="adapterStyle">@style/Widget.Adapter</item>
+		<item name="dividerStyle">@style/Widget.Divider</item>
+		<item name="drawerStyle">@style/Drawer</item>
+		<item name="drawerHeaderStyle">@style/Drawer.Header</item>
+		<item name="drawerHeaderTitleStyle">@style/Drawer.Header.Title</item>
+		<item name="drawerItemStyle">@style/Drawer.Item</item>
+		<item name="drawerDividerStyle">@style/Drawer.Divider</item>
+
+		<!-- ActionBar theme. -->
+		<item name="theme">@style/Theme.ActionBar</item>
+	</style>
+
+	<!-- ActionBar theme. -->
+	<style name="Theme.ActionBar" parent="@style/Theme.AppCompat.Light"><!-- ThemeOverlay.AppCompat.Dark -->
+		<!-- Common styles. -->
+		<item name="android:background">@color/actionbar_primary_color</item>
+
+		<!-- Text styles. -->
+		<item name="android:textColorPrimary">@color/actionbar_title_color</item>
+		<item name="android:textColorSecondary">@color/text_secondary_color</item>
+
+		<!-- ActionBar styles. -->
+		<item name="titleTextAppearance">@style/ActionBar.Title</item>
+		<item name="searchViewStyle">@style/ActionBar.Search</item>
+		<item name="drawerArrowStyle">@style/Drawer.Toggle</item>
+		<item name="homeAsUpIndicator">@drawable/actionbar_home_as_up</item>
+	</style>
+
+	<!-- Dialog theme. -->
+	<style name="Theme.Dialog">
+		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
+		<!-- Window styles. -->
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:backgroundDimAmount">0.6</item>
+		<item name="android:colorBackgroundCacheHint">@null</item>
+
+		<!-- Widget styles. -->
+		<item name="textViewStyle">@style/Widget.TextView.Secondary</item>
+		<item name="textViewSecondaryStyle">@style/Widget.TextView.Secondary</item>
+		<item name="buttonStyle">@style/Widget.Button</item>
+		<item name="buttonSecondaryStyle">@style/Widget.Button.Secondary</item>
+		<item name="buttonFlatStyle">@style/Widget.Button.Flat</item>
+		<item name="buttonFlatSecondaryStyle">@style/Widget.Button.Flat.Secondary</item>
+		<item name="dividerStyle">@style/Widget.Divider</item>
+
+		<!-- Dialog styles. -->
+		<item name="dialogStyle">@style/Dialog</item>
+		<item name="dialogTitleStyle">@style/Dialog.Title</item>
+		<item name="dialogContentStyle">@style/Dialog.Content</item>
+		<item name="dialogActionsStyle">@style/Dialog.Actions</item>
+	</style>
+
+</resources>
